@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ContactResource1.Text" xml:space="preserve">
+    <value>Vous ne trouvez pas?</value>
+  </data>
+  <data name="ContactResource2.Text" xml:space="preserve">
+    <value>Contactez nous...</value>
+  </data>
+  <data name="DebitLogoResource1.ImageUrl" xml:space="preserve">
+    <value>../Images/LogoInteracH.gif</value>
+  </data>
+  <data name="DebitMessageResource1.Text" xml:space="preserve">
+    <value>INTERAC en ligne est un nouveau service de paiement qui vous permet de régler les achats de biens et de services effectués sur internet directement de votre compte bancaire. &lt;a href="#" onclick="javascript:window.open('http://www.interacenligne.com/renseignements','learn','height=400,width=570,toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizeable=1');"&gt;Renseignements&lt;/a&gt;</value>
+  </data>
+  <data name="HeaderResource1.Text" xml:space="preserve">
+    <value>Placer une commande</value>
+  </data>
+  <data name="logoRBCResource1.ImageUrl" xml:space="preserve">
+    <value>../Images/logo_rbc_fr.gif</value>
+  </data>
+  <data name="PaymentTypeResource1.Text" xml:space="preserve">
+    <value>Modes de paiement</value>
+  </data>
+  <data name="PaymentTypeResource2.Text" xml:space="preserve">
+    <value>Lorsque vous commandez en ligne, 3 méthodes de paiement faciles vous sont offertes.</value>
+  </data>
+  <data name="PaymentTypeResource3.Text" xml:space="preserve">
+    <value>&lt;IMG SRC="../images/ccs.gif" /&gt;&amp;nbsp;&amp;nbsp;Paiement en ligne</value>
+  </data>
+  <data name="PaymentTypeResource4.Text" xml:space="preserve">
+    <value>&lt;IMG SRC="../images/ccs.gif" /&gt;&lt;IMG SRC="../images/icons/telephone.gif" /&gt;&amp;nbsp;&amp;nbsp;Paiement par téléphone</value>
+  </data>
+  <data name="PaymentTypeResource5.Text" xml:space="preserve">
+    <value>&lt;IMG SRC="../images/icons/money.gif" /&gt;&amp;nbsp;&amp;nbsp;Paiement par chèque</value>
+  </data>
+  <data name="PaymentTypeResource6.Text" xml:space="preserve">
+    <value>Pour effectuer le paiement en ligne, vous serez redirigé vers le &lt;a href="#security"&gt;site sécurisé&lt;/a&gt; de Solutions Moneris pour compléter le paiement de la commande.</value>
+  </data>
+  <data name="PaymentTypeResource7.Text" xml:space="preserve">
+    <value>Pour payer par téléphone, faites imprimer le reçu et appelez nous pour effectuer le paiement. Ayez en main une copie du reçu et votre carte de crédit. La commande sera produite et livrée après la confirmation du paiement seulement. </value>
+  </data>
+  <data name="PaymentTypeResource8.Text" xml:space="preserve">
+    <value>Pour payer par chèque, faites imprimer le reçu et faites-nous le parvenir par la poste avec votre chèque. La commande sera produite et livrée après la réception du paiement seulement. </value>
+  </data>
+  <data name="PlaceOrderResource1.Text" xml:space="preserve">
+    <value>Placer une commande</value>
+  </data>
+  <data name="PlaceOrderResource10.Text" xml:space="preserve">
+    <value>Une fois que votre panier est complet, vous pouvez effectuer la commande.</value>
+  </data>
+  <data name="PlaceOrderResource11.Text" xml:space="preserve">
+    <value>Cliquez sur "Passer à la caisse"</value>
+  </data>
+  <data name="PlaceOrderResource12.Text" xml:space="preserve">
+    <value>Inscrivez l'information de livraison et cliquez sur "Continuer &gt;&gt;&gt;"</value>
+  </data>
+  <data name="PlaceOrderResource13.Text" xml:space="preserve">
+    <value>Inscrivez l'information de facturation et cliquez sur "Continuer &gt;&gt;&gt;"</value>
+  </data>
+  <data name="PlaceOrderResource14.Text" xml:space="preserve">
+    <value>Choisissez un mode de livraison</value>
+  </data>
+  <data name="PlaceOrderResource15.Text" xml:space="preserve">
+    <value>Choisissez un mode de paiement. Pour plus de détails sur les modes de paiements, &lt;a href="#paymenttype"&gt;cliquez ici.&lt;/a&gt;</value>
+  </data>
+  <data name="PlaceOrderResource16.Text" xml:space="preserve">
+    <value>Cliquez sur continuer. Pour plus de détails sur les modes de paiements, &lt;a href="#paymenttype"&gt;cliquez ici.&lt;/a&gt;</value>
+  </data>
+  <data name="PlaceOrderResource2.Text" xml:space="preserve">
+    <value>Vous pouvez acheter des impressions ou des produits des photos en tout temps. </value>
+  </data>
+  <data name="PlaceOrderResource3.Text" xml:space="preserve">
+    <value>Cliquez sur l’onglet "Mes albums"</value>
+  </data>
+  <data name="PlaceOrderResource4.Text" xml:space="preserve">
+    <value>Cliquez sur l’album désiré</value>
+  </data>
+  <data name="PlaceOrderResource5.Text" xml:space="preserve">
+    <value>Cliquez sur l’icône &lt;img src="../images/icons/money_dollar.gif" style="border-width:0px;" /&gt; sous la photographie désirée</value>
+  </data>
+  <data name="PlaceOrderResource6.Text" xml:space="preserve">
+    <value>Sélectionnez une catégorie de produits</value>
+  </data>
+  <data name="PlaceOrderResource7.Text" xml:space="preserve">
+    <value>Modifiez la quantité du produit à ajouter au besoin</value>
+  </data>
+  <data name="PlaceOrderResource8.Text" xml:space="preserve">
+    <value>Cliquez sur "Ajouter au panier"</value>
+  </data>
+  <data name="PlaceOrderResource9.Text" xml:space="preserve">
+    <value>Pour commander les droits numériques d'une photo, &lt;a href="PhotoProcessing.aspx#digitalrights"&gt;cliquer ici.&lt;/a&gt;</value>
+  </data>
+  <data name="SecurityResource1.Text" xml:space="preserve">
+    <value>Transactions en ligne sécuritaires</value>
+  </data>
+  <data name="SecurityResource2.Text" xml:space="preserve">
+    <value>Pour effectuer le paiement en ligne, vous serez redirigé vers le site sécurisé de Solutions Moneris pour compléter le paiement de la commande. Une fois la transaction acceptée, vous serez redirigé à nouveau sur le site de Caméléo Photo. Assurez-vous d'attendre la confirmation finale afin de vous assurer que la transaction est complète.</value>
+  </data>
+  <data name="SecurityResource3.Text" xml:space="preserve">
+    <value>Le paiement en ligne est entièrement sécurisé par l'utilisation de la technologie SSL. Le protocole SSL, défini par Netscape, est présent dans la plupart des navigateurs. Il permet la transmission sécurisée de formulaires sur le Web, notamment lors des transactions commerciales en ligne, nécessitant l'utilisation d'une carte de crédit.</value>
+  </data>
+  <data name="SecurityResource4.Text" xml:space="preserve">
+    <value>&lt;a href="http://www.moneris.com/fr" target="_blank"&gt;Solutions Moneris&lt;/a&gt; est la plus importante entreprise de traitement d'opérations par carte de débit et de crédit au Canada. Solutions Moneris a été constituée en tant que coentreprise de RBC Banque Royale et de BMO Banque de Montréal en décembre 2000.</value>
+  </data>
+  <data name="tblDebitResource1.Visible" xml:space="preserve">
+    <value>true</value>
+  </data>
+  <data name="trBMOResource1.Visible" xml:space="preserve">
+    <value>true</value>
+  </data>
+</root>

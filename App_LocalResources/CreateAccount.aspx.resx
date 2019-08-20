@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="btnCreateAccountResource1.HoverImageUrl" xml:space="preserve">
+    <value>~/Images2/login/enter_account_fr_over.png</value>
+  </data>
+  <data name="btnCreateAccountResource1.ImageUrl" xml:space="preserve">
+    <value>~/Images2/login/enter_account_fr_off.png</value>
+  </data>
+  <data name="lblAnswer1Resource1.Text" xml:space="preserve">
+    <value>Dorénavant, l’unique façon d’accéder à vos photos sera à l’aide de votre adresse de courriel et de votre mot de passe personnel.</value>
+  </data>
+  <data name="lblAnswer2Resource1.Text" xml:space="preserve">
+    <value>Uniquement à importer les photos de la nouvelle séance. Vous devez d’abord vous connecter à votre compte. Une fois connecté, entrez simplement les informations du carton à la section « Ajouter une séance », qui apparaîtra à droite de votre écran.</value>
+  </data>
+  <data name="lblAnswer3Resource1.Text" xml:space="preserve">
+    <value>&lt;ul&gt;&lt;li&gt;Regrouper toutes vos séances Caméléo dans un seul et même compte&lt;/li&gt;
+&lt;li&gt;Gérer les albums de tous vos enfants à partir de ce seul compte&lt;/li&gt;
+&lt;li&gt;Créer vos propres albums en important vos photos personnelles&lt;/li&gt;
+&lt;li&gt;Partager des albums avec vos proches&lt;/li&gt;
+&lt;li&gt;Commander des impressions ou des produits à partir de n’importe laquelle de vos photos&lt;/li&gt;
+&lt;li&gt;Conserver vos toiles de fond et vos produits favoris en mémoire&lt;/li&gt;
+&lt;li&gt;Et bien plus !&lt;/li&gt;&lt;/ul&gt;</value>
+  </data>
+  <data name="lblConfirmPasswordResource1.Text" xml:space="preserve">
+    <value>Entrez à nouveau votre mot de passe pour le confirmer</value>
+  </data>
+  <data name="lblCreateAccount2Resource1.Text" xml:space="preserve">
+    <value>VOTRE COMPTE</value>
+  </data>
+  <data name="lblCreateAccountResource1.Text" xml:space="preserve">
+    <value>VEUILLEZ CRÉER </value>
+  </data>
+  <data name="lblEmailResource1.Text" xml:space="preserve">
+    <value>Entrez votre courriel</value>
+  </data>
+  <data name="lblLoginHeaderResource1.Text" xml:space="preserve">
+    <value>Vous n'avez pas de compte?</value>
+  </data>
+  <data name="lblNoEmailAnswerResource1.Text" xml:space="preserve">
+    <value>Contactez notre service à la clientèle qui se fera un plaisir de vous assister.</value>
+  </data>
+  <data name="lblNoEmailResource1.Text" xml:space="preserve">
+    <value>Vous n'avez pas d'adresse de courriel valide?</value>
+  </data>
+  <data name="lblPasswordResource1.Text" xml:space="preserve">
+    <value>Créez votre mot de passe personnel</value>
+  </data>
+  <data name="lblQuestion1Resource1.Text" xml:space="preserve">
+    <value>Pourquoi devez-vous créer un compte ?</value>
+  </data>
+  <data name="lblQuestion2Resource1.Text" xml:space="preserve">
+    <value>À quoi servent le code d’usager et le mot de passe indiqués sur le carton que vous avez reçu ?</value>
+  </data>
+  <data name="lblQuestion3Resource1.Text" xml:space="preserve">
+    <value>Quels sont les avantages d’avoir un compte ?</value>
+  </data>
+  <data name="revEmailResource1.ErrorMessage" xml:space="preserve">
+    <value>Adresse invalide.</value>
+  </data>
+  <data name="rfvConfirmPasswordResource1.ErrorMessage" xml:space="preserve">
+    <value>Requis</value>
+  </data>
+  <data name="rfvEmailResource1.ErrorMessage" xml:space="preserve">
+    <value>Requis</value>
+  </data>
+  <data name="rfvPasswordResource1.ErrorMessage" xml:space="preserve">
+    <value>Requis</value>
+  </data>
+  <data name="txtResultResource1.ErrorConfirm" xml:space="preserve">
+    <value>Le mot de passe et la confirmation du mot de passe doivent être identiques.</value>
+  </data>
+</root>

@@ -1,0 +1,46 @@
+<%@ master language="vb" autoeventwireup="true" inherits="adminmaster, App_Web_zgfxqbvs" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head id="Head1" runat="server">
+    
+</head>
+<body >
+    <form id="form2" runat="server">
+            <div class="header">
+                <h1>Administration DB(<asp:Label ID="lblDB" runat="server" Text="Label"></asp:Label>)</h1>
+            </div>
+            <div id="menutext">
+                <ul>                   
+                    <li><a href="../Albums.aspx">Return To Site</a></li>
+                    <li><a href="default.aspx">Admin</a></li>
+                    <li><a href="admin_client_details.aspx">Production</a></li>
+                    <li><a href="admin_clients.aspx">Users</a></li>                    
+                    <li><a href="admin_orders.aspx">Orders</a></li>
+                    <li><a href="admin_orders_checkProcessing.aspx">Check processing</a></li>
+                    <li><a href="admin_ordershipping.aspx">Order Shipping</a></li>
+                    <li><a href="admin_orderscheckup.aspx">Processing checkup</a></li>
+                    <li><a href="admin_event_calendar.aspx">Calendrier</a></li>
+                    <li><a href="admin_top_photos.aspx">TopPhotos</a></li>
+                    <li><a href="admin_email_list.aspx">Emails</a></li>
+                    <li><a href="admin_products.aspx">Products</a></li>
+                    <li><a href="admin_categories.aspx">Product Categories</a></li>                    
+                    <li><a href="admin_shipping.aspx">Shipping Calculator</a></li>                    
+                    <li><a href="admin_horaire.aspx">Horaire</a></li>    
+                    <li><a href="admin_rd_client_calendrier.aspx">Client rendez-vous</a></li>                 
+                    <li><a href="admin_logs.aspx">Logs</a></li>     
+               </ul>
+            </div>
+            <div class="offsetleftbox">
+                <asp:contentplaceholder id="AdminPlaceHolder" runat="server">
+                </asp:contentplaceholder>
+            </div>
+    </form>
+</body>
+</html>
+<script>
+function popItScroll(theLink){ 
+	window.open(theLink,null,'height=800,width=700,scrollbars=yes,resizable=yes'); 
+	
+}
+</script>

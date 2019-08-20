@@ -1,0 +1,84 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* All frames scroll */
+#mcs1_container{margin:0; width:100%; height:350px; padding:0 10px;}
+#mcs1_container .customScrollBox{position:relative; height:100%; overflow:hidden;}
+#mcs1_container .customScrollBox .container{position:relative; width:95%; top:0; float:left;}
+#mcs1_container .customScrollBox .content{clear:both;}
+#mcs1_container .dragger_container{position:relative; width:0px; height:335px; float:left; margin:10px 0 0 10px; border-left:1px dashed #555; cursor:pointer;}
+#mcs1_container .dragger{position:absolute; width:9px; height:9px; background:#555; margin-left:-5px; text-align:center; overflow:hidden; cursor:pointer; -moz-border-radius:18px; -khtml-border-radius:18px; -webkit-border-radius:18px; border-radius:18px;}
+#mcs1_container .dragger_pressed{position:absolute; width:9px; height:9px; background:#09C; margin-left:-5px; overflow:hidden; cursor:s-resize;}
+
+/* Frame categories scroll */
+#mcs2_container{margin:0; width:100%; height:350px; padding:0 10px;}
+#mcs2_container .customScrollBox{position:relative; height:100%; overflow:hidden;}
+#mcs2_container .customScrollBox .container{position:relative; width:95%; top:0; float:left;}
+#mcs2_container .customScrollBox .content{clear:both;}
+#mcs2_container .dragger_container{position:relative; width:0px; height:335px; float:left; margin:10px 0 0 10px; border-left:1px dashed #555; cursor:pointer;}
+#mcs2_container .dragger{position:absolute; width:9px; height:9px; background:#555; margin-left:-5px; text-align:center; overflow:hidden; cursor:pointer; -moz-border-radius:18px; -khtml-border-radius:18px; -webkit-border-radius:18px; border-radius:18px;}
+#mcs2_container .dragger_pressed{position:absolute; width:9px; height:9px; background:#09C; margin-left:-5px; overflow:hidden; cursor:s-resize;}
+
+/* All backgrounds scroll */
+#mcs3_container{margin:0; width:100%; height:350px; padding:0 10px;}
+#mcs3_container .customScrollBox{position:relative; height:100%; overflow:hidden;}
+#mcs3_container .customScrollBox .container{position:relative; width:95%; top:0; float:left;}
+#mcs3_container .customScrollBox .content{clear:both;}
+#mcs3_container .dragger_container{position:relative; width:0px; height:335px; float:left; margin:10px 0 0 10px; border-left:1px dashed #555; cursor:pointer;}
+#mcs3_container .dragger{position:absolute; width:9px; height:9px; background:#555; margin-left:-5px; text-align:center; overflow:hidden; cursor:pointer; -moz-border-radius:18px; -khtml-border-radius:18px; -webkit-border-radius:18px; border-radius:18px;}
+#mcs3_container .dragger_pressed{position:absolute; width:9px; height:9px; background:#09C; margin-left:-5px; overflow:hidden; cursor:s-resize;}
+
+/* Background categories scroll */
+#mcs4_container{margin:0; width:100%; height:350px; padding:0 10px;}
+#mcs4_container .customScrollBox{position:relative; height:100%; overflow:hidden;}
+#mcs4_container .customScrollBox .container{position:relative; width:95%; top:0; float:left;}
+#mcs4_container .customScrollBox .content{clear:both;}
+#mcs4_container .dragger_container{position:relative; width:0px; height:335px; float:left; margin:10px 0 0 10px; border-left:1px dashed #555; cursor:pointer;}
+#mcs4_container .dragger{position:absolute; width:9px; height:9px; background:#555; margin-left:-5px; text-align:center; overflow:hidden; cursor:pointer; -moz-border-radius:18px; -khtml-border-radius:18px; -webkit-border-radius:18px; border-radius:18px;}
+#mcs4_container .dragger_pressed{position:absolute; width:9px; height:9px; background:#09C; margin-left:-5px; overflow:hidden; cursor:s-resize;}
+
+/* Album and poses scrollbar */
+#mcs5_container{margin:0; width:195px; padding:0 0px; }
+#mcs5_container .customScrollBox{position:relative; overflow:hidden;}
+#mcs5_container .customScrollBox .horWrapper{position:relative; left:0;}
+#mcs5_container .customScrollBox .container{position:relative; left:0; display:inline-block; *display:inline;}
+#mcs5_container .customScrollBox .content{clear:both;}
+#mcs5_container .dragger_container{position:relative; height:0px; width:195px; margin:10px; border-top:1px dashed #555;}
+#mcs5_container .dragger{position:absolute; height:5px; background:#555; margin-top:-3px;}
+#mcs5_container .dragger_pressed{position:absolute; height:5px; background:#555; margin-top:-3px;}
+
+/* All products scroll */
+#mcs6_container{margin:0; width:100%; height:350px; padding:0 10px;}
+#mcs6_container .customScrollBox{position:relative; height:100%; overflow:hidden;}
+#mcs6_container .customScrollBox .container{position:relative; width:95%; top:0; float:left;}
+#mcs6_container .customScrollBox .content{clear:both;}
+#mcs6_container .dragger_container{position:relative; width:0px; height:335px; float:left; margin:10px 0 0 10px; border-left:1px dashed #555; cursor:pointer;}
+#mcs6_container .dragger{position:absolute; width:9px; height:9px; background:#555; margin-left:-5px; text-align:center; overflow:hidden; cursor:pointer; -moz-border-radius:18px; -khtml-border-radius:18px; -webkit-border-radius:18px; border-radius:18px;}
+#mcs6_container .dragger_pressed{position:absolute; width:9px; height:9px; background:#09C; margin-left:-5px; overflow:hidden; cursor:s-resize;}
+
+/* Product categories scroll */
+#mcs7_container{margin:0; width:100%; height:350px; padding:0 10px;}
+#mcs7_container .customScrollBox{position:relative; height:100%; overflow:hidden;}
+#mcs7_container .customScrollBox .container{position:relative; width:95%; top:0; float:left;}
+#mcs7_container .customScrollBox .content{clear:both;}
+#mcs7_container .dragger_container{position:relative; width:0px; height:335px; float:left; margin:10px 0 0 10px; border-left:1px dashed #555; cursor:pointer;}
+#mcs7_container .dragger{position:absolute; width:9px; height:9px; background:#555; margin-left:-5px; text-align:center; overflow:hidden; cursor:pointer; -moz-border-radius:18px; -khtml-border-radius:18px; -webkit-border-radius:18px; border-radius:18px;}
+#mcs7_container .dragger_pressed{position:absolute; width:9px; height:9px; background:#09C; margin-left:-5px; overflow:hidden; cursor:s-resize;}
+
+/* Albums scroll */
+#mcs8_container{margin:0; width:100%; height:425px; padding:0 10px;}
+#mcs8_container .customScrollBox{position:relative; height:100%; overflow:hidden;}
+#mcs8_container .customScrollBox .container{position:relative; width:95%; top:0; float:left;}
+#mcs8_container .customScrollBox .content{clear:both;}
+#mcs8_container .dragger_container{position:relative; width:0px; height:415px; float:left; margin:10px 0 0 10px; border-left:1px dashed #555; cursor:pointer;}
+#mcs8_container .dragger{position:absolute; width:9px; height:9px; background:#555; margin-left:-5px; text-align:center; overflow:hidden; cursor:pointer; -moz-border-radius:18px; -khtml-border-radius:18px; -webkit-border-radius:18px; border-radius:18px;}
+#mcs8_container .dragger_pressed{position:absolute; width:9px; height:9px; background:#09C; margin-left:-5px; overflow:hidden; cursor:s-resize;}
+
+/* Personal Albums scroll */
+#mcs9_container{margin:0; width:100%; height:425px; padding:0 10px;}
+#mcs9_container .customScrollBox{position:relative; height:100%; overflow:hidden;}
+#mcs9_container .customScrollBox .container{position:relative; width:95%; top:0; float:left;}
+#mcs9_container .customScrollBox .content{clear:both;}
+#mcs9_container .dragger_container{position:relative; width:0px; height:415px; float:left; margin:10px 0 0 10px; border-left:1px dashed #555; cursor:pointer;}
+#mcs9_container .dragger{position:absolute; width:9px; height:9px; background:#555; margin-left:-5px; text-align:center; overflow:hidden; cursor:pointer; -moz-border-radius:18px; -khtml-border-radius:18px; -webkit-border-radius:18px; border-radius:18px;}
+#mcs9_container .dragger_pressed{position:absolute; width:9px; height:9px; background:#09C; margin-left:-5px; overflow:hidden; cursor:s-resize;}

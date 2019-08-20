@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ContactResource1.Text" xml:space="preserve">
+    <value>Vous ne trouvez pas?</value>
+  </data>
+  <data name="ContactResource2.Text" xml:space="preserve">
+    <value>Contactez nous...</value>
+  </data>
+  <data name="lblAccessResource1.Text" xml:space="preserve">
+    <value>Droits d'accès</value>
+  </data>
+  <data name="lblAccessResource2.Text" xml:space="preserve">
+    <value>Caméléo Photo ne vend en aucun cas l'information personnelle de ses clients à des tiers. Nous nous engageons à reconnaître un droit d'accès et de rectification aux personnes concernées désireuses de consulter, modifier, voire radier les informations les concernant.
+L'exercice de ce droit se fera :
+&lt;ul&gt;&lt;li&gt;Section du site web : section "Mon profil"&lt;/li&gt;&lt;/ul&gt;</value>
+  </data>
+  <data name="lblCookiesResource1.Text" xml:space="preserve">
+    <value>Fichiers journaux et témoins</value>
+  </data>
+  <data name="lblCookiesResource2.Text" xml:space="preserve">
+    <value>Nous recueillons certaines informations par le biais de fichiers journaux (log file) et de fichiers témoins (cookies). Il s'agit principalement des informations suivantes : 
+&lt;ul&gt;
+&lt;li&gt;Pages visitées et requêtes&lt;/li&gt;
+&lt;li&gt;Heure et jour de connexion&lt;/li&gt;&lt;/ul&gt;
+
+Le recours à de tels fichiers nous permet : 
+&lt;ul&gt;
+&lt;li&gt;Amélioration du service et accueil personnalisé&lt;/li&gt;
+&lt;li&gt;Suivi de commande&lt;/li&gt;
+&lt;li&gt;Statistique&lt;/li&gt;&lt;/ul&gt;</value>
+  </data>
+  <data name="lblPersonalInfoResource1.Text" xml:space="preserve">
+    <value>Collecte de renseignements personnels</value>
+  </data>
+  <data name="lblPersonalInfoResource2.Text" xml:space="preserve">
+    <value>Lors du processus de commande, nous collectons les renseignements suivants : &lt;br&gt;&lt;ul&gt;
+&lt;li&gt;Nom&lt;/li&gt;
+&lt;li&gt;Prénom&lt;/li&gt;
+&lt;li&gt;Adresse postale&lt;/li&gt;
+&lt;li&gt;Code postal&lt;/li&gt;
+&lt;li&gt;Adresse électronique&lt;/li&gt;
+&lt;li&gt;Numéro de téléphone / télécopieur&lt;/li&gt;&lt;/ul&gt;
+Les renseignements personnels que nous collectons sont recueillis au travers de formulaires et grâce à l'interactivité établie entre vous et notre site Web. Notez qu'il est possible que nous vous demandions votre numéro de carte de crédit pour effectuer le paiement mais que nous ne conservons en aucun cas les numéros de cartes de crédit dans nos données. </value>
+  </data>
+  <data name="lblPrivacyHeaderResource1.Text" xml:space="preserve">
+    <value>Politique de confidentialité</value>
+  </data>
+  <data name="lblPrivacyHeaderResource2.Text" xml:space="preserve">
+    <value>Devant le développement des nouveaux outils de communication, il est nécessaire de porter une attention particulière à la protection de la vie privée. C'est pourquoi, nous nous engageons à respecter la confidentialité des renseignements personnels que nous collectons.</value>
+  </data>
+  <data name="lblSecurityResource1.Text" xml:space="preserve">
+    <value>Protection des renseignements</value>
+  </data>
+  <data name="lblSecurityResource2.Text" xml:space="preserve">
+    <value>Les renseignements personnels que nous collectons sont conservés dans un environnement sécurisé. Les personnes travaillant pour nous sont tenues de respecter la confidentialité de vos informations.
+Pour assurer la sécurité de vos renseignements personnels, nous avons recours aux mesures suivantes : 
+&lt;ul&gt;
+&lt;li&gt;Protocole SSL (Secure Sockets Layer)&lt;/li&gt;
+&lt;li&gt;Gestion des accès - personne autorisée&lt;/li&gt;
+&lt;li&gt;Gestion des accès - personne concernée&lt;/li&gt;
+&lt;li&gt;Logiciel de surveillance du réseau&lt;/li&gt;
+&lt;li&gt;Sauvegarde informatique&lt;/li&gt;
+&lt;li&gt;Identifiant / mot de passe&lt;/li&gt;
+&lt;li&gt;Pare-feu (Firewalls)&lt;/li&gt;&lt;/ul&gt;
+Nous nous engageons à maintenir un haut degré de confidentialité en intégrant les dernières innovations technologiques permettant d'assurer la confidentialité de vos transactions. Toutefois, comme aucun mécanisme n'offre une sécurité maximale, une part de risque est toujours présente lorsque l'on utilise Internet pour transmettre des renseignements personnels.</value>
+  </data>
+  <data name="lblWhyResource1.Text" xml:space="preserve">
+    <value>Pourquoi nous demandons ces informations?</value>
+  </data>
+  <data name="lblWhyResource2.Text" xml:space="preserve">
+    <value>Nous utilisons les renseignements ainsi collectés pour les finalités suivantes : 
+&lt;ul&gt;&lt;li&gt;Suivi de la commande&lt;/li&gt;
+&lt;li&gt;Informations / Offres promotionnelles&lt;/li&gt;
+&lt;li&gt;Statistiques&lt;/li&gt;
+&lt;li&gt;Contact&lt;/li&gt;
+&lt;li&gt;Gestion du site Web (présentation, organisation)&lt;/li&gt;&lt;/ul&gt;</value>
+  </data>
+</root>

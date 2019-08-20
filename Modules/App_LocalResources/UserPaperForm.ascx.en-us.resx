@@ -1,0 +1,540 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="imgHeaderLogo.AlternateText" xml:space="preserve">
+    <value>Cameleo Photo Logo</value>
+  </data>
+  <data name="imgHeaderLogo.ImageUrl" xml:space="preserve">
+    <value>../Images/cameleo-logo-SansTexte-en.jpg</value>
+  </data>
+  <data name="imgHeaderLogo.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblCameleoAddress.Text" xml:space="preserve">
+    <value>Cameleo Photo&lt;br/&gt;Cameleo Photo&lt;br&gt;Po BOX 363&lt;br&gt;Shelburne, Vt, USA&lt;br&gt;05482&lt;br/&gt;&lt;a href='http://album.cameleophoto.com'&gt;album.cameleophoto.com&lt;/a&gt;&lt;br/&gt;&lt;b&gt;Tél:&lt;/b&gt; 514-499-0052</value>
+  </data>
+  <data name="lblCameleoAddress.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblReturnAddress.Text" xml:space="preserve">
+    <value>Shipping address : </value>
+  </data>
+  <data name="lblReturnAddress.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblPurchaseOrder.Text" xml:space="preserve">
+    <value>Paper order :</value>
+  </data>
+  <data name="lblPurchaseOrder.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblCode1Resource1.Text" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="lblCode1Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblCode2Resource1.Text" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="lblCode2Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblKitCode.Text" xml:space="preserve">
+    <value>Kits</value>
+  </data>
+  <data name="lblKitCode.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblUserID.Text" xml:space="preserve">
+    <value>User number : </value>
+  </data>
+  <data name="lblUserID.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblContact1Resource1.Text" xml:space="preserve">
+    <value>If you have any questions, do not hesitate and &lt;b&gt;contact our customer service.&lt;/b&gt;</value>
+  </data>
+  <data name="lblContact1Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblContact2Resource1.Text" xml:space="preserve">
+    <value>- By &lt;b&gt;e-mail&lt;/b&gt; (anytime) : support@cameleophoto.com</value>
+  </data>
+  <data name="lblContact2Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblContact3Resource1.Text" xml:space="preserve">
+    <value>- By &lt;b&gt;phone&lt;/b&gt; (between 9:00 am 5:30 pm, from Monday to Friday) : 1-877-622-0052</value>
+  </data>
+  <data name="lblContact3Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblDescriptionEnsembleResource1.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="lblDescriptionEnsembleResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblSampleIndication.Text" xml:space="preserve">
+    <value>*** These are only samples, the real photos will be printed on premium quality paper. ***</value>
+  </data>
+  <data name="lblSampleIndication.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblBackgroundExample1.Text" xml:space="preserve">
+    <value>Background 1</value>
+  </data>
+  <data name="lblBackgroundExample1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblBackgroundExample2.Text" xml:space="preserve">
+    <value>Background 2</value>
+  </data>
+  <data name="lblBackgroundExample2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblKitAResource1.Text" xml:space="preserve">
+    <value>7 pictures</value>
+  </data>
+  <data name="lblKitAResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblKitBResource1.Text" xml:space="preserve">
+    <value>14 pictures</value>
+  </data>
+  <data name="lblKitBResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblKitCResource1.Text" xml:space="preserve">
+    <value>15 pictures</value>
+  </data>
+  <data name="lblKitCResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblKitDResource1.Text" xml:space="preserve">
+    <value>32 pictures</value>
+  </data>
+  <data name="lblKitDResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblKitEResource1.Text" xml:space="preserve">
+    <value>1 picture</value>
+  </data>
+  <data name="lblKitEResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblKitFResource1.Text" xml:space="preserve">
+    <value>1 picture</value>
+  </data>
+  <data name="lblKitFResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblKitGResource1.Text" xml:space="preserve">
+    <value>2 pictures</value>
+  </data>
+  <data name="lblKitGResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblKitHResource1.Text" xml:space="preserve">
+    <value>4 pictures</value>
+  </data>
+  <data name="lblKitHResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblKitIResource1.Text" xml:space="preserve">
+    <value>8 pictures</value>
+  </data>
+  <data name="lblKitIResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblKitJResource1.Text" xml:space="preserve">
+    <value>16 pictures</value>
+  </data>
+  <data name="lblKitJResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblFastShipping.Text" xml:space="preserve">
+    <value>Shipping by mail (3$):</value>
+  </data>
+  <data name="lblFastShipping.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblNotes1Resource1.Text" xml:space="preserve">
+    <value>Prices for our promotional products like mugs, mouse pad, t-shirt are available on demand.</value>
+  </data>
+  <data name="lblNotes1Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblNotes2Resource1.Text" xml:space="preserve">
+    <value>The order will be shipped to the school within 4-6 weeks after the photo session.</value>
+  </data>
+  <data name="lblNotes2Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblNotes3Resource1.Text" xml:space="preserve">
+    <value>If you want to receive the order more rapidly we can ship directly to you &lt;b&gt;within 10 business day&lt;/b&gt; for a 3$ shipping fee or call us to make the payment by phone.</value>
+  </data>
+  <data name="lblNotes3Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblNotesResource1.Text" xml:space="preserve">
+    <value>NOTES :</value>
+  </data>
+  <data name="lblNotesResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblShoot1.Text" xml:space="preserve">
+    <value>Picture</value>
+  </data>
+  <data name="lblShoot1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblShoot2.Text" xml:space="preserve">
+    <value>Picture</value>
+  </data>
+  <data name="lblShoot2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblSootExample1.Text" xml:space="preserve">
+    <value>Picture 1</value>
+  </data>
+  <data name="lblSootExample1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblSootExample2.Text" xml:space="preserve">
+    <value>Picture 2</value>
+  </data>
+  <data name="lblSootExample2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblShoots.Text" xml:space="preserve">
+    <value>Pictures</value>
+  </data>
+  <data name="lblShoots.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblKitPrice.Text" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="lblKitPrice.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblQuantity1.Text" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="lblQuantity1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblQuantity2.Text" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="lblQuantity2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblSection1Resource1.Text" xml:space="preserve">
+    <value>1. Choose one or more kits.</value>
+  </data>
+  <data name="lblSection1Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblSection2Resource1.Text" xml:space="preserve">
+    <value>2. You may want to add some extra sheets to complete your order.</value>
+  </data>
+  <data name="lblSection2Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblSection3Resource1.Text" xml:space="preserve">
+    <value>3. For each item ordered (kit or sheet), you will need to fill in the order form as shown below :</value>
+  </data>
+  <data name="lblSection3Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblSection4Resource1.Text" xml:space="preserve">
+    <value>4. Finally, complete your order and calculate order total. Return this paper order to Cameleo Photo along with your &lt;b&gt;check&lt;/b&gt; or &lt;b&gt;money order&lt;/b&gt; or call customer service to &lt;b&gt;pay by credit card&lt;/b&gt; (VISA, MasterCard).</value>
+  </data>
+  <data name="lblSection4Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblSection5Resource1.Text" xml:space="preserve">
+    <value>5. All taxes are included.</value>
+  </data>
+  <data name="lblSection5Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblSheetCode1.Text" xml:space="preserve">
+    <value>Sheets</value>
+  </data>
+  <data name="lblSheetCode1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblSheetCode2.Text" xml:space="preserve">
+    <value>Sheets</value>
+  </data>
+  <data name="lblSheetCode2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblSheetDescription1.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="lblSheetDescription1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblSheetDescription2.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="lblSheetDescription2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblSheetPrice1.Text" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="lblSheetPrice1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblSheetPrice2.Text" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="lblSheetPrice2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblBackground1.Text" xml:space="preserve">
+    <value>Background</value>
+  </data>
+  <data name="lblBackground1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblBackground2.Text" xml:space="preserve">
+    <value>Background</value>
+  </data>
+  <data name="lblBackground2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblBackgrounds.Text" xml:space="preserve">
+    <value>Background</value>
+  </data>
+  <data name="lblBackgrounds.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblTotal1Resource1.Text" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="lblTotal1Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblTotal2Resource1.Text" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="lblTotal2Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblOrderTotal.Text" xml:space="preserve">
+    <value>Total :</value>
+  </data>
+  <data name="lblOrderTotal.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblTPSResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblTPSResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblTVQResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblTVQResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblPOTitle.Text" xml:space="preserve">
+    <value>Paper order</value>
+  </data>
+  <data name="lblPOTitle.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PageResource1.Title" xml:space="preserve">
+    <value>Paper order</value>
+  </data>
+  <data name="txtCodeUtilisateurResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtCodeUtilisateurResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtPriceA.Text" xml:space="preserve">
+    <value>13,00$</value>
+  </data>
+  <data name="txtPriceA.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtPriceB.Text" xml:space="preserve">
+    <value>18,00$</value>
+  </data>
+  <data name="txtPriceB.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtPriceC.Text" xml:space="preserve">
+    <value>22,00$</value>
+  </data>
+  <data name="txtPriceC.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtPriceD.Text" xml:space="preserve">
+    <value>33,00$</value>
+  </data>
+  <data name="txtPriceD.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtPriceE.Text" xml:space="preserve">
+    <value>9,00$</value>
+  </data>
+  <data name="txtPriceE.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtPriceF.Text" xml:space="preserve">
+    <value>13,00$</value>
+  </data>
+  <data name="txtPriceF.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtPriceG.Text" xml:space="preserve">
+    <value>9,00$</value>
+  </data>
+  <data name="txtPriceG.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtPriceH.Text" xml:space="preserve">
+    <value>9,00$</value>
+  </data>
+  <data name="txtPriceH.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtPriceI.Text" xml:space="preserve">
+    <value>9,00$</value>
+  </data>
+  <data name="txtPriceI.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtPriceJ.Text" xml:space="preserve">
+    <value>9,00$</value>
+  </data>
+  <data name="txtPriceJ.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+</root>

@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ABLabelResource1.Text" xml:space="preserve">
+    <value>Alberta</value>
+  </data>
+  <data name="CanadaLabelResource1.Selected" xml:space="preserve">
+    <value>true</value>
+  </data>
+  <data name="CanadaLabelResource1.Text" xml:space="preserve">
+    <value>Canada</value>
+  </data>
+  <data name="CBLabelResource1.Text" xml:space="preserve">
+    <value>Colombie-Britannique</value>
+  </data>
+  <data name="Countries.Text" xml:space="preserve">
+    <value>&lt;countries&gt;
+&lt;country code="AF" text="Afghanistan" /&gt;
+&lt;country code="ZA" text="Afrique du Sud" /&gt;
+&lt;country code="AL" text="Albanie" /&gt;
+&lt;country code="DZ" text="Algérie" /&gt;
+&lt;country code="DE" text="Allemagne" /&gt;
+&lt;country code="AD" text="Andorre" /&gt;
+&lt;country code="AO" text="Angola" /&gt;
+&lt;country code="AI" text="Anguilla" /&gt;
+&lt;country code="AQ" text="Antarctique" /&gt;
+&lt;country code="AG" text="Antigua-et-Barbuda" /&gt;
+&lt;country code="AN" text="Antilles néerlandaises" /&gt;
+&lt;country code="SA" text="Arabie saoudite" /&gt;
+&lt;country code="AR" text="Argentine" /&gt;
+&lt;country code="AM" text="Arménie" /&gt;
+&lt;country code="AW" text="Aruba" /&gt;
+&lt;country code="AU" text="Australie" /&gt;
+&lt;country code="AT" text="Autriche" /&gt;
+&lt;country code="AZ" text="Azerbaïdjan" /&gt;
+&lt;country code="BS" text="Bahamas" /&gt;
+&lt;country code="BH" text="Bahreïn" /&gt;
+&lt;country code="BD" text="Bangladesh" /&gt;
+&lt;country code="BB" text="Barbade" /&gt;
+&lt;country code="BY" text="Bélarus" /&gt;
+&lt;country code="BE" text="Belgique" /&gt;
+&lt;country code="BZ" text="Belize" /&gt;
+&lt;country code="BJ" text="Bénin" /&gt;
+&lt;country code="BM" text="Bermudes" /&gt;
+&lt;country code="BT" text="Bhoutan" /&gt;
+&lt;country code="BO" text="Bolivie" /&gt;
+&lt;country code="BA" text="Bosnie-Herzégovine" /&gt;
+&lt;country code="BW" text="Botswana" /&gt;
+&lt;country code="BR" text="Brésil" /&gt;
+&lt;country code="IO" text="British Indian Ocean Territory" /&gt;
+&lt;country code="BN" text="Brunéi Darussalam" /&gt;
+&lt;country code="BG" text="Bulgarie" /&gt;
+&lt;country code="BF" text="Burkina Faso" /&gt;
+&lt;country code="BI" text="Burundi" /&gt;
+&lt;country code="KH" text="Cambodge" /&gt;
+&lt;country code="CM" text="Cameroun" /&gt;
+&lt;country code="CA" text="Canada" /&gt;
+&lt;country code="CV" text="Cap-Vert" /&gt;
+&lt;country code="CL" text="Chili" /&gt;
+&lt;country code="CN" text="Chine" /&gt;
+&lt;country code="CY" text="Chypre" /&gt;
+&lt;country code="CO" text="Colombie" /&gt;
+&lt;country code="KM" text="Comores" /&gt;
+&lt;country code="CG" text="Congo" /&gt;
+&lt;country code="KP" text="Corée" /&gt;
+&lt;country code="CR" text="Costa Rica" /&gt;
+&lt;country code="CI" text="Côte d'Ivoire" /&gt;
+&lt;country code="HR" text="Croatie" /&gt;
+&lt;country code="CU" text="Cuba" /&gt;
+&lt;country code="DK" text="Danemark" /&gt;
+&lt;country code="DJ" text="Djibouti" /&gt;
+&lt;country code="DM" text="Dominique" /&gt;
+&lt;country code="EG" text="Égypte" /&gt;
+&lt;country code="SV" text="El Salvador" /&gt;
+&lt;country code="AE" text="Émirats arabes unis" /&gt;
+&lt;country code="EC" text="Équateur" /&gt;
+&lt;country code="ER" text="Érythrée" /&gt;
+&lt;country code="ES" text="Espagne" /&gt;
+&lt;country code="EE" text="Estonie" /&gt;
+&lt;country code="US" text="États-Unis" /&gt;
+&lt;country code="ET" text="Éthiopie" /&gt;
+&lt;country code="RU" text="Fédération de Russie" /&gt;
+&lt;country code="FJ" text="Fidji" /&gt;
+&lt;country code="FI" text="Finlande" /&gt;
+&lt;country code="FR" text="France" /&gt;
+&lt;country code="GA" text="Gabon" /&gt;
+&lt;country code="GM" text="Gambie" /&gt;
+&lt;country code="GE" text="Géorgie" /&gt;
+&lt;country code="GH" text="Ghana" /&gt;
+&lt;country code="GI" text="Gibraltar" /&gt;
+&lt;country code="GR" text="Grèce" /&gt;
+&lt;country code="GD" text="Grenade" /&gt;
+&lt;country code="GL" text="Groenland" /&gt;
+&lt;country code="GP" text="Guadeloupe" /&gt;
+&lt;country code="GU" text="Guam" /&gt;
+&lt;country code="GT" text="Guatemala" /&gt;
+&lt;country code="GN" text="Guinée" /&gt;
+&lt;country code="GW" text="Guinée-Bissau" /&gt;
+&lt;country code="GQ" text="Guinée équatoriale" /&gt;
+&lt;country code="GY" text="Guyana" /&gt;
+&lt;country code="GF" text="Guyane française" /&gt;
+&lt;country code="HT" text="Haïti" /&gt;
+&lt;country code="HN" text="Honduras" /&gt;
+&lt;country code="HK" text="Hong Kong" /&gt;
+&lt;country code="HU" text="Hongrie" /&gt;
+&lt;country code="CX" text="Île Christmas" /&gt;
+&lt;country code="NF" text="Île Norfolk" /&gt;
+&lt;country code="KY" text="Îles Caïmanes" /&gt;
+&lt;country code="CC" text="Îles Cocos (Keeling)" /&gt;
+&lt;country code="CK" text="Îles Cook" /&gt;
+&lt;country code="FK" text="Îles Falkland (Malvinas)" /&gt;
+&lt;country code="FO" text="Îles Féroé" /&gt;
+&lt;country code="HM" text="Îles Heard and Mc Donald" /&gt;
+&lt;country code="MP" text="Îles Mariannes septentrionales" /&gt;
+&lt;country code="MH" text="Îles Marshall" /&gt;
+&lt;country code="SB" text="Îles Salomon" /&gt;
+&lt;country code="SJ" text="Îles Svalbard et Jan Mayen" /&gt;
+&lt;country code="TC" text="Îles Turques et Caïques" /&gt;
+&lt;country code="VI" text="Îles Vierges américaines" /&gt;
+&lt;country code="VG" text="Îles Vierges britanniques" /&gt;
+&lt;country code="WF" text="Îles Wallis et Futuna" /&gt;
+&lt;country code="IN" text="Inde" /&gt;
+&lt;country code="ID" text="Indonésie" /&gt;
+&lt;country code="IR" text="Iran" /&gt;
+&lt;country code="IQ" text="Iraq" /&gt;
+&lt;country code="IE" text="Irlande" /&gt;
+&lt;country code="IS" text="Islande" /&gt;
+&lt;country code="BV" text="Îsle Bouvet" /&gt;
+&lt;country code="IL" text="Israël" /&gt;
+&lt;country code="IT" text="Italie" /&gt;
+&lt;country code="LY" text="Jamahiriya arabe libyenne" /&gt;
+&lt;country code="JM" text="Jamaïque" /&gt;
+&lt;country code="JP" text="Japon" /&gt;
+&lt;country code="JO" text="Jordanie" /&gt;
+&lt;country code="KZ" text="Kazakhstan" /&gt;
+&lt;country code="KE" text="Kenya" /&gt;
+&lt;country code="KG" text="Kirghizistan" /&gt;
+&lt;country code="KI" text="Kiribati" /&gt;
+&lt;country code="KW" text="Koweït" /&gt;
+&lt;country code="LA" text="Laos" /&gt;
+&lt;country code="LS" text="Lesotho" /&gt;
+&lt;country code="LV" text="Lettonie" /&gt;
+&lt;country code="LB" text="Liban" /&gt;
+&lt;country code="LR" text="Libéria" /&gt;
+&lt;country code="LI" text="Liechtenstein" /&gt;
+&lt;country code="LT" text="Lituanie" /&gt;
+&lt;country code="LU" text="Luxembourg" /&gt;
+&lt;country code="MO" text="Macao" /&gt;
+&lt;country code="MG" text="Madagascar" /&gt;
+&lt;country code="MY" text="Malaisie" /&gt;
+&lt;country code="MW" text="Malawi" /&gt;
+&lt;country code="MV" text="Maldives" /&gt;
+&lt;country code="ML" text="Mali" /&gt;
+&lt;country code="MT" text="Malte" /&gt;
+&lt;country code="MA" text="Maroc" /&gt;
+&lt;country code="MQ" text="Martinique" /&gt;
+&lt;country code="MU" text="Maurice" /&gt;
+&lt;country code="MR" text="Mauritanie" /&gt;
+&lt;country code="YT" text="Mayotte" /&gt;
+&lt;country code="MX" text="Mexique" /&gt;
+&lt;country code="FM" text="Micronésie" /&gt;
+&lt;country code="MC" text="Monaco" /&gt;
+&lt;country code="MN" text="Mongolie" /&gt;
+&lt;country code="MS" text="Montserrat" /&gt;
+&lt;country code="MZ" text="Mozambique" /&gt;
+&lt;country code="MM" text="Myanmar" /&gt;
+&lt;country code="NA" text="Namibie" /&gt;
+&lt;country code="NR" text="Nauru" /&gt;
+&lt;country code="NP" text="Népal" /&gt;
+&lt;country code="NI" text="Nicaragua" /&gt;
+&lt;country code="NE" text="Niger" /&gt;
+&lt;country code="NG" text="Nigéria" /&gt;
+&lt;country code="NU" text="Nioué" /&gt;
+&lt;country code="NO" text="Norvège" /&gt;
+&lt;country code="NC" text="Nouvelle-Calédonie" /&gt;
+&lt;country code="NZ" text="Nouvelle-Zélande" /&gt;
+&lt;country code="OM" text="Oman" /&gt;
+&lt;country code="UG" text="Ouganda" /&gt;
+&lt;country code="UZ" text="Ouzbékistan" /&gt;
+&lt;country code="PK" text="Pakistan" /&gt;
+&lt;country code="PW" text="Palaos" /&gt;
+&lt;country code="PA" text="Panama" /&gt;
+&lt;country code="PG" text="Papouasie-Nouvelle-Guinée" /&gt;
+&lt;country code="PY" text="Paraguay" /&gt;
+&lt;country code="NL" text="Pays-Bas" /&gt;
+&lt;country code="PE" text="Pérou" /&gt;
+&lt;country code="PH" text="Philippines" /&gt;
+&lt;country code="PN" text="Pitcairn" /&gt;
+&lt;country code="PL" text="Pologne" /&gt;
+&lt;country code="PF" text="Polynésie française" /&gt;
+&lt;country code="PR" text="Porto Rico" /&gt;
+&lt;country code="PT" text="Portugal" /&gt;
+&lt;country code="TW" text="Province chinoise de Taïwan" /&gt;
+&lt;country code="QA" text="Qatar" /&gt;
+&lt;country code="SY" text="République arabe syrienne" /&gt;
+&lt;country code="CF" text="République centrafricaine" /&gt;
+&lt;country code="KR" text="République de Corée" /&gt;
+&lt;country code="CD" text="République dém. du Congo" /&gt;
+&lt;country code="MD" text="République de Moldova" /&gt;
+&lt;country code="DO" text="République dominicaine" /&gt;
+&lt;country code="CZ" text="République tchèque" /&gt;
+&lt;country code="TZ" text="République-Unie de Tanzanie" /&gt;
+&lt;country code="RE" text="Réunion" /&gt;
+&lt;country code="RO" text="Roumanie" /&gt;
+&lt;country code="GB" text="Royaume-Uni" /&gt;
+&lt;country code="RW" text="Rwanda" /&gt;
+&lt;country code="EH" text="Sahara occidental" /&gt;
+&lt;country code="SH" text="Sainte-Hélène" /&gt;
+&lt;country code="LC" text="Sainte-Lucie" /&gt;
+&lt;country code="KN" text="Saint-Kitts-et-Nevis" /&gt;
+&lt;country code="SM" text="Saint-Marin" /&gt;
+&lt;country code="PM" text="Saint-Pierre-et-Miquelon" /&gt;
+&lt;country code="VA" text="Saint-Siège" /&gt;
+&lt;country code="VC" text="Saint-Vincent-et-les Grenadines" /&gt;
+&lt;country code="WS" text="Samoa" /&gt;
+&lt;country code="AS" text="Samoas américaines" /&gt;
+&lt;country code="ST" text="Sao Tomé-et-Principe" /&gt;
+&lt;country code="SN" text="Sénégal" /&gt;
+&lt;country code="YU" text="Serbie-et-Monténégro" /&gt;
+&lt;country code="SC" text="Seychelles" /&gt;
+&lt;country code="SL" text="Sierra Leone" /&gt;
+&lt;country code="SG" text="Singapour" /&gt;
+&lt;country code="SK" text="Slovaquie" /&gt;
+&lt;country code="SI" text="Slovénie" /&gt;
+&lt;country code="SO" text="Somalie" /&gt;
+&lt;country code="SD" text="Soudan" /&gt;
+&lt;country code="LK" text="Sri Lanka" /&gt;
+&lt;country code="SE" text="Suède" /&gt;
+&lt;country code="CH" text="Suisse" /&gt;
+&lt;country code="SR" text="Suriname" /&gt;
+&lt;country code="SZ" text="Swaziland" /&gt;
+&lt;country code="TJ" text="Tadjikistan" /&gt;
+&lt;country code="TD" text="Tchad" /&gt;
+&lt;country code="TH" text="Thaïlande" /&gt;
+&lt;country code="TL" text="Timor-Leste" /&gt;
+&lt;country code="TG" text="Togo" /&gt;
+&lt;country code="TK" text="Tokélaou" /&gt;
+&lt;country code="TO" text="Tonga" /&gt;
+&lt;country code="TT" text="Trinité-et-Tobago" /&gt;
+&lt;country code="TN" text="Tunisie" /&gt;
+&lt;country code="TM" text="Turkménistan" /&gt;
+&lt;country code="TR" text="Turquie" /&gt;
+&lt;country code="TV" text="Tuvalu" /&gt;
+&lt;country code="UA" text="Ukraine" /&gt;
+&lt;country code="UM" text="US Minor Islands" /&gt;
+&lt;country code="UY" text="Uruguay" /&gt;
+&lt;country code="VU" text="Vanuatu" /&gt;
+&lt;country code="VE" text="Venezuela" /&gt;
+&lt;country code="VN" text="Viet Nam" /&gt;
+&lt;country code="YE" text="Yémen" /&gt;
+&lt;country code="ZM" text="Zambie" /&gt;
+&lt;country code="ZW" text="Zimbabwe" /&gt;
+&lt;/countries&gt;</value>
+  </data>
+  <data name="CountryLabelResource1.Text" xml:space="preserve">
+    <value>Pays:</value>
+  </data>
+  <data name="IPELabelResource1.Text" xml:space="preserve">
+    <value>Île-du-Prince-Édouard</value>
+  </data>
+  <data name="MNLabelResource1.Text" xml:space="preserve">
+    <value>Manitoba</value>
+  </data>
+  <data name="NBLabelResource1.Text" xml:space="preserve">
+    <value>Nouveau-Brunswick</value>
+  </data>
+  <data name="NELabelResource1.Text" xml:space="preserve">
+    <value>Nouvelle-Écosse</value>
+  </data>
+  <data name="NULabelResource1.Text" xml:space="preserve">
+    <value>Nunavut</value>
+  </data>
+  <data name="NYLabelResource1.Selected" xml:space="preserve">
+    <value>false</value>
+  </data>
+  <data name="NYLabelResource1.Selected1" xml:space="preserve">
+    <value>false</value>
+  </data>
+  <data name="ONLabelResource1.Text" xml:space="preserve">
+    <value>Ontario</value>
+  </data>
+  <data name="ProvinceLabelResource1.Text" xml:space="preserve">
+    <value>Province / État :</value>
+  </data>
+  <data name="QCLabelResource1.Selected" xml:space="preserve">
+    <value>true</value>
+  </data>
+  <data name="QCLabelResource1.Selected1" xml:space="preserve">
+    <value>true</value>
+  </data>
+  <data name="QCLabelResource1.Text" xml:space="preserve">
+    <value>Québec</value>
+  </data>
+  <data name="SALabelResource1.Text" xml:space="preserve">
+    <value>Saskatchewan</value>
+  </data>
+  <data name="TNLLabelResource1.Text" xml:space="preserve">
+    <value>Terre-Neuve et Labrador</value>
+  </data>
+  <data name="TNOLabelResource1.Text" xml:space="preserve">
+    <value>Territoires du Nord-Ouest</value>
+  </data>
+  <data name="USALabelResource1.Selected" xml:space="preserve">
+    <value>false</value>
+  </data>
+  <data name="valStateResource1.ErrorMessage" xml:space="preserve">
+    <value>Requis</value>
+  </data>
+  <data name="YULabelResource1.Text" xml:space="preserve">
+    <value>Yukon</value>
+  </data>
+</root>

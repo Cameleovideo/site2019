@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddFrameResource1.Text" xml:space="preserve">
+    <value>Add a border</value>
+    <comment>Add a border</comment>
+  </data>
+  <data name="ChangeBackgroundResource1.Text" xml:space="preserve">
+    <value>Change the background</value>
+    <comment>Changer la toile de fond</comment>
+  </data>
+  <data name="ContactResource1.Text" xml:space="preserve">
+    <value>Still can't find?</value>
+    <comment>Vous ne trouvez pas?</comment>
+  </data>
+  <data name="ContactResource2.Text" xml:space="preserve">
+    <value>Contact Us ....</value>
+    <comment>Contact Us ....</comment>
+  </data>
+  <data name="Definitions.Text" xml:space="preserve">
+    <value>Basic digital photographie knowledge</value>
+  </data>
+  <data name="DeletePhotoResource1.Text" xml:space="preserve">
+    <value>Delete a Photo</value>
+    <comment>Erase a Picture</comment>
+  </data>
+  <data name="DigitalRightsResource1.Text" xml:space="preserve">
+    <value>Digital rights</value>
+    <comment>Numerical rights</comment>
+  </data>
+  <data name="ForgotPasswordResource1.Text" xml:space="preserve">
+    <value>I forgot my password</value>
+    <comment>I forgot my password</comment>
+  </data>
+  <data name="HeaderResource1.Text" xml:space="preserve">
+    <value>Online Help</value>
+    <comment>Online Help</comment>
+  </data>
+  <data name="HowTos.Text" xml:space="preserve">
+    <value>Imports pictures</value>
+  </data>
+  <data name="Important.Text" xml:space="preserve">
+    <value>Important to know</value>
+  </data>
+  <data name="MergeHeaderResource1.Text" xml:space="preserve">
+    <value>Merge 2 albums</value>
+    <comment>Combine 2 albums</comment>
+  </data>
+  <data name="MergeResource1.Text" xml:space="preserve">
+    <value>Merge 2 albums (ex: more than one children at the same school)</value>
+  </data>
+  <data name="ModifyPasswordResource1.Text" xml:space="preserve">
+    <value>Change my password</value>
+    <comment>Modify my password</comment>
+  </data>
+  <data name="ModifyProfileResource1.Text" xml:space="preserve">
+    <value>Change my personal information</value>
+    <comment>Modify my personal information</comment>
+  </data>
+  <data name="OrderHeaderResource1.Text" xml:space="preserve">
+    <value>Place an order</value>
+    <comment>Place an order</comment>
+  </data>
+  <data name="OrderHistoryResource1.Text" xml:space="preserve">
+    <value>Order history</value>
+    <comment>History of my orders</comment>
+  </data>
+  <data name="PaymentTypeResource1.Text" xml:space="preserve">
+    <value>Payment options</value>
+    <comment>Modes of payment</comment>
+  </data>
+  <data name="PhotoHeaderResource1.Text" xml:space="preserve">
+    <value>Photo processing</value>
+    <comment>Treatment of pictures</comment>
+  </data>
+  <data name="PlaceOrderResource1.Text" xml:space="preserve">
+    <value>Place an Order</value>
+    <comment>Place an Order</comment>
+  </data>
+  <data name="Policies.Text" xml:space="preserve">
+    <value>Policies</value>
+  </data>
+  <data name="Privacy.Text" xml:space="preserve">
+    <value>Privacy</value>
+  </data>
+  <data name="ProfileHeaderResource1.Text" xml:space="preserve">
+    <value>My Profile</value>
+    <comment>My Profile</comment>
+  </data>
+  <data name="PurchaseConditions.Text" xml:space="preserve">
+    <value>Purchase Terms &amp; Conditions</value>
+  </data>
+  <data name="SecurityResource1.Text" xml:space="preserve">
+    <value>Secure online transactions</value>
+    <comment>Secure online transactions</comment>
+  </data>
+  <data name="ThingsToKnow.Text" xml:space="preserve">
+    <value>Before start</value>
+  </data>
+  <data name="UploadPhotos.Text" xml:space="preserve">
+    <value>Upload photos</value>
+  </data>
+  <data name="UseConditions.Text" xml:space="preserve">
+    <value>Conditions of use</value>
+  </data>
+</root>

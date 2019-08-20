@@ -1,0 +1,12 @@
+<%@ master language="VB" inherits="General, App_Web_xkuvhdkn" masterpagefile="~/Default.master" %>
+<asp:content id="Content1" contentplaceholderid="Main" runat="server">
+    <div id="desktopheader">            
+    </div>  
+    <div class="page" id="desktopgeneral" style="overflow:hidden;" >
+        <div id="desktopgeneralcontent" >  
+            <div style="margin-right:30px;">
+                <asp:contentplaceholder id="Main2" runat="server" />	                                    
+            </div>          
+        </div>
+    </div>   
+</asp:content>

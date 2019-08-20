@@ -1,0 +1,49 @@
+<%@ master language="VB" inherits="mastercart, App_Web_xkuvhdkn" masterpagefile="~/Default.master" %>
+<%@ Register Src="Modules/MiniBasket.ascx" TagName="MiniBasket" TagPrefix="ucMiniBasket" %>
+<%@ Register Src="Modules/LoginWelcome.ascx" TagName="LoginWelcome" TagPrefix="ucLoginWelcome" %>
+<asp:content id="Content1" contentplaceholderid="Main" runat="server">
+
+	    <div class="page" id="home">	    
+		    <div id="sidebar" class="login">		    			    
+		        <h4>
+				    <ucLoginWelcome:LoginWelcome ID="LoginWelcome1" runat="server" />					    
+				</h4>			
+				
+                <asp:ImageButton ID="btnTutorial" runat="server" meta:resourcekey="btnTutorialResource1" />
+				
+		        <asp:Panel ID="pnlAdmin" runat="server">
+		            <hr />
+			        <h4>Administration</h4>
+			    </asp:Panel>
+			    
+			    <asp:Panel ID="pnlAdminSite" runat="server">
+                    <a href="<%=Utility.GetSiteRoot()%>/admin/">Admin Site</a><br />
+                </asp:Panel>
+                    
+                <asp:Panel ID="pnlAdminGallery" runat="server">
+                    <a href="<%=Utility.GetSiteRoot()%>/admin/gallery/Albums.aspx">Admin Albums</a>
+                    <hr/>
+                </asp:Panel>
+                
+                <asp:Panel ID="pnlAdminPersonalAlbums" runat="server">
+                    <a href="<%=Utility.GetSiteRoot()%>/admin/gallery/Albums.aspx">
+                        <asp:Label ID="lblAdminPersonalAlbums" runat="server" meta:resourcekey="lblPersonalAlbumsResource1"></asp:Label>
+                    </a>
+                    <hr/>
+                </asp:Panel>
+                                    
+                <ucMiniBasket:MiniBasket ID="MiniBasket2" runat="server" />	
+                
+                <div>
+                    <asp:contentplaceholder id="infoZone" runat="server" />	    
+	            </div>	
+	            
+	            <asp:Label ID="lblThawte" runat="server" meta:resourcekey="lblThawteResource1"></asp:Label>                    
+		    </div>    	
+    		
+	        <div id="content">    	    			
+		        <asp:contentplaceholder id="Main2" runat="server" />	    
+	        </div>
+	    </div>
+        
+  </asp:content>

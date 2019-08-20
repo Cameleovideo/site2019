@@ -1,0 +1,392 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CaptionResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CheckBox1Resource1.Text" xml:space="preserve">
+    <value>Album de cadre</value>
+    <comment>Frame album</comment>
+  </data>
+  <data name="CheckBox1Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CheckBox2Resource1.Text" xml:space="preserve">
+    <value>Album public</value>
+    <comment>Make this album public</comment>
+  </data>
+  <data name="CheckBox2Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CheckBox3Resource1.Text" xml:space="preserve">
+    <value>Utilisateur staff</value>
+    <comment>Staff user</comment>
+  </data>
+  <data name="CheckBox3Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CheckBox4Resource1.Text" xml:space="preserve">
+    <value>Backdrop album</value>
+    <comment>Backdrop album</comment>
+  </data>
+  <data name="CheckBox4Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CheckBoxPersonalAlbumResource1.Text" xml:space="preserve">
+    <value>Album personel</value>
+    <comment>Personal Album</comment>
+  </data>
+  <data name="CheckBoxPersonalAlbumResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ConfirmButonExtender1.ConfirmText" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer cet album ?</value>
+  </data>
+  <data name="EventUserNameResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FormView1Resource1.Caption" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FormView1Resource1.EmptyDataText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FormView1Resource1.FooterText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FormView1Resource1.HeaderText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FormView1Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GridView1Resource1.Caption" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GridView1Resource1.EmptyDataText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GridView1Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Image1Resource1.AlternateText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Image1Resource1.ImageUrl" xml:space="preserve">
+    <value>../../Images/btn_Edit_Fr.png</value>
+  </data>
+  <data name="Image1Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImageButton1Resource1.AlternateText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImageButton1Resource1.ImageUrl" xml:space="preserve">
+    <value>../../Images/btn_Add_Fr.png</value>
+  </data>
+  <data name="ImageButton1Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImageButton2Resource1.AlternateText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImageButton2Resource1.ImageUrl" xml:space="preserve">
+    <value>../../Images/btn_Rename_Fr.png</value>
+  </data>
+  <data name="ImageButton2Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImageButton3Resource1.AlternateText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImageButton3Resource1.ImageUrl" xml:space="preserve">
+    <value>../../Images/btn_Delete_Fr.png</value>
+  </data>
+  <data name="ImageButton3Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImageButton4Resource1.AlternateText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImageButton4Resource1.ImageUrl" xml:space="preserve">
+    <value>../../Images/btn_Update_Fr.png</value>
+  </data>
+  <data name="ImageButton4Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImageButton5Resource1.AlternateText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImageButton5Resource1.ImageUrl" xml:space="preserve">
+    <value>../../Images/btn_Cancel_Fr.png</value>
+  </data>
+  <data name="ImageButton5Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="IsBackDropResource1.Text" xml:space="preserve">
+    <value>Est Backdrop?</value>
+  </data>
+  <data name="IsBackDropResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="IsFrameResource1.Text" xml:space="preserve">
+    <value>Est un cadre?</value>
+  </data>
+  <data name="IsFrameResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="IsPersonalAlbumResource1.Text" xml:space="preserve">
+    <value>Album Personel?</value>
+  </data>
+  <data name="IsPersonalAlbumResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="IsPublicResource1.Text" xml:space="preserve">
+    <value>Public ?</value>
+  </data>
+  <data name="IsPublicResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="IsStaffResource1.Text" xml:space="preserve">
+    <value>Staff ?</value>
+  </data>
+  <data name="IsStaffResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblAddNewAlbumResource1.Text" xml:space="preserve">
+    <value>Ajouter nouvel album</value>
+  </data>
+  <data name="lblAddNewAlbumResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblAlbumTitleBoxResource1.Text" xml:space="preserve">
+    <value>Titre</value>
+  </data>
+  <data name="lblAlbumTitleBoxResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblBeforeUploadingResource1.Text" xml:space="preserve">
+    <value>Avant de télécharger vos photos, créer un album pour les organiser.</value>
+    <comment>Before uploading your pictures, create an album to organize your pictures.</comment>
+  </data>
+  <data name="lblBeforeUploadingResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblCountPhotosResource1.Text" xml:space="preserve">
+    <value> Photo(s)</value>
+  </data>
+  <data name="lblCountPhotosResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblDiskSpaceResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblDiskSpaceResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblIsPublicResource1.Text" xml:space="preserve">
+    <value>Public</value>
+  </data>
+  <data name="lblIsPublicResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="MasterAlbumIdResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Message1Resource1.Text" xml:space="preserve">
+    <value>Voici la liste de vos albums. Cliquez sur &lt;b&gt;Modifier&lt;/b&gt; pour voir le détail d'un album.</value>
+    <comment>Voici la liste de vos albums. Cliquez sur &lt;b&gt;Éditer&lt;/b&gt; pour voir le détail d'un l'album.</comment>
+  </data>
+  <data name="NoAlbumsResource1.Text" xml:space="preserve">
+    <value>Aucun album.</value>
+    <comment>Aucun album.</comment>
+  </data>
+  <data name="PageResource1.Title" xml:space="preserve">
+    <value>Your Name Here | Admin</value>
+    <comment>Your Name Here | Admin</comment>
+  </data>
+  <data name="panelAddAlbumCheckboxesResource1.GroupingText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="panelAddAlbumCheckboxesResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="panelAddAlbumResource1.GroupingText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="panelAddAlbumResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PhotographUserNameResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="RequiredFieldValidator1Resource1.ErrorMessage" xml:space="preserve">
+    <value>Vous devez choisir un titre.</value>
+    <comment>You must choose a	title.</comment>
+  </data>
+  <data name="RequiredFieldValidator1Resource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="RequiredFieldValidator1Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SubjectEmailResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SubjectFirstNameResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SubjectGroupResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SubjectLastNameResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SubjectSuperiorNameResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SubjectUniqueIdResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TemplateFieldResource1.AccessibleHeaderText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TemplateFieldResource1.FooterText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TemplateFieldResource1.HeaderText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TemplateFieldResource2.AccessibleHeaderText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TemplateFieldResource2.FooterText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TemplateFieldResource2.HeaderText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TextBox1Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="YourAlbumsHeaderResource1.Text" xml:space="preserve">
+    <value>Vos albums</value>
+    <comment>Vos albums</comment>
+  </data>
+</root>
