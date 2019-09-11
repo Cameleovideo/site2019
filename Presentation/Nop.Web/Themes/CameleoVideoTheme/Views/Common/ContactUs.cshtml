@@ -1,0 +1,201 @@
+﻿@model ContactUsModel
+@using Nop.Web.Models.Common;
+@{
+    Layout = "~/Views/Shared/_ColumnsOne.cshtml";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.ContactUs").Text);
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sendbrochure').click(function () {
+            toggleSendBrochure();
+        });
+    });
+    function toggleSendBrochure() {
+        if ($('#sendbrochure').is(':checked')) {
+            document.getElementById('@Html.IdFor(model => model.Enquiry)').value = document.getElementById('@Html.IdFor(model => model.Enquiry)').value + '\r' + '@T("ContactUs.Brochure.Text")';
+        }
+        else {
+            var regex = new RegExp('@T("ContactUs.Brochure.Text")', 'g');
+            document.getElementById('@Html.IdFor(model => model.Enquiry)').value = (String)(document.getElementById('@Html.IdFor(model => model.Enquiry)').value).replace(regex, "");
+        }
+    }
+    $(document).ready(function () {
+        $('#send-contactus-form').submit(function () {
+            if ($('#send-contactus-form').valid()) {
+                document.getElementById('@Html.IdFor(model => model.Enquiry)').value = (String)(document.getElementById('@Html.IdFor(model => model.Enquiry)').value) + '\r' + "@T("ContactUs.School.Label") : " + document.getElementById('schoolname').value;
+            }
+        });
+    });
+
+</script>
+
+<div class="page contact-page">
+    <div class="page-title">        
+    </div>   
+    @Html.Widget("contactus_top")
+    @if (Model.SuccessfullySent)
+    {
+        <div class="result">
+            @Html.Raw(HttpUtility.HtmlDecode(Model.Result))
+        </div>
+    }
+    else
+    {
+        <div class="inputs-left" style="width:550px;padding-right:20px;">        
+            @using (Html.BeginForm("ContactUs", "Common", FormMethod.Post, new { id = "send-contactus-form" }))
+            {
+                <div class="page-body">
+                    <div class="message-error">
+                        @if (!ViewData.ModelState.IsValid)
+                        {
+                            @Html.Raw(HttpUtility.HtmlDecode(Html.ValidationSummary(true).ToHtmlString()))
+                        }
+                    </div>
+                    <div class="form-fields">
+                        <div class="page-title">
+                            <h1>@T("PageTitle.ContactUs")</h1><br />
+                        </div>
+                        <div class="inputs-left">
+                            <div class="inputs">                                
+                                @Html.LabelFor(model => model.FullName)
+                                <div class="input-box">
+                                    @Html.TextBoxFor(model => model.FullName, new { @class = "fullname", placeholder = T("ContactUs.FullName.Hint") })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.FullName)
+                            </div>
+                            <div class="inputs">
+                                <br />
+                                @Html.LabelFor(model => model.Email)
+                                <div class="input-box">
+                                    @Html.TextBoxFor(model => model.Email, new { @class = "email", placeholder = T("ContactUs.Email.Hint") })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.Email)
+                            </div>
+                            <div class="inputs">
+                                <br />
+                                @T("ContactUs.School.Label")
+                                <div class="input-box">
+                                    @Html.TextBox("schoolname", null, new { @class = "fullname", placeholder = T("ContactUs.School.Hint") })
+                                </div>
+                            </div>
+                            <div class="inputs">
+                                <div class="input-box">
+                                    <br />
+                                    @Html.Label("sendbrochure", T("ContactUs.Brochure.Hint").Text)
+                                    @Html.CheckBox("sendbrochure")
+                                </div>
+                            </div>
+                            @if (Model.DisplayCaptcha)
+                            {
+                                <div class="captcha-box">
+                                    @Html.Raw(Html.GenerateCaptcha())
+                                </div>
+                            }
+                        </div>
+                        <div class="inputs-left inputs">
+                            @Html.LabelFor(model => model.Enquiry)
+                            <div class="input-box">
+                                @Html.TextAreaFor(model => model.Enquiry, new { @class = "enquiry", placeholder = T("ContactUs.Enquiry.Hint") })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Enquiry)
+                        </div>
+                    </div>
+                    <div class="buttons" style="padding-top:81px;">
+                        <br />
+                        <input type="submit" name="send-email" id="send-email" class="button-1 contact-us-button" value="@T("ContactUs.Button")" />
+                    </div>
+                </div>
+            }      
+        
+        </div>
+
+        <div class="inputs-left" style="width:550px;">
+            @using (Html.BeginForm("ShareInfo", "Event", FormMethod.Post, new { id = "share-info-form" }))
+            {
+                <div class="page-body">
+                    <div class="message-error">
+                        @if (!ViewData.ModelState.IsValid)
+                        {
+                            @Html.Raw(HttpUtility.HtmlDecode(Html.ValidationSummary(true).ToHtmlString()))
+                        }
+                    </div>
+                    <div class="form-fields">
+                        <div class="page-title">
+                            <h1>@T("PageTitle.ShareInfo")</h1>  
+                            <table width="100%">
+                                <tr style="vertical-align:middle;">
+                                    <td style="text-align:right;color: #0181c8;">
+                                        <h3>
+                                            @T("ShareInfo.WinACopy")                                            
+                                        </h3>
+                                    </td>
+                                    <td style="text-align:right;">
+                                        <img class="interrogation" src="~/Themes/CameleoVideoTheme/Content/images/interrogation.jpg" alt="@T("ShareInfo.WinACopy.Hint")" title="@T("ShareInfo.WinACopy.Hint")" />
+                                    </td>
+                                </tr>
+                            </table>                                                          
+                        </div>
+                        <div class="inputs-left">
+                            <div class="inputs">
+                                @Html.LabelFor(model => model.FullName)
+                                <div class="input-box">
+                                    @Html.TextBox("sharefullname", Model.FullName, new { data_val_required = "<br />" + T("ContactUs.FullName.Required"), data_val = "true", required = "Required", @name = "sharefullname", @id = "sharefullname", @class = "emaillist", placeholder = T("ShareInfo.FullName.Hint") })
+                                    <span class="field-validation-error" data-valmsg-replace="true" data-valmsg-for="sharefullname"></span>
+                                </div>
+                            </div>
+                            <div class="inputs">
+                                @Html.LabelFor(model => model.Email)
+                                <div class="input-box">
+                                    @Html.TextBox("shareemail", Model.Email, new { data_val_required = "<br />" + T("ContactUs.Email.Required"), data_val = "true", required = "Required", @name = "shareemail", @id = "shareemail", @class = "emaillist", placeholder = T("ShareInfo.Email.Hint") })
+                                    <span class="field-validation-error" data-valmsg-replace="true" data-valmsg-for="shareemail"></span>
+                                </div>
+                            </div>
+                            <div class="inputs">
+                                @T("ShareInfo.Emails.Label")
+                                <div class="input-box">
+                                    @Html.TextBox("emailaddresses", null, new { data_val_required = "<br />" + T("ContactUs.Emails.Required"), data_val = "true", required = "Required", @name = "emailaddresses", @id = "emailaddresses", @class = "emaillist", placeholder = T("ShareInfo.Emails.Hint") })
+
+                                    <span class="field-validation-error" data-valmsg-replace="true" data-valmsg-for="emailaddresses"></span>
+                                </div>
+                            </div>
+                            <div class="inputs">
+                                @T("ShareInfo.School.Label")
+                                <div class="input-box">
+                                    @Html.TextBox("shareschoolname", null, new { @class = "emaillist", placeholder = T("ShareInfo.School.Hint") })
+                                </div>
+                            </div>
+                            <div class="inputs">
+                                @T("ShareInfo.PersonalMessage.Label")
+                                <div class="input-box">
+                                    @Html.TextBox("sharemessage", null, new { data_val_required = "<br />" + T("ContactUs.ShareMessage.Required"), data_val = "true", required = "Required", @name = "sharemessage", @id = "sharemessage", @class = "emaillist", placeholder = T("ShareInfo.Message.Hint") })
+
+                                    <span class="field-validation-error" data-valmsg-replace="true" data-valmsg-for="sharemessage"></span>
+                                </div>
+                            </div>
+                            @if (Model.DisplayCaptcha)
+                            {
+                                <div class="captcha-box">
+                                    @Html.Raw(Html.GenerateCaptcha())
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <br />
+                        <input type="submit" name="share-info" id="share-info" class="button-1 contact-us-button" value="@T("ShareInfo.Button")" />
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    @Html.Widget("contactus_bottom")
+
+    <div class="inputs-left" style="padding-top:10px;width:100%;">
+        <div class="page-body" style="font-size:x-large;">            
+            @Html.Action("TopicBlock", "Topic", new { systemName = "ContactUs" })            
+        </div>
+    </div>    
+</div>

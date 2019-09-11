@@ -1,0 +1,187 @@
+﻿@using Nop.Plugin.Cameleo.CameleoEvents.ViewModels;
+@using Nop.Plugin.Cameleo.CameleoEvents.Domain;
+@using Nop.Core;
+@using Nop.Core.Infrastructure;
+
+@model Nop.Plugin.Cameleo.CameleoEvents.ViewModels.CameleoEventViewModel
+
+@{
+    //Layout
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+
+    var gridPageSize = EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().DefaultGridPageSize;
+    
+    //title
+    Html.AddTitleParts(T("pagetitle.cameleoeventdetails.eventuserlist").Text);
+
+    //CSS
+    Html.AddCssFileParts("~/Plugins/Cameleo.CameleoEvents/Content/styles.css");    
+    
+  
+    var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+
+}
+
+<div class="section-header">
+    <div class="title">
+        <img src="@Url.Content("~/Administration/Content/images/ico-system.png")" alt="" />
+        @T("Plugins.Cameleo.CameleoEvents.EventDetails.EventUserList") @Html.ActionLink("(" + T("Plugins.Cameleo.CameleoEventDetails.FinalReport.BackToDetails") + ")", "EventDetails", "EventAdmin", new { eventId = Model.Id }, null)
+    </div>           
+</div>
+     
+<div class="page cameleoevent-details-page">
+    <div class="page-body">
+        @Html.Partial("~/Plugins/Cameleo.CameleoEvents/Views/Admin/Event/_EventDetails.cshtml", Model)
+    </div>
+</div>
+<br /><br />
+
+    
+<table class="adminContent">
+    <tr>
+        <td>
+            <div id="eventusers-grid"></div>
+            <script>
+                $(document).ready(function () {
+                    $("#eventusers-grid").kendoGrid({
+                        dataSource: {
+                            type: "json",
+                            transport: {
+                                read: {
+                                    url: "@Html.Raw(Url.Action("EventUserList", "EventUserAdmin", new { eventId = Model.Id }))",
+                                    cache: false,
+                                    type: "POST",
+                                    dataType: "json"
+                                },
+                                update: {
+                                    url:"@Html.Raw(Url.Action("EventUserUpdate", "EventUserAdmin"))",
+                                    type: "POST",
+                                    dataType: "json"
+                                }
+                            },
+                            sync: function Sync_Handler(e) {
+                                this.read();
+                            },
+                            schema: {
+                                data: "Data",
+                                total: "Total",
+                                errors: "Errors",
+                                model: {
+                                    id: "Id",
+                                    fields: {
+                                        Id: { editable: false, type: "number" },
+                                        UserName: { editable: false, type: "string" },
+                                        Password: { editable: true, type: "string" },
+                                        LastNameFull: { editable: true, type: "string" },
+                                        FirstName: { editable: true, type: "string" },
+                                        Email: { editable: true, type: "string" },
+                                        UniqueId: { editable: true, type: "string" },
+                                        Group: { editable: true, type: "string" },
+                                        SuperiorName: { editable: true, type: "string" },                                                
+                                        isStaff: { editable: true, type: "boolean" },                                                
+                                        CreatedOnUtc: { editable: false, type: "date" }                                                
+                                    }
+                                }
+                            },
+                            error: function(e) {
+                                display_kendoui_grid_error(e);
+                                // Cancel the changes
+                                this.cancelChanges();
+                            },                                    
+                            serverPaging: true,
+                            serverFiltering: true,
+                            serverSorting: true
+                        },                                
+                        editable: {
+                            confirmation: false,
+                            mode: "inline"
+                        },
+                        pageable: {
+                            refresh: true,
+                            numeric: false,
+                            previousNext: false,
+                            info: false
+                        },
+                        scrollable: false,                        
+                        columns: [
+                            {
+                                command: { name: "edit", text: "@T("Admin.Common.Edit")" },
+                                title: "@T("Admin.Common.Edit")",
+                                width: 50
+                            },
+                            {
+                                field: "Id",
+                                title: "ID",
+                                width: 50
+                            }, 
+                            {
+                                field: "UserName",
+                                title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.UserName")"
+                            },
+                            {
+                                field: "Password",
+                                title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.Password")"
+                            },
+                            {
+                                field: "LastNameFull",
+                                title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.LastName")"
+                            },
+                            {
+                                field: "FirstName",
+                                title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.FirstName")"
+                            },
+                            {
+                                field: "Email",
+                                title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.Email")"
+                            },
+                            {
+                                field: "UniqueId",
+                                title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.UniqueId")"
+                            },
+                            {
+                                field: "Group",
+                                title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.Group")",
+                                editor: groupDropDownEditor
+                            },
+                            {
+                                field: "SuperiorName",
+                                title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.SuperiorName")"
+                            },
+                            {
+                                field: "isStaff",
+                                title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.isStaff")",
+                                template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=isStaff#.gif" />'
+                            },
+                            {
+                                field: "CreatedOnUtc",
+                                title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.CreatedOnUtc")",                                        
+                                type: "date",
+                                format: "{0:yyyy-MM-dd hh:mm:ss tt}"
+                            }]
+                    });
+                });
+
+                //Put additionnal pager on top of the grid
+                $(function ()
+                {
+                    var grid = $("#eventusers-grid").data("kendoGrid");
+                    var wrapper = $('<div class="k-pager-wrap k-grid-pager pagerTop"/>').insertBefore(grid.element.children("table"));
+                    grid.pagerTop = new kendo.ui.Pager(wrapper, $.extend({}, grid.options.pageable, { dataSource: grid.dataSource }));
+                    grid.element.height("").find(".pagerTop").css("border-width", "0 0 1px 0");
+                });
+            
+                //Group dropdown for edit mode
+                var tmpgroups = @(new Nop.Web.Framework.Localization.LocalizedString(Server.HtmlDecode(serializer.Serialize(ViewData["groups"]))))                        
+                function groupDropDownEditor(container, options)
+                {
+                    $('<input required data-text-field="Text" data-value-field="Value" data-value-primitive="true"  data-bind="value:' + options.field + '"/>')
+                        .appendTo(container)
+                        .kendoDropDownList({
+                            autoBind: false,
+                            dataSource: tmpgroups
+                        });
+                }
+            </script>
+        </td>
+    </tr>
+</table>

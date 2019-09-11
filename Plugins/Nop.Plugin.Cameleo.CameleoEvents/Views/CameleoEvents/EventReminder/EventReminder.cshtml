@@ -1,0 +1,182 @@
+﻿@using Nop.Plugin.Cameleo.CameleoEvents.ViewModels;
+@using Nop.Plugin.Cameleo.CameleoEvents.Domain;
+@using Nop.Core;
+@using Nop.Core.Infrastructure;
+@model Nop.Plugin.Cameleo.CameleoEvents.ViewModels.CustomerEventReminderListViewModel
+
+@{
+    Layout = "~/Views/Shared/_CameleoColumnsOne.cshtml";
+    
+    //title
+    Html.AddTitleParts(T("pagetitle.cameleoeventcustomers.reminders").Text);
+
+    //CSS
+    Html.AddCssFileParts("~/Plugins/Cameleo.CameleoEvents/Content/styles.css");
+
+    int index = 0;
+}
+
+<div class="page cameleoevent-details-page event-reminder">
+    <div class="page-title">
+        <h1>@T("Plugins.Cameleo.CameleoCustomerEvents.Reminders.Title")</h1>
+    </div>
+
+    <div>
+        <ol>
+            <li><span>1.</span><p>@T("Plugins.Cameleo.CameleoCustomerEvents.Reminders.Step1")</p></li>            
+        </ol>
+    </div>
+
+
+    <div class="page-body">
+        @using (Html.BeginForm("CreateReminder", "CustomerEvent", FormMethod.Post, new { target = "_blank" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.StaffCustomerEventId)
+            @Html.HiddenFor(model => model.GroupName)
+            
+            if (Model != null && Model.CameleoEventUserList.Count > 0)
+            {            
+                <table class="groupdetails-table">
+                    <thead>
+                        <tr>
+                            <th>
+                                <input id='mastercheckbox' type='checkbox' />
+                            </th>
+                            <th>
+                                @T("Plugins.Cameleo.CameleoEventUsers.Fields.LastName")
+                            </th>
+                            <th>
+                                @T("Plugins.Cameleo.CameleoEventUsers.Fields.FirstName")
+                            </th>
+                            <th>
+                                @T("Plugins.Cameleo.CameleoEventUsers.Fields.UserName")
+                            </th>
+                            <th>
+                                @T("Plugins.Cameleo.CameleoEventUsers.Fields.Password")
+                            </th>                
+                            <th>
+                                @T("Plugins.Cameleo.CameleoCustomerEvents.Fields.AcceptedStatus")
+                            </th>               
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var tmpEventUser in Model.CameleoEventUserList)
+                        {
+                            string style2 = index % 2 != 0 ? "alt" : null;                        
+                            <tr class="@style2" style="vertical-align: middle;">
+                                <td>                                
+                                    @Html.CheckBox("checkBox_" + tmpEventUser.Id.ToString(), !Model.SelectedEventUserList.ContainsKey(tmpEventUser.Id) ? false : Model.SelectedEventUserList[tmpEventUser.Id], new { id = tmpEventUser.Id, @class = "checkboxGroups" })                                    
+                                </td>
+                                <td>
+                                    @tmpEventUser.LastName
+                                </td>
+                                <td>
+                                    @tmpEventUser.FirstName
+                                </td>
+                                <td>
+                                    @tmpEventUser.UserName
+                                </td>
+                                <td>
+                                    @tmpEventUser.Password
+                                </td>                    
+                                <td>
+                                    @T(AcceptedStatusStrings.LocalizedStringValues[(int)AcceptedStatus.ToBeCompleted])
+                                </td>
+                            </tr>
+
+                            index++;
+                        }
+                    </tbody>
+                </table>
+    
+                <script type="text/javascript">
+
+                    $(document).ready(function () {
+
+                        updateMasterCheckbox();
+
+                        $('#mastercheckbox').click(function () {
+                            $('.checkboxGroups').attr('checked', $(this).is(':checked')).change();
+                        });
+                    });
+
+                    function updateMasterCheckbox() {
+                        var numChkBoxes = $('input[type=checkbox][id!=mastercheckbox]').length;
+                        var numChkBoxesChecked = $('input[type=checkbox][checked][id!=mastercheckbox]').length;
+                        $('#mastercheckbox').attr('checked', numChkBoxes == numChkBoxesChecked && numChkBoxes > 0);
+                    }
+                </script>            
+            }
+            else
+            {
+                @T("Plugins.Cameleo.CameleoEvents.NoEvent")
+            }
+        
+            <div>
+                <ol>
+                    <li><span>2.</span><p>@T("Plugins.Cameleo.CameleoCustomerEvents.Reminders.Step2")</p></li>            
+                </ol>
+            </div>
+            
+            <div class="fieldset">
+                <div class="form-fields">
+                    <div class="inputs">
+                        @Html.LabelFor(model => model.ShootDate, new { }, " :")
+                        @Html.EditorFor(model => model.ShootDate)                            
+                        @Html.RequiredHint()                                                    
+                        @Html.ValidationMessageFor(model => model.ShootDate)
+                    </div>
+                    <div class="inputs">
+                        @Html.LabelFor(model => model.ReminderDate, new { }, " :")
+                        @Html.EditorFor(model => model.ReminderDate)                            
+                        @Html.RequiredHint()                        
+                        @Html.ValidationMessageFor(model => model.ReminderDate)                        
+                    </div>                    
+                    <div class="inputs">
+                        @Html.LabelFor(model => model.SenderName, new { }, " :")
+                        @Html.EditorFor(model => model.SenderName)
+                        @Html.RequiredHint()                        
+                        @Html.ValidationMessageFor(model => model.SenderName)
+                    </div>
+                    <div class="inputs">
+                        @Html.LabelFor(model => model.SenderRole, new { }, " :")
+                        @Html.EditorFor(model => model.SenderRole)
+                        @Html.RequiredHint()                        
+                        @Html.ValidationMessageFor(model => model.SenderRole)
+                    </div>
+                </div>
+            </div>            
+            
+            <div>
+                <ol>
+                    <li><span>3.</span><p>@T("Plugins.Cameleo.CameleoCustomerEvents.Reminders.Step3")</p></li>            
+                </ol>
+            </div>
+            
+            <table>
+                <tr style="vertical-align:middle;">
+                    <td>
+                        <input type="submit" class="button-1 reminders-button" style="margin-left:30px;margin-right:30px;" name="preview" value="@T("plugins.cameleo.cameleocustomerevents.reminders.preview.button")" />
+                    </td>
+                    <td>
+                        <input type="submit" class="button-1 reminders-button" name="generate" value="@T("plugins.cameleo.cameleocustomerevents.reminders.generate.button")" />            
+                    </td>
+                    <td style="width:40%;">
+                        @T("Plugins.Cameleo.CameleoCustomerEvents.Reminders.GetAdobeReader")<br /><br />
+                        <a href="http://get.adobe.com/reader/" target="_blank">
+                            <img src="@Url.Content("~/Themes/CameleoVideoTheme/Content/images/get_adobe_reader-en.gif")" alt="" />
+                        </a>
+                    </td>
+                </tr>
+            </table>            
+            
+            <div>
+                <ol>
+                    <li><span>4.</span><p>@T("Plugins.Cameleo.CameleoCustomerEvents.Reminders.Step4")</p></li>            
+                </ol>
+            </div>
+            <input type="button" style="margin-left:30px;" value="@T("plugins.cameleo.cameleocustomerevents.reminders.finish.button")" class=" button-1 reminders-button" onclick="setLocation('@Url.RouteUrl("GroupDetails", new { customerEventId = Model.StaffCustomerEventId })')" />            
+        }
+    </div>
+</div>

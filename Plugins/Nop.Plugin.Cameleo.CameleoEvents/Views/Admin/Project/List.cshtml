@@ -1,0 +1,106 @@
+﻿@{
+    //Layout
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+    
+    //page title
+    ViewBag.Title = T("pagetitle.cameleoprojects.projectcategories").Text;
+
+    //CSS
+    Html.AddCssFileParts("~/Plugins/Cameleo.CameleoEvents/Content/styles.css");
+}
+<div class="section-header">
+    <div class="title">
+        <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt="" />
+        @T("Plugins.Cameleo.CameleoProjects.ProjectCategories") @Html.ActionLink("(" + T("Plugins.Cameleo.CameleoEvents.BackToList") + ")", "ConfigureEvents", "EventAdmin")
+    </div>
+    <div class="options">
+        <a href="@Url.Action("Create")" class="k-button">@T("Admin.Common.AddNew")</a>
+    </div>
+</div>
+<table class="adminContent">
+    <tr>
+        <td>
+            <div id="projectcategories-grid"></div>
+
+            <script>
+                $(document).ready(function () {
+                    $("#projectcategories-grid").kendoGrid({
+                        dataSource: {
+                            type: "json",
+                            transport: {
+                                read: {
+                                    url: "@Html.Raw(Url.Action("ProjectCategoryList", "ProjectAdmin"))",
+                                    type: "POST",
+                                    dataType: "json"
+                                }
+                            },
+                            schema: {
+                                data: "Data",
+                                total: "Total",
+                                errors: "Errors",
+                                model: {
+                                    id: "Id",
+                                    fields: {
+                                        Id: { editable: false, type: "number" },
+                                        Name: { editable: true, type: "string" },
+                                        Description: { editable: true, type: "string" },                                        
+                                        CreatedOnUtc: { editable: false, type: "date" }
+                                    }
+                                },
+                            },
+                            requestEnd: function (e) {
+                                if (e.type == "create" || e.type == "update") {
+                                    this.read();
+                                }
+                            },
+                            error: function (e) {
+                                display_kendoui_grid_error(e);
+                                // Cancel the changes
+                                this.cancelChanges();
+                            },
+                            serverPaging: true,
+                            serverFiltering: true,
+                            serverSorting: true
+                        },
+                        pageable: {
+                            refresh: true,
+                            numeric: false,
+                            previousNext: false,
+                            info: false
+                        },
+                         editable: {
+                            confirmation: false,
+                            mode: "inline"
+                        },
+                        scrollable: false,
+                        columns: [{
+                            field: "Name",
+                            title: "@T("Plugins.Cameleo.ProjectCategories.Fields.Name")",
+                            width: 300
+                        }, {
+                            field: "Description",
+                            title: "@T("Plugins.Cameleo.ProjectCategories.Fields.Description")",
+                            width: 300
+                        }, {
+                            field: "CreatedOnUtc",
+                            title: "@T("Plugins.Cameleo.ProjectCategories.Fields.CreatedOnUtc")",
+                            type: "date",
+                            format: "{0:yyyy-MM-dd}",
+                            width: 80
+                        }, {
+                            field: "Id",
+                            title: "@T("Admin.Common.Edit")",
+                            width: 50,
+                            template: '<a href="@Url.Content("~/ProjectAdmin/Edit/")#=Id#">@T("Admin.Common.Edit")</a>'
+                            //template: '<a href="Edit/#=Id#">@T("Admin.Common.Edit")</a>'
+                        }]
+                    });
+                });
+            </script>
+        </td>
+    </tr>
+</table>
+
+<script type="text/javascript">
+       
+</script>

@@ -1,0 +1,46 @@
+﻿@using Nop.Plugin.Cameleo.CameleoEvents.ViewModels;
+@using Nop.Plugin.Cameleo.CameleoEvents.Domain;
+@using Nop.Core;
+@using Nop.Core.Infrastructure;
+
+@model Nop.Plugin.Cameleo.CameleoEvents.ViewModels.NotPaidReminderListViewModel
+
+@if (Model.NotPaidUserList.Count == 0)
+{
+    //No user in the list
+    @T("Plugins.Cameleo.CameleoEvents.EventDetails.NotPaidReminder.Empty")    
+}
+else
+{
+    //Topic
+    string tmpTopic = Html.Action("TopicBlock", "Topic", new { systemName = Model.TopicToUse }).ToString().TrimEnd();    
+    
+    
+    //For each not paid user
+    foreach (var tmpNotPaidUser in Model.NotPaidUserList)
+    {       
+        //Get info
+        var SubjectName = tmpNotPaidUser.LastNameFull + ", " + tmpNotPaidUser.FirstName; ;
+        var SubjectGroup = tmpNotPaidUser.Group;
+        var SubjectUserName = tmpNotPaidUser.UserName;
+        var SubjectPassword = tmpNotPaidUser.Password;        
+            
+        //Replace data
+        @(                
+            new Nop.Web.Framework.Localization.LocalizedString
+            (
+                Server.HtmlDecode
+                (
+                    tmpTopic
+                        .Replace("{logopath}", Model.LogoPath)           
+                        .Replace("{subjectname}", SubjectName)
+                        .Replace("{group}", SubjectGroup)
+                        .Replace("{username}", SubjectUserName)
+                        .Replace("{password}", SubjectPassword)                                                    
+                        .Replace("{fee}", Model.ParticipationFee.ToString())
+                )
+            )
+        )        
+    }
+}
+

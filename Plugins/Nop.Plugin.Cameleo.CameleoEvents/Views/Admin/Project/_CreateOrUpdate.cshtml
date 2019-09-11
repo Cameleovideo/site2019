@@ -1,0 +1,212 @@
+﻿@using Nop.Plugin.Cameleo.CameleoEvents.ViewModels;
+@using Nop.Plugin.Cameleo.CameleoEvents.Domain;
+@using Nop.Web.Framework.Events;
+@using Nop.Core.Infrastructure;
+@using Nop.Services.Events;
+
+@model ProjectCategoryViewModel
+
+@Html.ValidationSummary(true)
+@Html.HiddenFor(model => model.Id)
+
+<div id="projectcategory-edit">
+    <ul>
+        <li @Html.RenderSelectedTabIndex(0, GetSelectedTabIndex())>
+            @T("Plugins.Cameleo.ProjectCategories.Info")
+        </li>
+        <li @Html.RenderSelectedTabIndex(1, GetSelectedTabIndex())>
+            @T("Plugins.Cameleo.ProjectCategories.SubCategories")
+        </li>        
+    </ul>
+    <div>
+        @TabInfo()
+    </div>
+    <div>
+        @TabSubCategories()
+    </div>    
+</div>
+<script>
+    $(document).ready(function () {
+        $("#projectcategory-edit").kendoTabStrip({
+            animation: {
+                open: {
+                    effects: "fadeIn"
+                }
+            },
+            select: tabstrip_on_tab_select
+        });
+    });
+</script>
+
+@{
+    //custom tabs
+    var eventMessage = new AdminTabStripCreated(this.Html, "projectcategory-edit");
+    EngineContext.Current.Resolve<IEventPublisher>().Publish(eventMessage);
+    foreach (var eventBlock in eventMessage.BlocksToRender)
+    {
+        @eventBlock
+    }
+}
+
+@*save selected tab index*@
+<input type="hidden" id="selected-tab-index" name="selected-tab-index" value="@(GetSelectedTabIndex())">
+
+@helper TabInfo()
+{        
+    @(Html.LocalizedEditor<ProjectCategoryViewModel, ProjectCategoryLocalizedModel>("projectcategory-info-localized",
+        @<table class="adminContent">
+            <tr>
+                <td class="adminTitle">
+                    @Html.NopLabelFor(model => model.Locales[item].Name):
+                </td>
+                <td class="adminData">
+                    @Html.EditorFor(model => model.Locales[item].Name)
+                    @Html.ValidationMessageFor(model => model.Locales[item].Name)
+                </td>
+            </tr>
+            <tr>
+                <td class="adminTitle">
+                    @Html.NopLabelFor(model => model.Locales[item].Description):
+                </td>
+                <td class="adminData">                             
+                    @Html.EditorFor(model => model.Locales[item].Description)
+                    @Html.ValidationMessageFor(model => model.Locales[item].Description)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    @Html.HiddenFor(model => model.Locales[item].LanguageId)
+                </td>
+            </tr>
+        </table>
+        ,
+        @<table class="adminContent">
+            <tr>
+                <td class="adminTitle">
+                    @Html.NopLabelFor(model => model.Name):
+                </td>
+                <td class="adminData">
+                    @Html.EditorFor(model => model.Name)
+                    @Html.ValidationMessageFor(model => model.Name)
+                </td>
+            </tr>
+            <tr>
+                <td class="adminTitle">
+                    @Html.NopLabelFor(model => model.Description):
+                </td>
+                <td class="adminData">
+                    @Html.EditorFor(model => model.Description)
+                    @Html.ValidationMessageFor(model => model.Description)
+                </td>
+            </tr>
+        </table>
+    ))    
+}
+@helper TabSubCategories()
+    {
+        if (Model.Id > 0)
+        {
+            <table class="adminContent">
+                <tr>
+                    <td>
+                        <div id="subcategories-grid"></div>
+
+                        <script>
+                            $(document).ready(function () {
+                                $("#subcategories-grid").kendoGrid({
+                                    dataSource: {
+                                        type: "json",
+                                        transport: {
+                                            read: {
+                                                url: "@Html.Raw(Url.Action("SubCategories", "ProjectAdmin", new { categoryId = Model.Id }))",
+                                                type: "POST",
+                                                dataType: "json"
+                                            },
+                                            destroy: {
+                                                url: "@Html.Raw(Url.Action("SubCategoryDelete", "ProjectAdmin"))",
+                                                type: "POST",
+                                                dataType: "json"
+                                            }
+                                        },
+                                        schema: {
+                                            data: "Data",
+                                            total: "Total",
+                                            errors: "Errors",
+                                            model: {
+                                                id: "Id"
+                                            }
+                                        },
+                                        error: function(e) {
+                                            display_kendoui_grid_error(e);
+                                            // Cancel the changes
+                                            this.cancelChanges();
+                                        },
+                                        serverPaging: true,
+                                        serverFiltering: true,
+                                        serverSorting: true
+                                    },
+                                    pageable: {
+                                        refresh: true,
+                                        numeric: false,
+                                        previousNext: false,
+                                        info: false
+                                    },
+                                    editable: {
+                                        confirmation: false,
+                                        mode: "inline"
+                                    },
+                                    scrollable: false,
+                                    columns: [{
+                                        field: "Id",
+                                        title: "@T("Admin.Common.Edit")",
+                                        width: 100,
+                                        template: "<input type='submit' value='@T("Admin.Common.Edit")' onclick=\"javascript:OpenWindow('@Url.Content("~/ProjectAdmin/SubCategoryEditPopup/")#=Id#?btnId=btnRefresh&formId=projectcategory-form', 800, 250, true); return false;\" class='k-button' />"
+                                    }, {
+                                        command: {name: "destroy", text: "@T("Admin.Common.Delete")"},
+                                        title: "@T("Admin.Common.Delete")",
+                                        width: 100
+                                    }, {
+                                        field: "Name",
+                                        title: "@T("Plugins.Cameleo.ProjectSubCategories.Fields.Name")",
+                                        width: 300
+                                    }, {
+                                        field: "Description",
+                                        title: "@T("Plugins.Cameleo.ProjectSubCategories.Fields.Description")",
+                                        width: 300
+                                    }, {
+                                        field: "CreatedOnUtc",
+                                        title: "@T("Plugins.Cameleo.ProjectSubCategories.Fields.CreatedOnUtc")",
+                                        template: "#= kendo.toString(kendo.parseDate(CreatedOnUtc, 'yyyy-MM-dd'), 'yyyy-MM-dd') #",
+                                        width: 80
+                                    }]
+                                });
+                            });
+                        </script>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="100%">
+                        <input type="submit" id="btnAddNewSubCategory" name="btnAddNewSubCategory" value="@T("Admin.Common.AddNew")" onclick="javascript:OpenWindow('@(Url.Action("SubCategoryCreatePopup", "ProjectAdmin", new { projectCategoryId = Model.Id, btnId = "btnRefresh", formId = "projectcategory-form" }))', 800, 250, true); return false;" class="k-button" />
+                        <input type="submit" id="btnRefresh" name="btnRefresh" style="display: none" />
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+                                $('#btnRefresh').click(function () {
+                                    //refresh grid
+                                    var optionsGrid = $("#subcategories-grid");
+                                    optionsGrid.data('kendoGrid').dataSource.read();
+
+                                    //return false to don't reload a page
+                                    return false;
+                                });
+                            });
+                        </script>
+                    </td>
+                </tr>
+            </table>
+
+        }
+        else
+        {
+            @T("Plugins.Cameleo.ProjectSubCategories.SaveBeforeEdit")
+        }
+}

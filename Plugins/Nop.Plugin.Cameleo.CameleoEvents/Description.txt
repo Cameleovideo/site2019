@@ -1,0 +1,8 @@
+﻿Group: Cameleo
+FriendlyName: Events
+SystemName: Cameleo.CameleoEvents
+Version: 1.00
+SupportedVersions: 3.40
+Author: Cameleo
+DisplayOrder: 1
+FileName: Nop.Plugin.Cameleo.CameleoEvents.dll

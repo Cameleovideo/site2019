@@ -1,0 +1,180 @@
+﻿@using Nop.Plugin.Cameleo.CameleoEvents.ViewModels;
+@using Nop.Plugin.Cameleo.CameleoEvents.Domain;
+@model CameleoCustomerEventListViewModel
+
+@{
+    //layout
+    Layout = "~/Views/Shared/_CameleoColumnsOne.cshtml";
+    
+    //title
+    Html.AddTitleParts(T("pagetitle.cameleoevents").Text);
+}
+
+<div class="page cameleoevents-page cameleoevents-list-page">
+    <div class="page-title">
+        <h1>@T("Plugins.Cameleo.CameleoEvents.MyEvents")</h1>
+    </div>
+    
+    <div class="page-body">
+        <div class="cameleoevents-list">
+            @if (Model.CameleoCustomerEventList.Count > 0)
+            {
+                <table class="data-table">
+                    <tr>
+                        <th>
+                            @T("Plugins.Cameleo.CameleoEvents.Fields.EventName")
+                        </th>
+                        <th>
+                            @T("Plugins.Cameleo.CameleoEvents.Fields.ClientName")
+                        </th>
+                        <th>
+                            @T("Plugins.Cameleo.CameleoEvents.Fields.ShootedOnUtc")
+                        </th>
+                        <th>
+                            @T("Plugins.Cameleo.CameleoEventUsers.Fields.Name")
+                        </th>
+                        <th>
+                            @T("Plugins.Cameleo.CameleoEventUsers.Fields.Group")
+                        </th>
+                        <th>
+                            @T("Plugins.Cameleo.CameleoCustomerEvents.Fields.Accepted")
+                        </th>
+                        <th>
+                            @T("Plugins.Cameleo.CameleoCustomerEvents.Fields.AcceptedImageUse")
+                        </th>
+                        <th>
+                            @T("Plugins.Cameleo.CameleoCustomerEvents.Fields.Paid")
+                        </th>
+                        <th>
+                        </th>
+                    </tr>
+                    @foreach (var CameleoCustomerEvent in Model.CameleoCustomerEventList)
+                    {
+                        <tr>
+                            <td>
+                                @CameleoCustomerEvent.CameleoEvent.EventName
+                            </td>
+                            <td>
+                                @CameleoCustomerEvent.CameleoEvent.ClientName
+                            </td>
+                            <td>
+                                @if (Convert.IsDBNull(CameleoCustomerEvent.CameleoEvent.ShootedOnUtc) || CameleoCustomerEvent.CameleoEvent.ShootedOnUtc == null)
+                                {
+                                     @T("Plugins.Cameleo.CameleoEvents.DateUnknown")
+                                }
+                                else
+                                {
+                                    @(((DateTime)CameleoCustomerEvent.CameleoEvent.ShootedOnUtc).ToString("yyyy-MM-dd"))           
+                                }                                
+                            </td>
+                            <td>
+                                @CameleoCustomerEvent.CameleoEventUser.FirstName @CameleoCustomerEvent.CameleoEventUser.LastName
+                            </td>
+                            <td>
+                                @CameleoCustomerEvent.CameleoEventUser.Group
+                            </td>
+                            <td>
+                                @if (CameleoCustomerEvent.Accepted)
+                                {
+                                    @T("Plugins.Cameleo.CameleoEvents.AcceptedStatus.Accepted")
+                                }
+                                else
+                                {
+                                    if (CameleoCustomerEvent.AcceptedStatus == (int)AcceptedStatus.Refused)
+                                    {
+                                        @T("Plugins.Cameleo.CameleoEvents.AcceptedStatus.Refused")
+                                    }
+                                    else if (CameleoCustomerEvent.AcceptedStatus == (int)AcceptedStatus.ToBeCompleted)
+                                    {
+                                        @T("Plugins.Cameleo.CameleoEvents.AcceptedStatus.ToBeCompleted")
+                                    }
+                                    else
+                                    {
+                                        @T("Plugins.Cameleo.CameleoEvents.AcceptedStatus.Accepted")
+                                    }
+                                }
+                                
+                            </td>
+                            <td>
+                                @if (CameleoCustomerEvent.AcceptedImageUse)
+                                {
+                                    @T("Plugins.Cameleo.CameleoEvents.AcceptedStatus.Accepted")
+                                }
+                                else
+                                {
+                                    @T("Plugins.Cameleo.CameleoEvents.AcceptedStatus.Refused")
+                                }
+                            </td>
+                            <td>
+                            @if (CameleoCustomerEvent.Paid)
+                            {
+                                @T("Plugins.Cameleo.CameleoEvents.Paid.Yes")
+                            }
+                            else
+                            {
+                                @T("Plugins.Cameleo.CameleoEvents.Paid.No")
+                            }
+                                    
+                            </td>
+                            <td style="text-align:right;">
+                                <div class="buttons">
+                                    <input type="button" value="@T("Plugins.Cameleo.CameleoEvents.EventDetails")" class="button-2 cameleoevent-details-button" onclick="setLocation('@Url.RouteUrl("CameleoEventDetails", new { customerEventId = CameleoCustomerEvent.Id })')" />
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+            else
+            {
+                @T("Plugins.Cameleo.CameleoEvents.NoEvents")
+            }
+        </div>  
+        <hr />        
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="add-customerevent-page">                                
+                <div class="message-error">
+                    @Html.ValidationSummary(true)
+                </div>
+                
+                <div style="float:left;max-width:45%;margin-left:20px;">
+                    @Html.Action("TopicBlock", "Topic", new { systemName = "AddCustomerEvent" })
+                </div>
+                <div class="fieldset" style="float:right;min-width:45%;margin-bottom:50px;">
+                    <div class="form-fields">
+                        <div class="inputs">
+                            @Html.LabelFor(model => model.NewCustomerEvent, new { }, " :")
+                            @Html.EditorFor(model => model.NewCustomerEvent)                            
+                            @Html.RequiredHint()                            
+                            <br />
+                            @Html.ValidationMessageFor(model => model.NewCustomerEvent)
+                        </div>
+                        <div class="inputs">
+                            @Html.LabelFor(model => model.Password, new { }, " :")
+                            @Html.EditorFor(model => model.Password)                            
+                            @Html.RequiredHint()
+                            <br />
+                            @Html.ValidationMessageFor(model => model.Password)
+                            <br />
+                            <span class="forgot-password">
+                                @Html.RouteLink(T("Plugins.Cameleo.CameleoEvents.LostEventCode").Text, "EventCodeRecovery")
+                            </span>
+                        </div>
+                        <div class="buttons">                            
+                            <input type="submit" class="button-2 add-customer-event-button" value="@T("Plugins.Cameleo.CameleoEvents.AddCustomerEvent.Button")" />
+                        </div>
+                    </div>
+                </div> 
+                @if (!String.IsNullOrEmpty(Model.Result))
+                {
+                    <div class="result">
+                        @Model.Result
+                    </div>
+                }               
+            </div>
+        }
+       
+    </div>
+</div>

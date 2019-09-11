@@ -1,0 +1,30 @@
+﻿@using Nop.Plugin.Cameleo.CameleoEvents.ViewModels;
+@using Nop.Plugin.Cameleo.CameleoEvents.Domain;
+
+@model ProjectCategoryViewModel
+@{
+    //Layout
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+    
+    //page title
+    ViewBag.Title = T("pagetitle.cameleoprojects.projectcategories.edit").Text;
+
+    //CSS
+    Html.AddCssFileParts("~/Plugins/Cameleo.CameleoEvents/Content/styles.css");
+}
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "projectcategory-form" }))
+{
+    <div class="section-header">
+        <div class="title">
+            <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt="" />
+            @T("pagetitle.cameleoprojects.projectcategories.edit") @Html.ActionLink("(" + T("Plugins.Cameleo.ProjectCategories.BackToList") + ")", "List")
+        </div>
+        <div class="options">
+            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
+            <input type="submit" name="save-continue" class="k-button" value="@T("Admin.Common.SaveContinue")" />
+            <span id="projectcategory-delete" class="k-button">@T("Admin.Common.Delete")</span>
+        </div>
+    </div>
+    @Html.Partial("~/Plugins/Cameleo.CameleoEvents/Views/Admin/Project/_CreateOrUpdate.cshtml", Model)
+}
+@Html.DeleteConfirmation("projectcategory-delete")

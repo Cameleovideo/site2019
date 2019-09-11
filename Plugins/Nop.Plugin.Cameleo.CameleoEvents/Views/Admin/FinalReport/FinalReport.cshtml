@@ -1,0 +1,193 @@
+﻿@using Nop.Plugin.Cameleo.CameleoEvents.ViewModels;
+@using Nop.Plugin.Cameleo.CameleoEvents.Domain;
+@using Nop.Core;
+@using Nop.Core.Infrastructure;
+@model Nop.Plugin.Cameleo.CameleoEvents.ViewModels.CameleoEventFinalReportViewModel
+
+@{
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";    
+    
+    //title
+    Html.AddTitleParts(T("pagetitle.cameleoeventdetails.finalreport").Text);
+
+    //CSS
+    Html.AddCssFileParts("~/Plugins/Cameleo.CameleoEvents/Content/styles.css");
+    
+    var tmpGroup = "";
+}
+
+
+@if (!Model.AsPDF)
+{ 
+    <div class="section-header">
+        <div class="title">
+            <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt="" />
+            @T("Plugins.Cameleo.CameleoEvents.EventDetails.FinalReport") @Html.ActionLink("(" + T("Plugins.Cameleo.CameleoEventDetails.FinalReport.BackToDetails") + ")", "EventDetails", "EventAdmin", new { eventId = Model.CameleoEvent.Id }, null)
+        </div>    
+
+        <div class="options">
+            <table>
+                <tr> 
+                    <td>
+                        <input type="button" id="exportexcel-all" class="k-button" value="@T("Admin.Common.ExportToExcel.All")" />
+                    </td>                   
+                    <td>
+                        @using (Html.BeginForm("FinalReportPDF", "EventAdmin", FormMethod.Post, new { target = "_blank" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(model => model.EventId)
+                            <input type="submit" class="k-button" value="@T("Plugins.Cameleo.CameleoEvents.Admin.EventReportPDF.Button")" />
+                        }
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    
+    <script>
+        //"Export Excel " button
+        $('#exportexcel-all').click(function (e) {
+            e.preventDefault();
+            //redirect to required URL
+            setLocation('@(Url.Action("ExportExcelFinalReport", "EventAdmin"))?eventId=' + @(Model.EventId));
+            return false;
+        });
+
+    </script>
+}
+
+<div class="page cameleoevent-details-page">    
+    <div class="page-body">
+
+        @if (Model.CameleoEvent != null)
+        {
+            if (!Model.AsPDF)
+            {            
+                //Event header
+                @Html.Partial("~/Plugins/Cameleo.CameleoEvents/Views/Admin/Event/_EventDetails.cshtml", Model.CameleoEvent)
+            }
+
+            <div class="cameleoadmincontent finalreporttable" style="margin-top:15px;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>
+                                @T("Plugins.Cameleo.CameleoEvents.EventDetails.Group")
+                            </th>                            
+                            <th>
+                                @T("Plugins.Cameleo.CameleoEventUsers.Fields.LastName")
+                            </th>
+                            <th>
+                                @T("Plugins.Cameleo.CameleoEventUsers.Fields.FirstName")
+                            </th>  
+                            @if (!Model.AsPDF)
+                            {
+                                <th>
+                                    @T("Plugins.Cameleo.CameleoEventUsers.Fields.UserName")
+                                </th>
+                                <th>
+                                    @T("Plugins.Cameleo.CameleoEventUsers.Fields.Password")
+                                </th>                                
+                            }        
+                            <th>
+                                @T("Plugins.Cameleo.CameleoCustomerEvents.Fields.CustomerUserName")
+                            </th>                                                                        
+                            <th>
+                                @T("Plugins.Cameleo.CameleoCustomerEvents.Fields.Accepted")
+                            </th>
+                            <th>
+                                @T("Plugins.Cameleo.CameleoCustomerEvents.Fields.AcceptedStatus")
+                            </th>
+                            <th>
+                                @T("Plugins.Cameleo.CameleoCustomerEvents.Fields.AcceptedImageUse")
+                            </th>
+                            <th>
+                                @T("Plugins.Cameleo.CameleoEventUsers.Fields.isStaff")
+                            </th>  
+                            <th>
+                                @T("Plugins.Cameleo.CameleoCustomerEvents.Fields.Paid")
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        @foreach (var tmpCustomerEvent in Model.CameleoCustomerEventList)
+                        {
+                            if (tmpGroup == "")
+                            {
+                                //Empty group
+                            }
+                            else if (tmpGroup != tmpCustomerEvent.CameleoEventUser.Group)
+                            {
+                                 //Group different from last group
+                                <tr style="border-bottom: solid 1px gray;background-color:black;">
+                                    <td colspan="11" style="background-color:black;">&nbsp;</td>
+                                </tr>
+                            }
+                            tmpGroup = tmpCustomerEvent.CameleoEventUser.Group;
+                            
+                            string style = tmpCustomerEvent.Accepted && tmpCustomerEvent.AcceptedStatus == (int)AcceptedStatus.AcceptedPaid ? "background-color:Green" : tmpCustomerEvent.Accepted && tmpCustomerEvent.AcceptedStatus == (int)AcceptedStatus.AcceptedNotPaid ? "background-color:Yellow" : !tmpCustomerEvent.Accepted && tmpCustomerEvent.AcceptedStatus == (int)AcceptedStatus.Refused ? "background-color:Red" : null;
+                            string fontcolor = tmpCustomerEvent.Accepted && tmpCustomerEvent.AcceptedStatus == (int)AcceptedStatus.AcceptedPaid ? "color:white" : tmpCustomerEvent.Accepted && tmpCustomerEvent.AcceptedStatus == (int)AcceptedStatus.AcceptedNotPaid ? "" : !tmpCustomerEvent.Accepted && tmpCustomerEvent.AcceptedStatus == (int)AcceptedStatus.Refused ? "color:white" : null;
+                            string paid = tmpCustomerEvent.Paid ? "color:white;background-color:Green" : "color:white;background-color:Red";
+                            <tr style="@style;border-bottom: solid 1px gray;vertical-align:middle;">
+                                <td style="@fontcolor">
+                                    @tmpCustomerEvent.CameleoEventUser.Group
+                                </td>
+                                <td style="@fontcolor">
+                                    @tmpCustomerEvent.CameleoEventUser.LastNameFull
+                                </td>
+                                <td style="@fontcolor">
+                                    @tmpCustomerEvent.CameleoEventUser.FirstName
+                                </td>    
+                                @if (!Model.AsPDF)
+                                {
+                                    <td style="@fontcolor">
+                                    @tmpCustomerEvent.CameleoEventUser.UserName
+                                    </td>
+                                    <td style="@fontcolor">
+                                        @tmpCustomerEvent.CameleoEventUser.Password
+                                    </td>                                      
+                                }          
+                                <td style="@fontcolor">
+                                    @tmpCustomerEvent.CustomerUserName
+                                </td>                                                  
+                                <td style="@fontcolor">
+                                    @tmpCustomerEvent.Accepted
+                                </td>
+                                <td style="@fontcolor">
+                                    @T(AcceptedStatusStrings.LocalizedStringValues[tmpCustomerEvent.AcceptedStatus])
+                                </td>
+                                <td style="@fontcolor">
+                                    @tmpCustomerEvent.AcceptedImageUse
+                                    @if (tmpCustomerEvent.AcceptedImageUse)
+                                    {
+                                        <img class="finalreportwarning" src="@Url.Content("~/Plugins/Cameleo.CameleoEvents/Content/images/warning.jpg")" alt="" />
+                                    }
+                                </td>
+                                <td style="@fontcolor">
+                                    @tmpCustomerEvent.CameleoEventUser.isStaff
+                                    @if (tmpCustomerEvent.CameleoEventUser.isStaff)
+                                    {
+                                        <img class="finalreportwarning" src="@Url.Content("~/Plugins/Cameleo.CameleoEvents/Content/images/warning.jpg")" alt="" />
+                                    }
+                                </td>
+                                <td style="@paid">
+                                    @tmpCustomerEvent.Paid
+                                    @if (!tmpCustomerEvent.Paid)
+                                    {
+                                        <img class="finalreportwarning" src="@Url.Content("~/Plugins/Cameleo.CameleoEvents/Content/images/warning.jpg")" alt="" />
+                                    }    
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            @T("Plugins.Cameleo.CameleoEvents.NoEvent")
+        }
+
+    </div>
+</div>

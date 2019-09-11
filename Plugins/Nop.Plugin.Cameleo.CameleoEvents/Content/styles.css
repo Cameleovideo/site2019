@@ -1,0 +1,28 @@
+﻿table.admincontent{border-collapse:collapse;color:#333;font-size:12px;margin:0;width:100%;vertical-align:middle;text-align:left;}
+table.admincontent td.adminTitle{padding:4px;}
+table.admincontent td.adminData{padding:4px;}
+
+/*CAMELEO*/
+.cameleoadmincontent {font: normal 12px/150% Arial, Helvetica, sans-serif; background: #fff; overflow: hidden; border: 1px solid #0181C8; }
+.cameleoadmincontent table { border-collapse: collapse; text-align: left; width: 100%; } 
+.cameleoadmincontent table td, .cameleoadmincontent table th { padding: 7px 10px; }
+.grouptable table td, .grouptable table th { padding: 0; padding-left:10px; text-align:left; }
+.cameleoadmincontent table thead th {background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #00557F) );background:-moz-linear-gradient( center top, #006699 5%, #00557F 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#006699', endColorstr='#00557F');background-color:#006699; color:#FFFFFF; font-size: 15px; font-weight: bold; border-left: 1px solid #0070A8; } 
+.cameleoadmincontent table thead th:first-child { border: none; }
+.cameleoadmincontent table tbody td { color: #00496B; border-left: 1px solid #E1EEF4;font-size: 12px;font-weight: normal; }
+.cameleoadmincontent table tbody .alt td { background: #E1EEF4; color: #00496B; }
+.cameleoadmincontent table tbody td:first-child { border-left: none; }
+.cameleoadmincontent table tbody tr:last-child td { border-bottom: none; }
+.cameleoadmincontent table tfoot td div { border-top: 1px solid #0181C8;background: #E1EEF4;} 
+.cameleoadmincontent table tfoot td { padding: 0; font-size: 12px } 
+.cameleoadmincontent table tfoot td div{ padding: 2px; }
+.cameleoadmincontent table tfoot td ul { margin: 0; padding:0; list-style: none; text-align: right; }
+.cameleoadmincontent table tfoot  li { display: inline; }
+.cameleoadmincontent table tfoot li a { text-decoration: none; display: inline-block;  padding: 2px 8px; margin: 1px;color: #FFFFFF;border: 1px solid #006699;-webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #00557F) );background:-moz-linear-gradient( center top, #006699 5%, #00557F 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#006699', endColorstr='#00557F');background-color:#006699; }
+.cameleoadmincontent table tfoot ul.active, .cameleoadmincontent table tfoot ul a:hover { text-decoration: none;border-color: #006699; color: #FFFFFF; background: none; background-color:#00557F;}
+.finalreporttable table tbody td, .finalreporttable table thead th { padding: 0; padding-left:10px; text-align:left;}    
+
+div.dhtmlx_window_active, div.dhx_modal_cover_dv { position: fixed !important; }
+
+
+.finalreportwarning {border:solid 0px black;width:15px;}

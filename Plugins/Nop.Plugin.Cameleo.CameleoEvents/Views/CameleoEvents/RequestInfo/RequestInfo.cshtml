@@ -1,0 +1,117 @@
+﻿@model ContactUsModel
+@using Nop.Web.Models.Common;
+@{
+    Layout = "~/Views/Shared/_CameleoColumnsOne.cshtml";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.RequestInfo").Text);
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sendbrochure').click(function () {
+            toggleSendBrochure();
+        });
+    });
+    function toggleSendBrochure() {
+        if ($('#sendbrochure').is(':checked')) {
+            document.getElementById('@Html.IdFor(model => model.Enquiry)').value = document.getElementById('@Html.IdFor(model => model.Enquiry)').value + '\r' + '@T("ContactUs.Brochure.Text")';
+        }
+        else {
+            var regex = new RegExp('@T("ContactUs.Brochure.Text")', 'g');
+            document.getElementById('@Html.IdFor(model => model.Enquiry)').value = (String)(document.getElementById('@Html.IdFor(model => model.Enquiry)').value).replace(regex, "");
+        }
+    }
+    $(document).ready(function () {
+        $('#send-contactus-form').submit(function () {
+            if ($('#send-contactus-form').valid()) {
+                document.getElementById('@Html.IdFor(model => model.Enquiry)').value = (String)(document.getElementById('@Html.IdFor(model => model.Enquiry)').value) + '\r' + "@T("ContactUs.School.Label") : " + document.getElementById('schoolname').value;
+            }
+        });
+    });
+
+</script>
+
+<div class="page contact-page">
+   
+    <table class="cameleo-index-table">
+        <tr>
+            <td style="width:38%">
+                <div class="cameleo-request-info-left">
+                    @Html.Action("TopicBlock", "Topic", new { systemName = "RequestInfoLeft" })
+                </div>
+            </td>
+            <td style="width:62%">
+                @Html.Action("TopicBlock", "Topic", new { systemName = "RequestInfo" })
+            </td>
+        </tr>
+    </table>
+    
+
+    
+
+    @Html.Widget("contactus_top")
+    @if (Model.SuccessfullySent)
+    {
+        <div class="result">
+            @Html.Raw(HttpUtility.HtmlDecode(Model.Result))
+        </div>
+    }
+    else
+    {
+        using (Html.BeginForm("RequestInfo", "Event", FormMethod.Post, new { id = "send-contactus-form", sourceMessageId = this.Context.Request.QueryString["sourceMessageId"] }))
+        {            
+            <div class="message-error">
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    @Html.Raw(HttpUtility.HtmlDecode(Html.ValidationSummary(true).ToHtmlString()))
+                }
+            </div>
+
+            <div class="page-body">
+                <div class="page-title">
+                    <h1>@T("PageTitle.ContactUs")</h1>
+                </div>
+                <div class="form-fields">                    
+                    <div class="inputs-left">
+                        <div class="inputs">                                                        
+                            @Html.LabelFor(model => model.FullName, new { }, " :") 
+                            @Html.TextBoxFor(model => model.FullName, new { @class = "fullname", placeholder = T("ContactUs.FullName.Hint") })                                                        
+                        </div>
+                        @Html.ValidationMessageFor(model => model.FullName)
+                        <div class="inputs">                                                        
+                            @Html.LabelFor(model => model.Email, new { }, " :") 
+                            @Html.TextBoxFor(model => model.Email, new { @class = "email", placeholder = T("ContactUs.Email.Hint") })                                                        
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Email)
+                        <div class="inputs">                                                                                    
+                            @Html.Label("schoolname", T("ContactUs.School.Label").Text)                            
+                            @Html.TextBox("schoolname", null, new { @class = "fullname", placeholder = T("ContactUs.School.Hint") })
+                        </div>
+                        <div class="inputs">
+                            @Html.Label("sendbrochure", T("ContactUs.Brochure.Hint").Text)
+                            @Html.CheckBox("sendbrochure")                            
+                        </div>
+                        @if (Model.DisplayCaptcha)
+                        {
+                            <div class="captcha-box">
+                                @Html.Raw(Html.GenerateCaptcha())
+                            </div>
+                        }
+                    </div>
+                    <div class="inputs-right inputs">                    
+                        <div class="input-box">
+                            @Html.TextAreaFor(model => model.Enquiry, new { @class = "requestinfo-enquiry", placeholder = T("ContactUs.Enquiry.Hint") })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Enquiry)
+                    </div>
+                </div>
+                <div class="buttons">                
+                    <input type="submit" name="send-email" id="send-email" class="button-1 contact-us-button" value="@T("ContactUs.Button")" />
+                </div>
+            </div>    
+        }
+    }
+    @Html.Widget("contactus_bottom")
+
+</div>

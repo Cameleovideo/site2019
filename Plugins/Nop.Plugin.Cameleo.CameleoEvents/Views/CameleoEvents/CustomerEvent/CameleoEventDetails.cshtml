@@ -1,0 +1,434 @@
+﻿@using Nop.Plugin.Cameleo.CameleoEvents.ViewModels;
+@using Nop.Plugin.Cameleo.CameleoEvents.Domain;
+@using Nop.Core;
+@using Nop.Core.Infrastructure;
+@model Nop.Plugin.Cameleo.CameleoEvents.ViewModels.CameleoCustomerEventViewModel
+
+@{
+    Layout = "~/Views/Shared/_CameleoColumnsOne.cshtml";
+    
+    //title
+    Html.AddTitleParts(T("pagetitle.cameleoeventdetails").Text);
+
+    //CSS
+    Html.AddCssFileParts("~/Plugins/Cameleo.CameleoEvents/Content/styles.css");   
+
+    //Customer id    
+     var customer =  EngineContext.Current.Resolve<IWorkContext>().CurrentCustomer;
+     var customerId = customer.Id; 
+}
+
+<div class="page cameleoevent-details-page">
+    <div class="page-title">
+        <h1>@T("Plugins.Cameleo.CameleoEvents.EventDetails")</h1>
+    </div>
+
+    <div class="page-body">
+        
+        @if (Model != null && Model.CustomerId == customerId)
+        {
+            if (Model.CameleoEventUser.isNameEmpty())
+            {
+                //First name or lastname or group is empty, force user to put something
+                @T("Plugins.Cameleo.CameleoEventUsers.Fields.Name.Empty")
+                using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.Id)
+                    @Html.HiddenFor(model => model.CameleoEventUser.Id)
+                    <div class="fieldset">
+                        <div class="form-fields">
+                            <div class="inputs">
+                                @Html.LabelFor(model => model.CameleoEventUser.LastName, new { }, " :")
+                                @Html.EditorFor(model => model.CameleoEventUser.LastName)                            
+                                @Html.RequiredHint()                                                            
+                                @Html.ValidationMessageFor(model => model.CameleoEventUser.LastName)
+                            </div>
+                            <div class="inputs">
+                                @Html.LabelFor(model => model.CameleoEventUser.FirstName, new { }, " :")
+                                @Html.EditorFor(model => model.CameleoEventUser.FirstName)                            
+                                @Html.RequiredHint()                                
+                                @Html.ValidationMessageFor(model => model.CameleoEventUser.FirstName)
+                            </div>
+                            <div class="inputs">
+                                @Html.LabelFor(model => model.CameleoEventUser.Group, new { }, " :")                                
+                                @Html.DropDownListFor(model => model.CameleoEventUser.Group, Model.CameleoEvent.Groups, new { @class = "dropdownlists" })
+                                @Html.RequiredHint()                                
+                                @Html.ValidationMessageFor(model => model.CameleoEventUser.Group)
+                            </div>
+                            <div class="buttons">
+                                <input type="submit" name="addname" class="button-2 add-name-button" value="@T("Plugins.Cameleo.CameleoEvents.AddName.Button")" />
+                            </div>
+                        </div>
+                    </div> 
+                    if (!String.IsNullOrEmpty(Model.Result))
+                    {
+                        <div class="result">
+                            @Model.Result
+                        </div>
+                    }
+                }
+            }
+            else
+            {
+                //Model is present and customer is authorized to see this event details
+                <table class="data-table">
+                    <tr>
+                        <th>
+                            @T("Plugins.Cameleo.CameleoEvents.Fields.EventName")
+                        </th>
+                        <th>
+                            @T("Plugins.Cameleo.CameleoEvents.Fields.ClientName")
+                        </th>
+                        <th>
+                            @T("Plugins.Cameleo.CameleoEvents.Fields.ShootedOnUtc")
+                        </th>
+                        <th>
+                            @T("Plugins.Cameleo.CameleoEventUsers.Fields.Name")
+                        </th>
+                        <th>
+                            @T("Plugins.Cameleo.CameleoEventUsers.Fields.Group")
+                        </th>                    
+                    </tr>
+               
+                    <tr>
+                        <td>
+                            @Model.CameleoEvent.EventName
+                        </td>
+                        <td>
+                            @Model.CameleoEvent.ClientName
+                        </td>
+                        <td>
+                            @if (Convert.IsDBNull(Model.CameleoEvent.ShootedOnUtc) || Model.CameleoEvent.ShootedOnUtc == null)
+                            {
+                                @T("Plugins.Cameleo.CameleoEvents.DateUnknown")
+                            }
+                            else
+                            {
+                                @(((DateTime)Model.CameleoEvent.ShootedOnUtc).ToString("yyyy-MM-dd"))
+                            }
+                        </td>
+                        <td>
+                            @Model.CameleoEventUser.FirstName @Model.CameleoEventUser.LastName
+                        </td>
+                        <td>
+                            @Model.CameleoEventUser.Group
+                        </td>                   
+                    </tr>
+                
+                </table>
+        
+
+                if (Model.CameleoEvent.Status == (int)CameleoEventStatus.Opened)
+                {
+                    string style = Model.CameleoEvent.OnlinePaymentEnabled ? "thermometer-4" : "thermometer-2";
+                    //Event is opened                     
+                    <div class="fieldset" >                        
+                        <div class="@style">
+                            @if (Model.Accepted)
+                            {
+                                //Current customer already accepted
+                                <h1>@T("Plugins.Cameleo.CameleoEvents.AcceptedSuccessTitle")</h1>
+                                <br />
+                                <h1>@T("Plugins.Cameleo.CameleoEvents.AcceptedSuccess").ToString().ToUpper()</h1>
+                                <br />
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <img class="thumb-up" src="@Url.Content("~/Plugins/Cameleo.CameleoEvents/Content/images/thumb-up.jpg")" alt="" />
+                                        </td>
+                                        <td>
+                                            @if (Model.CameleoEvent.OnlinePaymentEnabled)
+                                            {
+                                                //Online payment enabled
+                                                
+                                                //Already paid?
+                                                if (Model.Paid)
+                                                {
+                                                    //Yes
+                                                    @T("Plugins.Cameleo.CameleoCustomerEvents.Paid")
+                                                }
+                                                else
+                                                {
+                                                    //Else
+                                                    @T("Plugins.Cameleo.CameleoCustomerEvents.NotPaid")
+                                                
+                                                    <table>
+                                                        <tr>
+                                                            <td style="vertical-align:middle">
+                                                                <img class="warning" src="@Url.Content("~/Plugins/Cameleo.CameleoEvents/Content/images/warning.jpg")" alt="" />
+                                                            </td>
+                                                            <td>
+                                                                <a href="@Url.RouteUrl("ShoppingCart")">
+                                                                    @T("Plugins.Cameleo.CameleoCustomerEvents.Paid.PaymentToCome")
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </table>                                                     
+                                                }
+                                            }
+                                            else                                            
+                                            {
+                                                //Else, trad payment
+                                                
+                                                //Already paid?
+                                                if (Model.Paid)
+                                                {
+                                                    //Yes
+                                                    @T("Plugins.Cameleo.CameleoCustomerEvents.Paid")
+                                                }
+                                                else
+                                                {
+                                                    @T("Plugins.Cameleo.CameleoEvents.AcceptedSuccess.PaymentToCome")
+
+                                                    <table>
+                                                        <tr>
+                                                            <td style="vertical-align:middle">
+                                                                <img class="warning" src="@Url.Content("~/Plugins/Cameleo.CameleoEvents/Content/images/warning.jpg")" alt="" />
+                                                            </td>
+                                                            <td>
+                                                                <a href="@Url.RouteUrl("PaymentInfo", new { customerEventId = Model.Id })">
+                                                                    @T("Plugins.Cameleo.CameleoEvents.AcceptedSuccess.PaymentToCome.MoreInfo")
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </table>     
+                                                }                                                
+                                            }
+                                            
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                using (Html.BeginForm())
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.HiddenFor(model => model.Id)
+                                    <table class="acceptimageuse-table">
+                                        <tr>
+                                            @if (Model.AcceptedImageUse)
+                                            {                                                
+                                                <td>
+                                                    <div class="buttons">
+                                                        <input type="submit" name="refuseimageuse" class="button-1 refuse-imageuse-button" value="@T("plugins.cameleo.cameleoevents.refuseimageuse.button")" />
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    @T("Plugins.Cameleo.CameleoEvents.AcceptedSuccess.RefuseImageUse")
+                                                </td>
+                                            }
+                                            else
+                                            {                                                
+                                                <td>
+                                                    <div class="buttons">
+                                                        <input type="submit" name="acceptimageuse" class="button-1 accept-imageuse-button" value="@T("plugins.cameleo.cameleoevents.acceptimageuse.button")" />
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    @T("Plugins.Cameleo.CameleoEvents.AcceptedSuccess.AutorizeImageUse")
+                                                </td>
+                                            }
+                                        </tr>
+                                        <tr>                                            
+                                            <td>
+                                                <div class="buttons">
+                                                    <input type="submit" name="addnewevent" class="button-1 add-newevent-button" value="@T("plugins.cameleo.cameleoevents.addnewevent.button")" />
+                                                </div>
+                                            </td>
+                                            <td>
+                                                @T("Plugins.Cameleo.CameleoEvents.AddNewEvent")
+                                            </td>
+                                        </tr>
+                                        <tr>                                            
+                                            <td>
+                                                <div class="buttons">
+                                                    <input type="submit" name="addnewevent" class="button-1 finish-button" value="@T("plugins.cameleo.cameleoevents.finish.button")" />
+                                                </div>
+                                            </td>
+                                            <td>
+                                                @T("Plugins.Cameleo.CameleoEvents.Finish")
+                                            </td>
+                                        </tr>
+
+                                    </table>
+
+                                    if (!String.IsNullOrEmpty(Model.Result))
+                                    {
+                                        <div class="result">
+                                            @Model.Result
+                                        </div>
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                //Current customer did not accept yet
+                                <h1>@T("Plugins.Cameleo.CameleoEvents.AcceptedFailureTitle")</h1>
+                                <br />
+                                if (Model.AcceptedStatus == (int)AcceptedStatus.Refused)
+                                {
+                                    @T("Plugins.Cameleo.CameleoEvents.Refused.ChangeMind") <br />
+                                }
+
+                                @T("Plugins.Cameleo.CameleoEvents.AcceptedFailure")
+
+                                <table style="padding:0px;">
+                                    <tr style="vertical-align:middle;">
+                                        @if (Model.CameleoEvent.AcceptDaysLeft <= Model.CameleoEvent.AcceptReminderDelay)
+                                        {
+                                            <td style="vertical-align:middle">
+                                                <img class="warning" src="@Url.Content("~/Plugins/Cameleo.CameleoEvents/Content/images/warning.jpg")" alt="" />
+                                            </td>
+                                        }
+                                        <td style="vertical-align:middle">
+                                            @if (Model.CameleoEvent.AcceptDaysLeft > 0)
+                                            {
+                                                @T("Plugins.Cameleo.CameleoEvents.AcceptedDateNotPassed").ToString().Replace("{0}", Model.CameleoEvent.AcceptDaysLeft.ToString())
+                                            }
+                                            else if (Model.CameleoEvent.AcceptDaysLeft == 0)
+                                            {
+                                                @T("Plugins.Cameleo.CameleoEvents.AcceptedDateNotPassed.LimitDate")
+                                            }
+                                            else
+                                            {
+                                                @T("Plugins.Cameleo.CameleoEvents.AcceptedPercentageDatePassed")
+                                            }
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                using (Html.BeginForm())
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.HiddenFor(model => model.Id)
+                                    <table class="accept-table">
+                                        <tr>
+                                            <td>
+                                                <div class="buttons">
+                                                    <input type="submit" name="accept" class="button-1 accept-event-button" value="@T("Plugins.Cameleo.CameleoEvents.Accept.Button")" />
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <img class="interrogation" src="@Url.Content("~/Plugins/Cameleo.CameleoEvents/Content/images/interrogation.jpg")" alt="@T("Plugins.Cameleo.CameleoEvents.Accept.Info")" title="@T("Plugins.Cameleo.CameleoEvents.Accept.Info")" />
+                                            </td>
+                                        </tr>
+                                        @if (Model.AcceptedStatus == (int)AcceptedStatus.Refused)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <div class="buttons">
+                                                        <input type="submit" name="refuse" class="button-1 refuse-event-button" value="@T("Plugins.Cameleo.CameleoEvents.Refuse.Button")" />
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <img class="interrogation" src="@Url.Content("~/Plugins/Cameleo.CameleoEvents/Content/images/interrogation.jpg")" alt="@T("Plugins.Cameleo.CameleoEvents.Refuse.Info")" title="@T("Plugins.Cameleo.CameleoEvents.Refuse.Info")" />
+                                                </td>
+                                            </tr>
+                                        }
+
+                                        <tr>
+                                            <td colspan="2">
+                                                <a href="http://vimeo.com/73426246?autoplay=0" target="_blank">
+                                                    <img class="cameleofilmstrip" src="@Url.Content("~/Plugins/Cameleo.CameleoEvents/Content/images/film-strip.jpg")" />
+                                                    <br />
+                                                    @T("Plugins.Cameleo.CameleoEvents.SampleVideoLink")
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    if (!String.IsNullOrEmpty(Model.Result))
+                                    {
+                                        <div class="result">
+                                            @Model.Result
+                                        </div>
+                                    }
+                                }
+                            }
+                        </div>
+              
+                        @if (Model.CameleoEvent.OnlinePaymentEnabled)
+                        {
+                            //Online payment enabled
+                            <div class="thermometer-1">
+                                <div class="thermometer-title">                                    
+                                </div>
+                                <img src='http://www.jlion.com:80//tools/Thermometer.aspx?MIN=0&MAX=100&VT=4&T=&nbsp;&IV=@(Model.CameleoEventUser.AcceptPercentage.ToString())&M=1&SC=0&CS=5&CI=en-US&TH=0' style="border: solid 0px black;" alt="" title="" width="240" height="425" />                            
+                            </div>  
+                        }
+                        else
+                        {
+                            <div class="thermometer-3">
+                                @if (Model.CameleoEventUser.AcceptPercentage >= Model.CameleoEvent.AcceptMinimumPercentage)
+                                {
+                                    //Minimum number of subjects have accepted
+                                    <h1>@T("Plugins.Cameleo.CameleoEvents.AcceptedPercentageSuccessTitle")</h1>
+                                    <br />
+                                    @T("Plugins.Cameleo.CameleoEvents.AcceptedPercentageSuccess")
+                                    <br />
+                                    <img class="thumb-up" src="@Url.Content("~/Plugins/Cameleo.CameleoEvents/Content/images/thumb-up.jpg")" alt="" />
+                                }
+                                else
+                                {
+                                    //Else, minimum number of subjects not yet obtained
+                                    <h1>@T("Plugins.Cameleo.CameleoEvents.AcceptedPercentageFailureTitle")</h1>
+                                    <br />
+                                    @T("Plugins.Cameleo.CameleoEvents.AcceptedPercentageFailure")
+                                    <br />
+                                    <img class="thumb-down" src="@Url.Content("~/Plugins/Cameleo.CameleoEvents/Content/images/thumb-down.jpg")" alt="" />
+                                    <br />
+                                    if (Model.CameleoEvent.AcceptReminderDatePassed)
+                                    {
+                                        //Limit date passed
+                                        @T("Plugins.Cameleo.CameleoEvents.AcceptedPercentageDatePassed")
+                                    }
+                                    else
+                                    {
+                                        //Else, there is still time                            
+                                        @T("Plugins.Cameleo.CameleoEvents.AcceptedPercentageDateNotPassed.Title")
+                                        <br /><br />
+                                        if (Model.CameleoEvent.AcceptDaysLeft > 0)
+                                        {
+                                            @T("Plugins.Cameleo.CameleoEvents.AcceptedPercentageDateNotPassed").ToString().Replace("{0}", Model.CameleoEvent.AcceptDaysLeft.ToString())    
+                                        }
+                                        else if (Model.CameleoEvent.AcceptDaysLeft == 0)
+	                                    {
+		                                    @T("Plugins.Cameleo.CameleoEvents.AcceptedPercentageDateNotPassed.LimitDate")
+	                                    }
+                                        else
+                                        {
+                                            @T("Plugins.Cameleo.CameleoEvents.AcceptedPercentageDateNotPassed.TimeLeft")
+                                        }
+                                    }
+                                }
+                            </div>
+
+                            <div class="thermometer-1">
+                                <div class="thermometer-title">
+                                    <h1>@T("Plugins.Cameleo.CameleoEvents.AcceptedPercentageTitle").ToString().Replace("{0}", Model.CameleoEvent.AcceptMinimumPercentage.ToString())</h1>
+                                </div>
+                                <img src='http://www.jlion.com:80//tools/Thermometer.aspx?MIN=0&MAX=100&VT=4&T=&nbsp;&IV=@(Model.CameleoEventUser.AcceptPercentage.ToString())&M=1&SC=0&CS=5&CI=en-US&TH=0' style="border: solid 0px black;" alt="" title="" width="240" height="425" />                            
+                            </div>        
+                        }
+                        
+                    </div>
+                }
+                else if (Model.CameleoEvent.Status == (int)CameleoEventStatus.CancelledAccepted)
+                {
+                    <br />
+                    <h1>
+                        @T("Plugins.Cameleo.CameleoEvents.CancelledAccepted")
+                    </h1>
+                }
+            }
+        }
+        else
+        {
+            @T("Plugins.Cameleo.CameleoEvents.NoEvent")
+        }
+        
+    </div>
+</div>

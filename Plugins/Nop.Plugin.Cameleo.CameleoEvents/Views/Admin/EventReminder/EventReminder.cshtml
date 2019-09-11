@@ -1,0 +1,86 @@
+﻿@using Nop.Plugin.Cameleo.CameleoEvents.ViewModels;
+@using Nop.Plugin.Cameleo.CameleoEvents.Domain;
+@using Nop.Core;
+@using Nop.Core.Infrastructure;
+@model Nop.Plugin.Cameleo.CameleoEvents.ViewModels.CustomerEventReminderListViewModel
+
+@{
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";    
+    
+    //title
+    Html.AddTitleParts(T("pagetitle.cameleoeventdetails.eventreminder").Text);
+
+    //CSS
+    Html.AddCssFileParts("~/Plugins/Cameleo.CameleoEvents/Content/styles.css");    
+}
+
+<div class="section-header">
+    <div class="title">
+        <img src="@Url.Content("~/Administration/Content/images/ico-system.png")" alt="" />
+        @T("Plugins.Cameleo.CameleoEvents.EventDetails.EventReminder") @Html.ActionLink("(" + T("Plugins.Cameleo.CameleoEventDetails.FinalReport.BackToDetails") + ")", "EventDetails", "EventAdmin", new { eventId = Model.EventId }, null)
+    </div>   
+</div>
+     
+@using (Html.BeginForm("AllRemindersPDF", "EventAdmin", FormMethod.Post, new { target = "_blank" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.EventId)            
+            
+    <table width="100%">
+        <tr>
+            <td class="adminTitle">
+                @Html.LabelFor(model => model.ShootDate, new { }, " :")
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.ShootDate)
+                @Html.RequiredHint()
+                @Html.ValidationMessageFor(model => model.ShootDate)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.LabelFor(model => model.ReminderDate, new { }, " :")
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.ReminderDate)
+                @Html.RequiredHint()
+                @Html.ValidationMessageFor(model => model.ReminderDate)                        
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.LabelFor(model => model.SenderName, new { }, " :")
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.SenderName)
+                @Html.RequiredHint()
+                @Html.ValidationMessageFor(model => model.SenderName)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.LabelFor(model => model.SenderRole, new { }, " :")
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.SenderRole)
+                @Html.RequiredHint()
+                @Html.ValidationMessageFor(model => model.SenderRole)
+            </td>            
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.LabelFor(model => model.ParticipationFee, new { }, " :")
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.ParticipationFee)
+                @Html.RequiredHint()
+                @Html.ValidationMessageFor(model => model.ParticipationFee)
+            </td>
+        </tr>
+    </table>
+    
+    <br /><br />
+    <input type="submit" class="k-button" name="generatewithoutcoupon" value="@T("plugins.cameleo.cameleocustomerevents.reminders.generatewithoutcoupon.button")" />    
+    <input type="submit" class="k-button" name="generatewithcoupon" value="@T("plugins.cameleo.cameleocustomerevents.reminders.generatewithcoupon.button")" />
+}
+   

@@ -1,0 +1,24 @@
+﻿@using Nop.Plugin.Cameleo.CameleoEvents.ViewModels;
+@using Nop.Plugin.Cameleo.CameleoEvents.Domain;
+@model ProjectSubCategoryViewModel
+@{
+    Layout = "~/Administration/Views/Shared/_AdminPopupLayout.cshtml";
+}
+
+@{
+    //page title
+    ViewBag.Title = T("pagetitle.cameleoprojects.projectsubcategories.edit").Text;
+}
+@using (Html.BeginForm())
+{
+    <div class="section-header">
+        <div class="title">
+            <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt="" />
+            @T("pagetitle.cameleoprojects.projectsubcategories.edit")
+        </div>
+        <div class="options">
+            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
+        </div>
+    </div>
+    @Html.Partial("~/Plugins/Cameleo.CameleoEvents/Views/Admin/Project/_CreateOrUpdateSubCategory.cshtml", Model)
+}

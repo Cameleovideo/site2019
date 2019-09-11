@@ -1,0 +1,62 @@
+﻿ 
+@{       
+    Layout = "~/Views/Shared/_ColumnsOne.cshtml";
+    bool isRegistered = User.Identity.IsAuthenticated;    
+}
+
+@using Nop.Web.Extensions
+@using Nop.Web.Themes.CameleoVideoTheme.ViewModels;
+@model CameleoVideoIndexViewModel
+
+<div class="page home-page">
+    <div class="page-body">
+        <!--@Html.Widget("home_page_top")-->
+        @{
+            if (isRegistered)
+            {
+                Response.Redirect("~/cameleoevents");
+            }
+            else
+            {
+                <table class="cameleo-index-table">
+                    <tr>
+                        <td style="text-align:right;">
+                            @if (Model != null)
+                            {
+                                @Html.Action("TopicBlock", "Topic", new { systemName = Model.Topic })
+                            }
+                            else
+                            {
+                                @Html.Action("TopicBlock", "Topic", new { systemName = "HomePageText" })
+                            }
+                            <div style="padding:10px;text-decoration:underline;">
+                                <a href="@Url.RouteUrl("Topic", new { SeName = Html.GetTopicSeName("AllVideos") })">@T("Plugins.Cameleo.CameleoEvents.AllVideos")</a>
+                            </div>
+                        </td>
+                        <td width="100%">
+                            <div class="cameleo-index-right">
+                                @Html.Action("TopicBlock", "Topic", new { systemName = "HomePageTextRight" })
+                                @Html.Action("TopicBlock", "Topic", new { systemName = "HomePageTextRight2" })
+                                @Html.Action("TopicBlock", "Topic", new { systemName = "HomePageTextRight3" })
+
+                                <div class="button-register">
+                                    <input type="button" class="button-1" onclick="location.href='@Url.RouteUrl("Login")'" value="@T("Plugins.Cameleo.CameleoEvents.Register.Button")" />                                    
+                                </div>
+                                                                
+
+                                @Html.Action("TopicBlock", "Topic", new { systemName = "HomePageTextRight5" })
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            }
+        }        
+        
+        @Html.Action("HomepageCategories", "Catalog")
+        @Html.Action("HomepageProducts", "Product")
+        @Html.Action("HomepageBestSellers", "Product")
+        @Html.Action("HomePageNews", "News")
+        @Html.Action("HomePagePolls", "Poll")
+        @Html.Widget("home_page_bottom")
+    </div>
+</div>

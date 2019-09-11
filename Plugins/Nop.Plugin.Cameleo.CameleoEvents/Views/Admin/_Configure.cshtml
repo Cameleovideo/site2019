@@ -1,0 +1,239 @@
+﻿@using Nop.Web.Framework;
+@using Nop.Plugin.Cameleo.CameleoEvents.ViewModels;
+@using Nop.Plugin.Cameleo.CameleoEvents.Domain;
+@using Nop.Core.Infrastructure;
+
+<table class="adminContent">
+    <tr>
+        <td>
+            <div id="events-grid"></div>
+
+            <script>
+                $(document).ready(function () {
+                    $("#events-grid").kendoGrid({
+                        dataSource: {
+                            type: "json",
+                            transport: {
+                                read: {
+                                    url: "@Html.Raw(Url.Action("EventList", "EventAdmin"))",
+                                    type: "POST",
+                                    dataType: "json"
+                                },
+                                create: {
+                                    url: "@Html.Raw(Url.Action("EventInsert", "EventAdmin"))",
+                                    type: "POST",
+                                    dataType: "json",
+                                    contentType: "application/json"
+                                },
+                                update: {
+                                    url:"@Html.Raw(Url.Action("EventUpdate", "EventAdmin"))",
+                                    type: "POST",
+                                    dataType: "json",
+                                    contentType: "application/json"
+                                },
+                                parameterMap: function (data, type) {
+                                    if (type == "update" || type == "create") {
+                                        if (data.ShootedOnUtc != null) {
+                                            data.ShootedOnUtc = kendo.toString(new Date(data.ShootedOnUtc), "yyyy-MM-dd");
+                                        }
+
+                                        if (data.AcceptReminderDateUtc != null) {
+                                            data.AcceptReminderDateUtc = kendo.toString(new Date(data.AcceptReminderDateUtc), "yyyy-MM-dd");
+                                        }
+                                        return kendo.stringify(data);
+                                    }
+                                }
+                            },
+                            schema: {
+                                data: "Data",
+                                total: "Total",
+                                errors: "Errors",
+                                model: {
+                                    id: "Id",
+                                    fields: {
+                                        Id: { editable: false, type: "number" },
+                                        ClientName: { editable: true, type: "string" },
+                                        EventCode: { editable: true, type: "string" },
+                                        EventName: { editable: true, type: "string" },
+                                        CreatedOnUtc: { editable: false, type: "date" },
+                                        ShootedOnUtc: { editable: true, type: "date" },
+                                        AcceptReminderDateUtc: { editable: true, type: "date" },
+                                        AcceptReminderDelay: { editable: true, type: "number" },
+                                        AcceptMinimumPercentage: { editable: true, type: "number" },
+                                        Status: { editable: true, type: "number" },
+                                        ClientLogo: { editable: true, type: "string" },
+                                        IntroLogo: { editable: true, type: "string" },
+                                        ParticipationFee: { editable: true, type: "decimal" }
+                                    }
+                                },
+                            },
+                            requestEnd: function (e) {
+                                if (e.type == "create" || e.type == "update") {
+                                    this.read();
+                                }
+                            },
+                            error: function (e) {
+                                display_kendoui_grid_error(e);
+                                // Cancel the changes
+                                this.cancelChanges();
+                            },
+                            serverPaging: true,
+                            serverFiltering: true,
+                            serverSorting: true
+                        },
+                        pageable: {
+                            refresh: true,
+                            numeric: false,
+                            previousNext: false,
+                            info: false
+                        },
+                        toolbar: ["create"],
+                        editable: {
+                            confirmation: false,
+                            mode: "inline"
+                        },
+                        scrollable: false,
+                        columns: [{
+                            command: { name: "edit", text: "@T("Admin.Common.Edit")" },
+                            title: "@T("Admin.Common.Edit")",
+                            width: 80
+                        }, {
+                            field: "Id",
+                            title: "@T("Plugins.Cameleo.CameleoEvents.Admin.EventDetails")",
+                            template: '<a href="@Url.Content("~/admin/plugin/cameleoevents/cameleoeventdetails/")#=Id#" class="k-button">@T("Plugins.Cameleo.CameleoEvents.Admin.EventDetails")</a>',
+                            width: 75
+                        }, {
+                            field: "Id",
+                            title: "Id"
+                        }, {
+                            field: "ClientName",
+                            title: "@T("Plugins.Cameleo.CameleoEvents.Fields.ClientName")"
+                        }, {
+                            field: "EventCode",
+                            title: "@T("Plugins.Cameleo.CameleoEvents.Fields.EventCode")",
+                            width: 80
+                        }, {
+                            field: "EventName",
+                            title: "@T("Plugins.Cameleo.CameleoEvents.Fields.EventName")"
+                        }, {
+                            field: "CreatedOnUtc",
+                            title: "@T("Plugins.Cameleo.CameleoEvents.Fields.CreatedOnUtc")",
+                            type: "date",
+                            format: "{0:yyyy-MM-dd}",
+                            width: 80
+                        }, {
+                            field: "ShootedOnUtc",
+                            title: "@T("Plugins.Cameleo.CameleoEvents.Fields.ShootedOnUtc")",
+                            type: "date",
+                            format: "{0:yyyy-MM-dd}",
+                            editor: dateEditor,
+                            width: 80
+                        }, {
+                            field: "AcceptReminderDateUtc",
+                            title: "@T("Plugins.Cameleo.CameleoEvents.Fields.AcceptReminderDateUtc")",
+                            type: "date",
+                            format: "{0:yyyy-MM-dd}",
+                            width: 80
+                        }, {
+                            field: "AcceptReminderDelay",
+                            title: "@T("Plugins.Cameleo.CameleoEvents.Fields.AcceptReminderDelay")",
+                            width: 80
+                        }, {
+                            field: "AcceptMinimumPercentage",
+                            title: "@T("Plugins.Cameleo.CameleoEvents.Fields.AcceptMinimumPercentage")",
+                            width: 80
+                        }, {
+                            field: "StatusString",
+                            title: "@T("Plugins.Cameleo.CameleoEvents.Fields.Status")",
+                            editor: statusDropDownEditor,
+                        }, {
+                            field: "ClientLogo",
+                            title: "@T("Plugins.Cameleo.CameleoEvents.Fields.Logo")"
+                        }, {
+                            field: "IntroLogo",
+                            title: "@T("Plugins.Cameleo.CameleoEvents.Fields.IntroLogo")"
+                        }, {
+                            field: "ParticipationFee",
+                            title: "@T("Plugins.Cameleo.CameleoEvents.Fields.ParticipationFee")",
+                            width: 80
+                        }]
+                    });
+                });
+
+                @{
+                    var eventStatusList = new List<SelectListItem>();
+                    var item = new SelectListItem()
+                    {
+                        Text = T(CameleoEventStatusStrings.LocalizedStringValues[(int)CameleoEventStatus.Opened]).Text,
+                        Value = ((int)CameleoEventStatus.Opened).ToString()
+                    };
+                    eventStatusList.Add(item);
+
+                    item = new SelectListItem()
+                    {
+                        Text = T(CameleoEventStatusStrings.LocalizedStringValues[(int)CameleoEventStatus.Accepted]).Text,
+                        Value = ((int)CameleoEventStatus.Accepted).ToString()
+                    };
+                    eventStatusList.Add(item);
+
+                    item = new SelectListItem()
+                    {
+                        Text = T(CameleoEventStatusStrings.LocalizedStringValues[(int)CameleoEventStatus.CancelledAccepted]).Text,
+                        Value = ((int)CameleoEventStatus.CancelledAccepted).ToString()
+                    };
+                    eventStatusList.Add(item);
+
+                    item = new SelectListItem()
+                    {
+                        Text = T(CameleoEventStatusStrings.LocalizedStringValues[(int)CameleoEventStatus.Paid]).Text,
+                        Value = ((int)CameleoEventStatus.Paid).ToString()
+                    };
+                    eventStatusList.Add(item);
+
+                    item = new SelectListItem()
+                    {
+                        Text = T(CameleoEventStatusStrings.LocalizedStringValues[(int)CameleoEventStatus.CancelledPaid]).Text,
+                        Value = ((int)CameleoEventStatus.CancelledPaid).ToString()
+                    };
+                    eventStatusList.Add(item);
+
+                    item = new SelectListItem()
+                    {
+                        Text = T(CameleoEventStatusStrings.LocalizedStringValues[(int)CameleoEventStatus.Completed]).Text,
+                        Value = ((int)CameleoEventStatus.Completed).ToString()
+                    };
+                    eventStatusList.Add(item);
+                }
+
+                var eventStatusList2 = [
+                    @foreach (var eventStatus in eventStatusList)
+                    {
+                        <text>
+                            {
+                                Value: @(eventStatus.Value),
+                                Text: "@(Html.Raw(HttpUtility.JavaScriptStringEncode(eventStatus.Text)))"
+                            } ,
+                        </text>
+                    }
+                ];
+
+                function statusDropDownEditor(container, options) {
+                    $('<input required data-text-field="Text" data-value-field="Value" data-bind="value:Status"/>')
+                        .appendTo(container)
+                        .kendoDropDownList({
+                            autoBind: false,
+                            dataSource: eventStatusList2
+                        });
+                }
+
+
+                function dateEditor(container, options) {
+                    $('<input data-text-field="' + options.field + '" data-value-field="' + options.field + '" data-bind="value:' + options.field + '" data-format="' + options.format + '"/>')
+                            .appendTo(container)
+                            .kendoDatePicker({});
+                }
+
+            </script>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,8 @@
+﻿Group: Payment methods
+FriendlyName: Moneris Standard
+SystemName: Payments.MonerisStandard
+Version: 1.0
+SupportedVersions: 3.40
+Author: Cameleo
+DisplayOrder: 1
+FileName: Nop.Plugin.Payments.MonerisStandard.dll

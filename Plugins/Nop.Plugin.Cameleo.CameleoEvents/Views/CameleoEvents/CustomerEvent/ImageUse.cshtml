@@ -1,0 +1,67 @@
+﻿@using Nop.Plugin.Cameleo.CameleoEvents.ViewModels;
+@using Nop.Plugin.Cameleo.CameleoEvents.Domain;
+@using Nop.Core;
+@using Nop.Core.Infrastructure;
+@using Nop.Web.Framework.Localization;
+
+@model Nop.Plugin.Cameleo.CameleoEvents.ViewModels.CameleoCustomerEventViewModel
+
+@{
+    Layout = "~/Views/Shared/_CameleoColumnsOne.cshtml";
+    
+    //title
+    Html.AddTitleParts(T("pagetitle.cameleoevents.imageuse").Text);
+
+    //CSS
+    Html.AddCssFileParts("~/Plugins/Cameleo.CameleoEvents/Content/styles.css");   
+}
+
+<div class="page cameleoevent-details-page">
+    <div class="page-title">
+        <h1>@T("Plugins.Cameleo.CameleoEvents.ImageUse")</h1>
+    </div>
+
+    <div class="page-body">
+        @if (!String.IsNullOrEmpty(Model.Result))
+        {
+            <div class="result">
+                @Model.Result
+            </div>
+        }
+        
+        @using (Html.BeginForm())
+        {        
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.Id)
+            <table class="acceptimageuse-table">                
+                @if (Model.AcceptedImageUse)
+                {
+                    Response.Redirect("~/Cart");                        
+                }
+                else
+                {                                                
+                    <tr>
+                        <td>
+                            <div class="buttons">
+                                <input type="submit" name="acceptimageuse2" class="button-1 accept-imageuse-button" value="@T("plugins.cameleo.cameleoevents.acceptimageuse.button")" />
+                            </div>
+                        </td>
+                        <td>
+                            @T("Plugins.Cameleo.CameleoEvents.AcceptedSuccess.AutorizeImageUse")
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="buttons">
+                                <input type="submit" name="refuseimageuse2" class="button-1 refuse-imageuse-button" value="@T("plugins.cameleo.cameleoevents.refuseimageuse.button")" />
+                            </div>
+                        </td>
+                        <td>
+                            @T("Plugins.Cameleo.CameleoEvents.AcceptedSuccess.RefuseImageUse")
+                        </td>
+                    </tr>
+                }                
+            </table>            
+        }
+    </div>
+</div>

@@ -1,0 +1,256 @@
+﻿@using Nop.Plugin.Cameleo.CameleoEvents.ViewModels;
+@using Nop.Plugin.Cameleo.CameleoEvents.Domain;
+@using Nop.Core;
+@using Nop.Core.Infrastructure;
+@using Nop.Admin.Models.Orders;
+@model Nop.Plugin.Cameleo.CameleoEvents.ViewModels.CameleoEventViewModel
+
+@{
+    //Layout
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+
+    //title
+    Html.AddTitleParts(T("pagetitle.cameleoeventdetails.notpaidreport").Text);
+
+    //CSS
+    Html.AddCssFileParts("~/Plugins/Cameleo.CameleoEvents/Content/styles.css");
+}
+
+<div class="section-header">
+    <div class="title">
+        <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt="" />
+        @T("Plugins.Cameleo.CameleoEvents.EventDetails.NotPaidReport") @Html.ActionLink("(" + T("Plugins.Cameleo.CameleoEventDetails.FinalReport.BackToDetails") + ")", "EventDetails", "EventAdmin", new { eventId = Model.Id }, null)        
+    </div>
+    <div class="options">
+            <table>
+            <tr>
+                <td>
+                    <input type="button" id="exportexcel-all" class="k-button" value="@T("Admin.Common.ExportToExcel.All")" />                
+                </td>
+                <td>
+                    @using (Html.BeginForm("NotPaidReminderEmail", "EventAdmin", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.Id)
+                        <input type="submit" class="k-button" value="@T("Plugins.Cameleo.CameleoEvents.Admin.NotPaidReport.ReminderEmail.Button")" />
+                    }
+                </td>
+                <td>
+                    @using (Html.BeginForm("NotPaidReminder", "EventAdmin", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.Id)
+                        <input type="submit" class="k-button" value="@T("Plugins.Cameleo.CameleoEvents.Admin.NotPaidReport.Reminder.Button")" />
+                    }            
+                </td>                
+            </tr>
+        </table>
+    </div>
+</div>
+
+@using (Html.BeginForm())
+{
+    <div class="page cameleoevent-details-page">
+        <div class="page-body">
+            @Html.Partial("~/Plugins/Cameleo.CameleoEvents/Views/Admin/Event/_EventDetails.cshtml", Model)
+        </div>
+    </div>
+    <br /><br />
+
+    <table class="adminContent">
+        <tr>
+            <td>
+                <div id="notpaid-grid"></div>
+
+                <script id="command-template" type="text/x-kendo-template">                
+                    <img src="@Url.Content("~/Administration/Content/images/")active-#=IsInCart#.gif" />
+
+                    # if(ShowCartButtons){ if(!IsInCart) { #
+                        <a class="k-button k-grid-addshoppingcart" onclick="addShoppingCart(#= CustomerEventId #)">Add Cart Item</a>
+                    # } else { # 
+                        <a class="k-button k-grid-clearshoppingcart" onclick="clearShoppingCart(#= CustomerEventId #)">Clear Cart Items</a>
+                    # }} #
+                </script>
+
+                <script>
+                    $(document).ready(function () {
+                        $("#notpaid-grid").kendoGrid({
+                            dataSource: {
+                                type: "json",
+                                transport: {
+                                    read: {
+                                        url: "@Html.Raw(Url.Action("NotPaidReportJson", "EventAdmin", new { eventId = Model.Id }))",
+                                        cache: false,
+                                        type: "POST",
+                                        dataType: "json"
+                                    }
+                                },
+                                sync: function Sync_Handler(e) {
+                                    this.read();
+                                },
+                                schema: {
+                                    data: "Data",
+                                    total: "Total",
+                                    errors: "Errors",
+                                    model: {
+                                        id: "Id",
+                                        fields: {
+                                            CustomerEventId: { editable: false, type: "number" },
+                                            CustomerId: { editable: false, type: "number" },
+                                            CustomerUserName: { editable: false, type: "string" },                                        
+                                            Accepted: { editable: false, type: "boolean" },
+                                            AcceptedStatusString: { editable: false, type: "string" },
+                                            AcceptedImageUse: { editable: false, type: "bool" },
+                                            Paid: { editable: false, type: "boolean" },
+                                            EventUserId: { editable: false, type: "number" },                                        
+                                            Group: { editable: false, type: "string" },
+                                            UniqueId: { editable: false, type: "string" },
+                                            isStaff: { editable: false, type: "boolean" },
+                                            CartId: { editable: false, type: "number" },
+                                            IsInCart: { editable: false, type: "boolean" },
+                                            OrderId: { editable: false, type: "number" },
+                                            IsInOrder: { editable: false, type: "boolean" },
+                                        }
+                                    }
+                                },
+                                error: function (e) {
+                                    display_kendoui_grid_error(e);
+                                    // Cancel the changes
+                                    this.cancelChanges();
+                                },
+                                pageSize: 20,
+                                serverPaging: true,
+                                serverFiltering: true,
+                                serverSorting: true
+                            },
+                            editable: {
+                                confirmation: false,
+                                mode: "inline"
+                            },
+                            pageable: {
+                                refresh: true,
+                                numeric: false,
+                                previousNext: false,
+                                info: false
+                            },
+                            scrollable: false,
+                            columns: [
+                                {
+                                    field: "CustomerEventId",
+                                    title: "CustomerEventId",
+                                    width: 50
+                                },
+                                {
+                                    field: "IsInCart",
+                                    title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.IsInCart")",
+                                    template: $("#command-template").html()
+                                },
+                                {
+                                    field: "CartId",
+                                    title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.CartId")",                                
+                                    template: "# if(IsInCart) {# #=CartId# #}  else{# - #} #"
+                                },
+                                {
+                                    field: "IsInOrder",
+                                    title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.IsInOrder")",
+                                    template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=IsInOrder#.gif" />'
+                                },
+                                {
+                                    field: "OrderId",
+                                    title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.OrderId")",
+                                    template: "# if(IsInOrder) {# #=OrderId# #}  else{# - #} #"
+                                },                            
+                                {
+                                    field: "CustomerId",
+                                    title: "@T("Plugins.Cameleo.CameleoCustomerEvents.Fields.CustomerId")"
+                                },
+                                {
+                                    field: "CustomerUserName",
+                                    title: "@T("Plugins.Cameleo.CameleoCustomerEvents.Fields.CustomerUserName")",
+                                    template: '<a href="@Url.Content("~/Admin/Customer/Edit/")#=CustomerId#" target="_blank">#= CustomerUserName #</a>'
+                                },                                                        
+                                {
+                                    field: "EventUserId",
+                                    title: "@T("Plugins.Cameleo.CameleoCustomerEvents.Fields.EventUserId")"
+                                },
+                                {
+                                    field: "UserName",
+                                    title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.UserName")"
+                                },
+                                {
+                                    field: "Password",
+                                    title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.Password")"
+                                },
+                                {
+                                    field: "LastName",
+                                    title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.LastName")"
+                                },
+                                {
+                                    field: "FirstName",
+                                    title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.FirstName")"
+                                },
+                                {
+                                    field: "Group",
+                                    title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.Group")"
+                                },                            
+                                {
+                                    field: "isStaff",
+                                    title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.IsStaff")",
+                                    template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=isStaff#.gif" />'
+                                },
+                            ]
+                        });
+                    });
+
+                    //Put additionnal pager on top of the grid
+                    $(function () {
+                        var grid = $("#notpaid-grid").data("kendoGrid");
+                        var wrapper = $('<div class="k-pager-wrap k-grid-pager pagerTop"/>').insertBefore(grid.element.children("table"));
+                        grid.pagerTop = new kendo.ui.Pager(wrapper, $.extend({}, grid.options.pageable, { dataSource: grid.dataSource }));
+                        grid.element.height("").find(".pagerTop").css("border-width", "0 0 1px 0");
+                    });
+
+                    //"Export Excel " button
+                    $('#exportexcel-all').click(function (e) {
+                        e.preventDefault();
+                        //redirect to required URL
+                        setLocation('@(Url.Action("ExportExcelNotPaid", "EventAdmin"))?eventId=' + @(Model.Id));
+                        return false;
+                    });
+
+                    function addShoppingCart(e) {
+                        $.ajax({
+                            url: "@(Url.Action("AddShoppingCartItem", "CustomerEventAdmin"))",
+                            data: { customerEventId : e },
+                            async: true,
+                            error: function (xhr, ajaxOptions, thrownError) {
+                                alert(thrownError);
+                            },
+                            success: function(response) {  
+                                $("#notpaid-grid").data("kendoGrid").dataSource.read();
+                            }
+                        });
+                    }
+
+                    function clearShoppingCart(e) {                    
+                        $.ajax({
+                            url: "@(Url.Action("ClearShoppingCart", "CustomerEventAdmin"))",
+                            data: { customerEventId : e },
+                            async: true,
+                            error: function (xhr, ajaxOptions, thrownError) {
+                                alert(thrownError);
+                            },
+                            success: function(response) {  
+                                $("#notpaid-grid").data("kendoGrid").dataSource.read();
+                            }
+                        });
+                    }
+
+                </script>
+            </td>
+        </tr>
+    </table>
+}
+
+
+

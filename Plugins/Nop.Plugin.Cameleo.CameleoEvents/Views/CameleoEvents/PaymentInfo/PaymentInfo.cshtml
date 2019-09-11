@@ -1,0 +1,45 @@
+﻿@using Nop.Plugin.Cameleo.CameleoEvents.ViewModels;
+@using Nop.Plugin.Cameleo.CameleoEvents.Domain;
+@using Nop.Core;
+@using Nop.Core.Infrastructure;
+@using Nop.Web.Framework.Localization;
+
+@model Nop.Plugin.Cameleo.CameleoEvents.ViewModels.CameleoCustomerEventViewModel
+
+@{
+    Layout = "~/Views/Shared/_CameleoColumnsOne.cshtml";
+    
+    //title
+    Html.AddTitleParts(T("pagetitle.cameleoevents.paymentinfo").Text);
+
+    //CSS
+    Html.AddCssFileParts("~/Plugins/Cameleo.CameleoEvents/Content/styles.css");   
+
+    //Customer id    
+     var customer =  EngineContext.Current.Resolve<IWorkContext>().CurrentCustomer;
+     var customerId = customer.Id; 
+}
+
+<div class="page cameleoevent-details-page">
+    <div class="page-title">
+        <h1>@T("Plugins.Cameleo.CameleoEvents.Payment")</h1>
+    </div>
+
+    <div class="page-body">
+        @if (Model != null && !(string.IsNullOrEmpty(Model.Result)))
+        {
+            @Model.Result
+        }
+        else if (Model != null && Model.CustomerId == customerId)
+        {
+            @(new Nop.Web.Framework.Localization.LocalizedString(Server.HtmlDecode(Html.Action("TopicBlock", "Topic", new { systemName = "PaymentInfoText" }).ToString().Replace("{0}", Model.CameleoEvent.ParticipationFee.ToString()))))
+        }
+        else
+        {
+            @T("Plugins.Cameleo.CameleoEvents.NoEvent")
+        }
+        
+        <br />
+        <input type="button" value="@T("Plugins.Cameleo.CameleoEvents.EventDetails.Return")" class="button-2 cameleoevent-details-button" onclick="setLocation('@Url.RouteUrl("CameleoEventDetails", new { customerEventId = Model.Id })')" />
+    </div>
+</div>

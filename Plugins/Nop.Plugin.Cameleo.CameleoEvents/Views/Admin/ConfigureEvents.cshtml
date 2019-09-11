@@ -1,0 +1,32 @@
+﻿@{
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+
+    //title
+    Html.AddTitleParts(T("pagetitle.cameleoevents").Text);
+
+    //CSS
+    Html.AddCssFileParts("~/Plugins/Cameleo.CameleoEvents/Content/styles.css"); 
+}
+
+@using Nop.Web.Framework;
+@using Nop.Plugin.Cameleo.CameleoEvents.ViewModels;
+@using Nop.Plugin.Cameleo.CameleoEvents.Domain;
+@using Nop.Core.Infrastructure;
+
+<div class="section-header">
+    <div class="options">
+        <table>
+            <tr>
+                <td>
+                    <input type="button" value="@T("Plugins.Cameleo.CameleoEvents.Admin.RegistrationList.Button")" class="k-button" onclick="setLocation('@Url.RouteUrl("Admin/CameleoEventDetails/RecentRegistrations")')" />
+                    <input type="button" value="@T("Plugins.Cameleo.CameleoEvents.Admin.PendingOrders.Button")" class="k-button" onclick="setLocation('@Url.RouteUrl("Admin/CameleoEventDetails/PendingOrders")')" />
+                    <input type="button" value="@T("Plugins.Cameleo.CameleoEvents.Admin.Orders.Button")" class="k-button" onclick="setLocation('@Url.RouteUrl("Admin/CameleoEventDetails/Orders")')" />
+                    <input type="button" value="@T("Plugins.Cameleo.CameleoEvents.Admin.Projects.Button")" class="k-button" onclick="setLocation('@Url.RouteUrl("Admin/ProjectCategories/List")')" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+@Html.Partial("~/Plugins/Cameleo.CameleoEvents/Views/Admin/_Configure.cshtml")
+

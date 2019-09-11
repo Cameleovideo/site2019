@@ -1,0 +1,275 @@
+﻿@using Nop.Web.Framework;
+@using Nop.Plugin.Cameleo.CameleoEvents.ViewModels;
+@using Nop.Plugin.Cameleo.CameleoEvents.Domain;
+@using Nop.Core.Infrastructure;
+
+<table class="adminContent">
+    <tr>
+        <td>
+            <div id="cameleocustomerevents-grid"></div>
+
+            <script id="command-template" type="text/x-kendo-template">
+                <img src="@Url.Content("~/Administration/Content/images/")active-#=Paid#.gif" />
+
+                # if(!Paid) { #
+                    <a class="k-button k-grid-paid" onclick="Paid(#= Id #)">Paid</a>
+                # } else { # 
+                    <a class="k-button k-grid-paid" onclick="Unpaid(#= Id #)">Unpaid</a>
+                # } #
+            </script>
+
+            <script>
+                $(document).ready(function () {
+                    $("#cameleocustomerevents-grid").kendoGrid({
+                        dataSource: {
+                            type: "json",
+                            transport: {
+                                read: {
+                                    url: "@Html.Raw(Url.Action("CustomerEventListJson", "CustomerEventAdmin", new { eventId = ViewBag.EventId, groupName = ViewBag.GroupName }))",
+                                    cache: false,
+                                    type: "POST",
+                                    dataType: "json"
+                                },
+                                update: {
+                                    url:"@Html.Raw(Url.Action("CustomerEventUpdate", "CustomerEventAdmin"))",
+                                    type: "POST",
+                                    dataType: "json"
+                                },
+                                destroy:{
+                                    url:"@Html.Raw(Url.Action("CustomerEventDelete", "CustomerEventAdmin"))",
+                                    type: "POST",
+                                    dataType: "json"
+                                }
+                            },
+                            sync: function Sync_Handler(e) {
+                                this.read();
+                            },
+                            schema: {
+                                data: "Data",
+                                total: "Total",
+                                errors: "Errors",
+                                model: {
+                                    id: "Id",
+                                    fields: {
+                                        Id: { editable: false, type: "number" },
+                                        CustomerId: { editable: false, type: "number" },
+                                        CustomerUserName: { editable: false, type: "string" },
+                                        ClientName: { editable: false, type: "string" },
+                                        EventCode: { editable: false, type: "string" },
+                                        EventName: { editable: false, type: "string" },
+                                        Accepted: { editable: false, type: "boolean" },
+                                        AcceptedStatus: { editable: true, type: "number" },
+                                        AcceptedStatusString: { editable: false, type: "string" },
+                                        AcceptedImageUse: { editable: true, type: "boolean" },
+                                        Paid: { editable: true, type: "boolean" },
+                                        EventUserId: { editable: false, type: "number" },
+                                        CreatedOnUtc: { editable: false, type: "date" },
+                                        UserName: { editable: false, type: "string" },
+                                        Password: { editable: false, type: "string" },
+                                        LastName: { editable: false, type: "string" },
+                                        LastNameFull: { editable: false, type: "string" },
+                                        FirstName: { editable: false, type: "string" },
+                                        Group: { editable: false, type: "string" },
+                                        UniqueId: { editable: false, type: "string" },
+                                        isStaff: { editable: true, type: "boolean" },
+                                    }
+                                }
+                            },
+                            error: function(e) {
+                                display_kendoui_grid_error(e);
+                                // Cancel the changes
+                                this.cancelChanges();
+                            },
+                            serverPaging: true,
+                            serverFiltering: true,
+                            serverSorting: true
+                        },
+                        editable: {
+                            confirmation: false,
+                            mode: "inline"
+                        },
+                        pageable: {
+                            refresh: true,
+                            numeric: false,
+                            previousNext: false,
+                            info: false
+                        },
+                        scrollable: false,
+                        columns: [
+                            {                                
+                                command: [{name: "edit", text: "@T("Admin.Common.Edit")"}, {name: "destroy",text: "@T("Admin.Common.Delete")"}],
+                                title: "@T("Admin.Common.Edit")",
+                                width: 100
+                            },
+                            {
+                                field: "Id",
+                                title: "Id",
+                                width: 50
+                            },                            
+                            {
+                                field: "Accepted",
+                                title: "@T("Plugins.Cameleo.CameleoCustomerEvents.Fields.Accepted")",
+                                template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=Accepted#.gif" />'
+                            },
+                            {
+                                field: "AcceptedStatus",
+                                title: "@T("Plugins.Cameleo.CameleoCustomerEvents.Fields.AcceptedStatusString")",
+                                editor: acceptedStatusDropDownEditor,
+                                template: "#: AcceptedStatusString #"
+                            },
+                            {
+                                field: "AcceptedImageUse",
+                                title: "@T("Plugins.Cameleo.CameleoCustomerEvents.Fields.AcceptedImageUse")",
+                                template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=AcceptedImageUse#.gif" />'
+                            },
+                            {
+                                field: "Paid",
+                                title: "@T("Plugins.Cameleo.CameleoCustomerEvents.Fields.Paid")",
+                                template: $("#command-template").html()                                
+                            },
+                            {
+                                field: "isStaff",
+                                title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.IsStaff")",
+                                template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=isStaff#.gif" />'
+                            },
+                            {
+                                field: "CustomerId",
+                                title: "@T("Plugins.Cameleo.CameleoCustomerEvents.Fields.CustomerId")"
+                            },
+                            {
+                                field: "CustomerUserName",
+                                title: "@T("Plugins.Cameleo.CameleoCustomerEvents.Fields.CustomerUserName")",
+                                template: '<a href="@Url.Content("~/Admin/Customer/Edit/")#=CustomerId#" target="_blank">#= CustomerUserName #</a>'
+                            },
+                            { 
+                                field: "Id",
+                                command: { text: "@T("Plugins.Cameleo.CameleoCustomerEvents.ClearShoppingCart.Button")", click: clearShoppingCart }, 
+                                title: " " 
+                            },
+                            {
+                                field: "EventUserId",
+                                title: "@T("Plugins.Cameleo.CameleoCustomerEvents.Fields.EventUserId")"
+                            },
+                            {
+                                field: "UserName",
+                                title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.UserName")"
+                            },
+                            {
+                                field: "Password",
+                                title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.Password")"
+                            },
+                            {
+                                field: "LastName",
+                                title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.LastName")"
+                            },
+                            {
+                                field: "FirstName",
+                                title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.FirstName")"
+                            },
+                            {
+                                field: "Group",
+                                title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.Group")"
+                            },
+                            {
+                                field: "UniqueId",
+                                title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.UniqueId")"
+                            },                            
+                            {
+                                field: "CreatedOnUtc",
+                                title: "@T("Plugins.Cameleo.CameleoCustomerEvents.Fields.CreatedOnUtc")",
+                                type: "date",
+                                format: "{0:yyyy-MM-dd hh:mm:ss}"
+                            }
+                        ]
+                    });
+                });
+
+                //Put additionnal pager on top of the grid
+                $(function ()
+                {
+                    var grid = $("#cameleocustomerevents-grid").data("kendoGrid");
+                    var wrapper = $('<div class="k-pager-wrap k-grid-pager pagerTop"/>').insertBefore(grid.element.children("table"));
+                    grid.pagerTop = new kendo.ui.Pager(wrapper, $.extend({}, grid.options.pageable, { dataSource: grid.dataSource }));
+                    grid.element.height("").find(".pagerTop").css("border-width", "0 0 1px 0");
+                });
+
+                //local datasource
+                var allAcceptedStatus = [
+                    {
+                        Id : @(((int)AcceptedStatus.ToBeCompleted).ToString()),
+                        Name : "@T(AcceptedStatusStrings.LocalizedStringValues[(int)AcceptedStatus.ToBeCompleted]).Text"
+                    },
+                    {
+                        Id : @(((int)AcceptedStatus.AcceptedPaid).ToString()),
+                        Name : "@T(AcceptedStatusStrings.LocalizedStringValues[(int)AcceptedStatus.AcceptedPaid]).Text"
+                    },
+                    {
+                        Id : @(((int)AcceptedStatus.AcceptedNotPaid).ToString()),
+                        Name : "@T(AcceptedStatusStrings.LocalizedStringValues[(int)AcceptedStatus.AcceptedNotPaid]).Text"
+                    },
+                    {
+                        Id : @(((int)AcceptedStatus.Refused).ToString()),
+                        Name : "@T(AcceptedStatusStrings.LocalizedStringValues[(int)AcceptedStatus.Refused]).Text"
+                    }
+                ];
+
+                function acceptedStatusDropDownEditor(container, options) {
+                    $('<input required data-text-field="Name" data-value-field="Id" data-bind="value:AcceptedStatus"/>')
+                        .appendTo(container)
+                        .kendoDropDownList({
+                            autoBind: false,
+                            dataSource: allAcceptedStatus
+                        });
+                }
+
+                function clearShoppingCart(e) {
+                    var tr = $(e.currentTarget).closest("tr");
+                    var item = $("#cameleocustomerevents-grid").data("kendoGrid").dataItem(tr);
+
+
+                    $.ajax({
+                        url: "@(Url.Action("ClearShoppingCart", "CustomerEventAdmin"))",
+                        data: { customerEventId : item.Id },
+                        async: true,
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            alert(thrownError);
+                        },
+                        success: function(response) {  
+                            alert('success');
+                        }
+                    });
+                }
+
+                function Paid(e) {                    
+                    $.ajax({
+                        url: "@(Url.Action("SetPaid", "CustomerEventAdmin"))",
+                        data: { customerEventId : e },
+                        async: true,
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            alert(thrownError);
+                        },
+                        success: function(response) {  
+                            $("#cameleocustomerevents-grid").data("kendoGrid").dataSource.read();
+                        }
+                    });
+                }
+
+                function Unpaid(e) {
+                    $.ajax({
+                        url: "@(Url.Action("SetUnpaid", "CustomerEventAdmin"))",
+                        data: { customerEventId : e },
+                        async: true,
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            alert(thrownError);
+                        },
+                        success: function(response) {  
+                            $("#cameleocustomerevents-grid").data("kendoGrid").dataSource.read();
+                        }
+                    });
+                }
+
+
+            </script>
+        </td>
+    </tr>
+</table>

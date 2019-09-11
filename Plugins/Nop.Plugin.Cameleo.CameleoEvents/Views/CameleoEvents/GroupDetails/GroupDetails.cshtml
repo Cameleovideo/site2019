@@ -1,0 +1,152 @@
+﻿@using Nop.Plugin.Cameleo.CameleoEvents.ViewModels;
+@using Nop.Plugin.Cameleo.CameleoEvents.Domain;
+@using Nop.Core;
+@using Nop.Core.Infrastructure;
+@model Nop.Plugin.Cameleo.CameleoEvents.ViewModels.CameleoEventViewModel
+
+@{
+    Layout = "~/Views/Shared/_CameleoColumnsOne.cshtml";
+    
+    //title
+    Html.AddTitleParts(T("pagetitle.cameleogroupdetails").Text);
+
+    //Customer id    
+    var customer = EngineContext.Current.Resolve<IWorkContext>().CurrentCustomer;
+    var customerId = customer.Id;
+
+    int index = 0;
+}
+
+<div class="page cameleoevent-details-page">
+    <div class="page-title">
+        <table>
+            <tr>
+                <td>
+                    <h1>
+                        @T("Plugins.Cameleo.CameleoEvents.GroupDetails") (@Model.DetailedGroupName)
+                    </h1>
+                </td>                
+            </tr>
+        </table>        
+    </div>
+
+    <div class="page-body">
+        
+        @if (Model != null && customerId == ViewBag.CustomerId)
+        {
+            if (Model.ShowGroupDetails)
+            {
+                //Show details for a specific group
+                <div style="margin-top: 10px; border: 1px solid #e9e9e9;">
+                    <div class="title" style="margin:10px;">
+                        <div style="float:left;padding-right:10px;"><h1>@T("Plugins.Cameleo.CameleoEvents.EventDetails.Group") : @Model.DetailedGroupName</h1></div>
+                        <div style="float:left;padding-right:10px;"><h1>@T("Plugins.Cameleo.CameleoEvents.EventDetails.NbUsersInGroup") : @Model.GroupDetails.EventUserCount</h1></div>
+                        <div style="float:left;padding-right:10px;"><h1>@T("Plugins.Cameleo.CameleoEvents.EventDetails.NbUsersAccepted") : @Model.GroupDetails.AcceptedEventUserCount</h1></div>
+                        <div style="float:left;padding-right:10px;"><h1>@T("Plugins.Cameleo.CameleoEvents.EventDetails.NbUsersRefused") : @Model.GroupDetails.RefusedEventUserCount</h1></div>
+                        <div style="float:left;padding-right:10px;"><h1>@T("Plugins.Cameleo.CameleoEvents.EventDetails.NbUsersNoAnswer") : @(Model.GroupDetails.EventUserCount - Model.GroupDetails.AcceptedEventUserCount - Model.GroupDetails.RefusedEventUserCount)</h1></div>                        
+                    </div>
+                    
+                    <table style="width:100%;">
+                        <tbody>
+                            <tr>
+                                <td style="vertical-align:top;width:250px;">
+                                    <div style="position:absolute;top:260px;">
+                                        <h1>@T("Plugins.Cameleo.CameleoEvents.AcceptedPercentageTitle").ToString().Replace("{0}", Model.AcceptMinimumPercentage.ToString())</h1>
+                                    </div>
+                                    <img src="http://www.jlion.com:80//tools/Thermometer.aspx?MIN=0&MAX=100&VT=4&T=&nbsp;&IV=@(Model.GroupDetails.AcceptPercentage.ToString())&M=0&SC=0&CS=5&CI=en-US&TH=0" style="border: solid 0px black;" alt="" title="" width="130" height="191" />
+
+                                    <br /><br /><br />
+                                    <h1>@T("Plugins.Cameleo.CameleoCustomerEvents.Projects.Title")</h1>
+                                    @T("Plugins.Cameleo.CameleoCustomerEvents.Projects")
+                                    <input type="button" class="button-1 reminders-button" value="@T("plugins.cameleo.cameleocustomerevents.projects.button")" onclick="setLocation('@Url.RouteUrl("ClassProjects", new { customerEventId = ViewBag.CustomerEventId })')" />
+
+                                    <br /><br /><br />
+                                    <h1>@T("Plugins.Cameleo.CameleoCustomerEvents.Reminders.Title")</h1>
+                                    @T("Plugins.Cameleo.CameleoCustomerEvents.Reminders")                                    
+                                    <input type="button" class="button-1 reminders-button" value="@T("plugins.cameleo.cameleocustomerevents.reminders.button")" onclick="setLocation('@Url.RouteUrl("CreateReminder", new { customerEventId = ViewBag.CustomerEventId })')" />
+
+                                    <br /><br /><br />
+                                    <h1>@T("plugins.cameleo.cameleoevents.finish.button")</h1>
+                                    @T("plugins.cameleo.cameleocustomerevents.reminders.finish")
+                                    <input type="button" class="button-1 reminders-button" value="@T("plugins.cameleo.cameleoevents.finish.button")" onclick="setLocation('@Url.RouteUrl("CameleoEventDetails", new { customerEventId = ViewBag.CustomerEventId })')" />
+                                </td>
+                                <td>
+                                    @Html.Action("CustomerEventList", "CustomerEvent", new { eventId = Model.Id, groupName = Model.DetailedGroupName })
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>                    
+                </div>
+            }            
+            
+            <br />
+            <h2>
+                @T("Plugins.Cameleo.CameleoEvents.OtherGroupDetails")
+            </h2>
+            <br />
+            <table class="groupdetails-table">
+                <thead>
+                    <tr>
+                        <th>
+                            @T("Plugins.Cameleo.CameleoEvents.EventDetails.Group")
+                        </th>
+                        <th>
+                            @T("Plugins.Cameleo.CameleoEvents.EventDetails.AcceptPercentage")
+                        </th>
+                        <th>
+                            @T("Plugins.Cameleo.CameleoEvents.EventDetails.NbUsersInGroup")
+                        </th>
+                        <th>
+                            @T("Plugins.Cameleo.CameleoEvents.EventDetails.NbUsersAccepted")
+                        </th>
+                        <th>
+                            @T("Plugins.Cameleo.CameleoEvents.EventDetails.NbUsersRefused")
+                        </th>
+                        <th>
+                            @T("Plugins.Cameleo.CameleoEvents.EventDetails.NbUsersNoAnswer")
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var tmpGroup in Model.Groups)
+                    {
+                        if (!String.IsNullOrEmpty(tmpGroup.Text) && tmpGroup.Text != Model.DetailedGroupName)
+                        {
+                            string style = index % 2 != 0 ? "alt" : null;
+
+                            <tr class="@style">
+                                <td>
+                                    @tmpGroup.Text
+                                </td>
+                                <td>
+                                    @tmpGroup.AcceptPercentage %
+                                </td>
+                                <td>
+                                    @tmpGroup.EventUserCount
+                                </td>
+                                <td>
+                                    @tmpGroup.AcceptedEventUserCount
+                                </td>
+                                <td>
+                                    @tmpGroup.RefusedEventUserCount
+                                </td>
+                                <td>
+                                    @(tmpGroup.EventUserCount - tmpGroup.AcceptedEventUserCount - tmpGroup.RefusedEventUserCount)
+                                </td>
+                            </tr>
+
+                            index++;
+                        }
+                    }
+                </tbody>
+            </table>
+            <hr />
+        }
+        else
+        {
+            @T("Plugins.Cameleo.CameleoEvents.NoGroup")
+        }
+        
+    </div>
+</div>

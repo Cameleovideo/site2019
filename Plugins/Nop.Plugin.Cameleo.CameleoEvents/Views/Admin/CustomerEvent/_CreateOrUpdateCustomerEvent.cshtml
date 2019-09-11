@@ -1,0 +1,65 @@
+﻿@model Nop.Plugin.Cameleo.CameleoEvents.ViewModels.AddCustomerEventViewModel
+@using Nop.Plugin.Cameleo.CameleoEvents.Domain;
+@Html.ValidationSummary(false)
+@Html.HiddenFor(model => model.CameleoEvent.Id)
+@Html.HiddenFor(model => model.GroupName)
+@if (ViewBag.RefreshPage == true)
+{
+    <script type="text/javascript">        
+        try {window.opener.document.forms['@(ViewBag.formId)'].@(ViewBag.btnId).click();}
+        catch (e){} 
+        window.close();
+    </script>
+}
+
+<table class="adminContent">
+    <tr>
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.AddedEventUserId):
+        </td>
+        <td class="adminData">
+            @Html.DropDownListFor(model => model.AddedEventUserId, Model.CameleoEventUserListForDropDown)                        
+            @Html.ValidationMessageFor(model => model.AddedEventUserId)
+        </td>
+    </tr>
+    <tr>
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.AddedCustomerEventUserName):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.AddedCustomerEventUserName)                        
+            @Html.ValidationMessageFor(model => model.AddedCustomerEventUserName)
+            <input type="button" name="eventusername" id="eventusername" class="k-button" value="@T("Plugins.Cameleo.CameleoEvents.CustomerEvent.AddNew.PutEventCode.Button")" />
+        </td>
+    </tr>
+    <tr>
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.AddedAcceptedStatus):
+        </td>
+        <td class="adminData">
+            @Html.RadioButtonFor(model => model.AddedAcceptedStatus, (int)AcceptedStatus.ToBeCompleted)@T(AcceptedStatusStrings.LocalizedStringValues[(int)AcceptedStatus.ToBeCompleted]).Text
+            @Html.RadioButtonFor(model => model.AddedAcceptedStatus, (int)AcceptedStatus.AcceptedPaid)@T(AcceptedStatusStrings.LocalizedStringValues[(int)AcceptedStatus.AcceptedPaid]).Text
+            @Html.RadioButtonFor(model => model.AddedAcceptedStatus, (int)AcceptedStatus.AcceptedNotPaid)@T(AcceptedStatusStrings.LocalizedStringValues[(int)AcceptedStatus.AcceptedNotPaid]).Text
+            @Html.RadioButtonFor(model => model.AddedAcceptedStatus, (int)AcceptedStatus.Refused)@T(AcceptedStatusStrings.LocalizedStringValues[(int)AcceptedStatus.Refused]).Text            
+            @Html.ValidationMessageFor(model => model.AddedAcceptedStatus)
+        </td>
+    </tr>
+    <tr>
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.AddedAcceptedImageUse):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.AddedAcceptedImageUse)            
+            @Html.ValidationMessageFor(model => model.AddedAcceptedImageUse)
+        </td>
+    </tr>
+
+</table>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#eventusername').on('click', function() {            
+            document.getElementById('@Html.IdFor(model => model.AddedCustomerEventUserName)').value = "@(Model.CameleoEvent.EventCode)";            
+        });
+    });
+</script>

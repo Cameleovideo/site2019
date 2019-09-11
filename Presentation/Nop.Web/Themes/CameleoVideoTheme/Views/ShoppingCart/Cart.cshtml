@@ -1,0 +1,33 @@
+﻿@model ShoppingCartModel
+@using Nop.Web.Models.Checkout
+@using Nop.Web.Models.ShoppingCart;
+@using Nop.Core.Infrastructure;
+@using Nop.Core;
+
+@{
+    Layout = "~/Views/Shared/_ColumnsOne.cshtml";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.ShoppingCart").Text);
+
+    bool isRegistered = User.Identity.IsAuthenticated;
+    var loginUrl = Url.RouteUrl("login");
+    if (!isRegistered)
+    {
+        var webHelper = EngineContext.Current.Resolve<IWebHelper>();
+        loginUrl = webHelper.ModifyQueryString(loginUrl, "ReturnUrl=" + HttpUtility.UrlEncode("/cart"), null);
+        Response.Redirect(loginUrl);
+    }
+}
+@if (!Model.OnePageCheckoutEnabled)
+{
+    @Html.Action("CheckoutProgress", "Checkout", new {step = CheckoutProgressStep.Cart})
+}
+<div class="page shopping-cart-page">
+    <div class="page-title">
+        <h1>@T("ShoppingCart")</h1>
+    </div>
+    <div class="page-body">
+        @Html.Partial("OrderSummary", Model)
+    </div>
+</div>

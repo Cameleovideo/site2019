@@ -1,0 +1,54 @@
+﻿@model RegisterResultModel
+@using Nop.Web.Models.Customer;
+@{
+    Layout = "~/Views/Shared/_ColumnsOne.cshtml";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.Register").Text);
+
+    //continue URL
+    var continueUrl = "";
+    
+    //TODO Enlever plus tard
+    Response.Redirect("~/cameleoevents");
+}
+<div class="page registration-result-page">
+    <div class="page-title">
+        <h1>@T("Account.Register.Result.Success")</h1>
+    </div>
+    <div class="page-body">
+        <div class="result" style="font-size:large;">            
+            <table>
+                <tr>
+                    <td>
+                        <img src="~/Themes/CameleoVideoTheme/Content/images/email.jpg" style="margin-right:25px;" />
+                    </td>
+                    <td>
+                        @Model.Result
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="~/Themes/CameleoVideoTheme/Content/images/warning.jpg" style="margin-right:25px;" />
+                    </td>
+                    <td>
+                        @T("Account.Register.Result.EmailValidation2")
+                    </td>
+                </tr>
+            </table>            
+        </div>
+
+        @if (!String.IsNullOrEmpty(this.Context.Request.QueryString["returnUrl"]))
+        {
+            continueUrl = this.Context.Request.QueryString["returnUrl"];
+            <div class="buttons">
+                <input type="button" class="button-1 register-continue-button" onclick="location.href='@continueUrl'" value="@T("Account.Register.Result.Continue")" />
+            </div>
+        }
+        else
+        {
+            //continueUrl = Url.RouteUrl("HomePage");
+        }
+        
+    </div>
+</div>

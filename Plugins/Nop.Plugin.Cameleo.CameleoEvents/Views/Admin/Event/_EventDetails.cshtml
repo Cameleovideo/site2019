@@ -1,0 +1,144 @@
+﻿@using Nop.Plugin.Cameleo.CameleoEvents.ViewModels;
+@using Nop.Plugin.Cameleo.CameleoEvents.Domain;
+@using Nop.Core;
+@using Nop.Core.Infrastructure;
+
+@model Nop.Plugin.Cameleo.CameleoEvents.ViewModels.CameleoEventViewModel
+
+<table class="adminContent">
+    <tr>
+        <td>
+            <div id="event-grid"></div>
+
+            <script>
+                $(document).ready(function () {
+                    $("#event-grid").kendoGrid({
+                        dataSource: {
+                            data: @Html.Raw(Json.Encode(Model)),
+                            schema: {                                
+                                model: {
+                                    id: "Id",
+                                    fields: {
+                                        Id: { editable: false, type: "number" },
+                                        ClientName: { editable: false, type: "string" },
+                                        EventCode: { editable: false, type: "string" },
+                                        EventName: { editable: false, type: "string" },
+                                        CreatedOnUtc: { editable: false, type: "date" },
+                                        ShootedOnUtc: { editable: false, type: "date" },
+                                        AcceptReminderDateUtc: { editable: false, type: "date" },
+                                        AcceptReminderDelay: { editable: false, type: "string" },
+                                        AcceptMinimumPercentage: { editable: false, type: "string" },
+                                        PayReminderDateUtc: { editable: false, type: "date" },
+                                        PayReminderDelay: { editable: false, type: "string" },
+                                        PayMinimumPercentage: { editable: false, type: "string" },
+                                        StatusString: { editable: false, type: "string" },
+                                        ClientLogo: { editable: false, type: "string" },
+                                        IntroLogo: { editable: false, type: "string" },
+                                        ParticipationFee: { editable: false, type: "decimal" },
+                                    }
+                                }
+                            },
+                            error: function(e) {
+                                display_kendoui_grid_error(e);
+                                // Cancel the changes
+                                this.cancelChanges();
+                            },
+                            serverPaging: true,
+                            serverFiltering: true,
+                            serverSorting: true
+                        },
+                        editable: {
+                            confirmation: false,
+                            mode: "inline"
+                        },
+                        scrollable: false,
+                        columns: [
+                            {
+                                field: "Id",
+                                title: "ID",
+                                width: 50
+                            },
+                            {
+                                field: "ClientName",
+                                title: "@T("Plugins.Cameleo.CameleoEvents.Fields.ClientName")"
+                            },
+                            {
+                                field: "EventCode",
+                                title: "@T("Plugins.Cameleo.CameleoEvents.Fields.EventCode")"
+                            },
+                            {
+                                field: "EventName",
+                                title: "@T("Plugins.Cameleo.CameleoEvents.Fields.EventName")"
+                            },
+                            {
+                                field: "CreatedOnUtc",
+                                title: "@T("Plugins.Cameleo.CameleoEvents.Fields.CreatedOnUtc")",
+                                type: "date",
+                                format: "{0:yyyy-MM-dd}",
+                                template: "# if(CreatedOnUtc != null) {# #= kendo.toString(CreatedOnUtc,'yyyy-MM-dd')# #} else{# @T("Plugins.Cameleo.CameleoEvents.DateUnknown") #} #"
+                            },
+                            {
+                                field: "ShootedOnUtc",
+                                title: "@T("Plugins.Cameleo.CameleoEvents.Fields.ShootedOnUtc")",
+                                type: "date",
+                                format: "{0:yyyy-MM-dd}",
+                                template: "# if(ShootedOnUtc != null) {# #= kendo.toString(ShootedOnUtc,'yyyy-MM-dd')# #} else{# @T("Plugins.Cameleo.CameleoEvents.DateUnknown") #} #"
+                            },
+                            {
+                                field: "AcceptReminderDateUtc",
+                                title: "@T("Plugins.Cameleo.CameleoEvents.Fields.AcceptReminderDateUtc")",
+                                type: "date",
+                                format: "{0:yyyy-MM-dd}",
+                                template: "# if(AcceptReminderDateUtc != null) {# #= kendo.toString(AcceptReminderDateUtc,'yyyy-MM-dd')# #} else{# @T("Plugins.Cameleo.CameleoEvents.DateUnknown") #} #"
+                            },
+                            {
+                                field: "AcceptReminderDelay",
+                                title: "@T("Plugins.Cameleo.CameleoEvents.Fields.AcceptReminderDelay")",
+                                template: "#: AcceptReminderDelay # jours"
+                            },
+                            {
+                                field: "AcceptMinimumPercentage",
+                                title: "@T("Plugins.Cameleo.CameleoEvents.Fields.AcceptMinimumPercentage")",
+                                template: "#: AcceptMinimumPercentage # %"
+                            },
+                            {
+                                field: "PayReminderDateUtc",
+                                title: "@T("Plugins.Cameleo.CameleoEvents.Fields.PayReminderDateUtc")",
+                                type: "date",
+                                format: "{0:yyyy-MM-dd}",
+                                template: "# if(PayReminderDateUtc != null) {# #= kendo.toString(PayReminderDateUtc,'yyyy-MM-dd')# #} else{# @T("Plugins.Cameleo.CameleoEvents.DateUnknown") #} #"
+                            },
+                            {
+                                field: "PayReminderDelay",
+                                title: "@T("Plugins.Cameleo.CameleoEvents.Fields.PayReminderDelay")",
+                                template: "#: PayReminderDelay # jours"
+                            },
+                            {
+                                field: "PayMinimumPercentage",
+                                title: "@T("Plugins.Cameleo.CameleoEvents.Fields.PayMinimumPercentage")",
+                                template: "#: PayMinimumPercentage # %"
+                            },
+                            {
+                                field: "StatusString",
+                                title: "@T("Plugins.Cameleo.CameleoEvents.Fields.Status")",
+                                template: "#: StatusString #"
+                            },
+                            {
+                                field: "ClientLogo",
+                                title: "@T("Plugins.Cameleo.CameleoEvents.Fields.Logo")"
+                            },
+                            {
+                                field: "IntroLogo",
+                                title: "@T("Plugins.Cameleo.CameleoEvents.Fields.IntroLogo")"
+                            },
+                            {
+                                field: "ParticipationFee",
+                                title: "@T("Plugins.Cameleo.CameleoEvents.Fields.ParticipationFee")"
+                            }]
+
+                    });
+                });
+            </script>           
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,94 @@
+﻿@using Nop.Plugin.Cameleo.CameleoEvents.ViewModels;
+@using Nop.Plugin.Cameleo.CameleoEvents.Domain;
+@using Nop.Core;
+@using Nop.Core.Infrastructure;
+
+@model Nop.Plugin.Cameleo.CameleoEvents.ViewModels.CustomerEventReminderListViewModel
+
+@{
+    //Layout = "~/Administration/Views/Shared/_AdminPopupLayout.cshtml";
+
+    //title
+    if (Model.showPreview)
+    {
+        Html.AddTitleParts(T("pagetitle.cameleoeventcustomers.reminders.preview").Text);    
+    }
+    else
+    {
+        Html.AddTitleParts(T("pagetitle.cameleoeventcustomers.reminders.showall").Text);    
+    }
+    
+}
+
+@if (Model.SelectedEventUserList.Count == 0)
+{
+    //No event user selected
+    @T("plugins.cameleo.cameleocustomerevents.reminders.noeventuserselected")    
+}
+else
+{
+    // remove trailing <br />                
+    string tmpTopic = Html.Action("TopicBlock", "Topic", new { systemName = Model.TopicToUse }).ToString().TrimEnd();    
+    tmpTopic = tmpTopic.Substring(0, tmpTopic.Length - 19).TrimEnd();        
+        
+    while (tmpTopic.EndsWith("<br />"))
+    {            
+        tmpTopic = tmpTopic.Substring(0, tmpTopic.Length - 6).TrimEnd();
+    }
+
+    tmpTopic = tmpTopic + "</div> </div>";
+    
+    //Else, for each event user
+    foreach (var tmpSelectedEventUser in Model.SelectedEventUserList)
+    {
+        // If it is selected
+        if (tmpSelectedEventUser.Value)
+        {
+            //yes, event user is selected
+            
+            //Get info
+            var SubjectName = "";
+            var SubjectGroup = "";
+            var SubjectUserName = "";
+            var SubjectPassword = "";
+            foreach (var tmpEventUser in Model.CameleoEventUserList)
+            {
+                if (tmpEventUser.Id == tmpSelectedEventUser.Key)
+                {
+                    //Found
+                    SubjectName = tmpEventUser.LastName + ", " + tmpEventUser.FirstName;
+                    SubjectGroup = tmpEventUser.Group;
+                    SubjectUserName = tmpEventUser.UserName;
+                    SubjectPassword = tmpEventUser.Password;
+                    break;
+                }    
+            }
+            
+            //Yes, replace logo if event is configured with one
+            @(                
+                new Nop.Web.Framework.Localization.LocalizedString
+                (
+                    Server.HtmlDecode
+                    (
+                        tmpTopic
+                            .Replace("{logopath}", Model.LogoPath)
+                            .Replace("{step1path}", Model.Step1Path)
+                            .Replace("{step2path}", Model.Step2Path)
+                            .Replace("{step3path}", Model.Step3Path)
+                            .Replace("{step4path}", Model.Step4Path)
+                            .Replace("{subjectname}", SubjectName)
+                            .Replace("{group}", SubjectGroup)
+                            .Replace("{username}", SubjectUserName)
+                            .Replace("{password}", SubjectPassword)
+                            .Replace("{shootdate}", Model.ShootDate)
+                            .Replace("{responsedate}", Model.ReminderDate)
+                            .Replace("{sender}", Model.SenderName)
+                            .Replace("{role}", Model.SenderRole)
+                            .Replace("{fee}", Model.ParticipationFee.ToString())
+                    )
+                )
+            )                    
+        }
+    }
+}
+

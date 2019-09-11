@@ -1,0 +1,22 @@
+﻿@{
+    Layout = "~/Administration/Views/Shared/_AdminPopupLayout.cshtml";
+}
+@model Nop.Plugin.Cameleo.CameleoEvents.ViewModels.AddCustomerEventViewModel
+@{
+    //page title
+    ViewBag.Title = T("Plugins.Cameleo.CameleoEvents.CustomerEvent.AddNew").Text;
+
+    //CSS
+    Html.AddCssFileParts("~/Plugins/Cameleo.CameleoEvents/Content/styles.css");
+}
+@using (Html.BeginForm())
+{
+    <div class="section-header">
+        <div class="title">
+            <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt="" />
+            @T("Plugins.Cameleo.CameleoEvents.CustomerEvent.AddNew") (@Model.GroupName)
+        </div>        
+    </div>
+    @Html.Partial("~/Plugins/Cameleo.CameleoEvents/Views/Admin/CustomerEvent/_CreateOrUpdateCustomerEvent.cshtml", Model)
+    <center><input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" /></center>
+}

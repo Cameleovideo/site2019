@@ -1,0 +1,193 @@
+﻿@using Nop.Plugin.Cameleo.CameleoEvents.ViewModels;
+@using Nop.Plugin.Cameleo.CameleoEvents.Domain;
+@using Nop.Core;
+@using Nop.Core.Infrastructure;
+@using Nop.Admin.Models.Orders;
+
+@{
+    //Layout
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+
+    //title
+    Html.AddTitleParts(T("pagetitle.cameleoeventdetails.recentregistrations").Text);
+
+    //CSS
+    Html.AddCssFileParts("~/Plugins/Cameleo.CameleoEvents/Content/styles.css");
+
+}
+
+<div class="section-header">
+    <div class="title">
+        <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt="" />
+        @T("Plugins.Cameleo.CameleoEvents.EventDetails.RecentRegistrations") @Html.ActionLink("(" + T("Plugins.Cameleo.CameleoEvents.BackToList") + ")", "ConfigureEvents", "EventAdmin")
+    </div>
+</div>
+
+<table class="adminContent">
+    <tr>
+        <td>
+            <div id="recent-registrations-grid"></div>
+
+            <script>
+                $(document).ready(function () {
+                    $("#recent-registrations-grid").kendoGrid({
+                        dataSource: {
+                            type: "json",
+                            transport: {
+                                read: {
+                                    url: "@Html.Raw(Url.Action("RecentRegistrationsJson", "CustomerEventAdmin"))",
+                                    cache: false,
+                                    type: "POST",
+                                    dataType: "json"
+                                }
+                            },
+                            sync: function Sync_Handler(e) {
+                                this.read();
+                            },
+                            schema: {
+                                data: "Data",
+                                total: "Total",
+                                errors: "Errors",
+                                model: {
+                                    id: "Id",
+                                    fields: {
+                                        Id: { editable: false, type: "number" },
+                                        CustomerId: { editable: false, type: "number" },
+                                        CustomerUserName: { editable: false, type: "string" },
+                                        ClientName: { editable: false, type: "string" },
+                                        EventCode: { editable: false, type: "string" },
+                                        EventName: { editable: false, type: "string" },
+                                        Accepted: { editable: false, type: "bool" },
+                                        AcceptedStatusString: { editable: false, type: "string" },
+                                        AcceptedImageUse: { editable: false, type: "bool" },
+                                        Paid: { editable: false, type: "bool" },
+                                        EventUserId: { editable: false, type: "number" },
+                                        CreatedOnUtc: { editable: false, type: "date" },
+                                        Group: { editable: false, type: "string" },
+                                        UniqueId: { editable: false, type: "string" },
+                                        isStaff: { editable: false, type: "bool" },
+                                    }
+                                }
+                            },
+                            error: function(e) {
+                                display_kendoui_grid_error(e);
+                                // Cancel the changes
+                                this.cancelChanges();
+                            },
+                            pageSize: 20,
+                            serverPaging: true,
+                            serverFiltering: true,
+                            serverSorting: true
+                        },
+                        editable: {
+                            confirmation: false,
+                            mode: "inline"
+                        },
+                        pageable: {
+                            refresh: true
+                        },
+                        scrollable: false,
+                        columns: [
+                            {
+                                field: "Id",
+                                title: "Id",
+                                width: 50
+                            },
+                            {
+                                field: "CreatedOnUtc",
+                                title: "@T("Plugins.Cameleo.CameleoCustomerEvents.Fields.CreatedOnUtc")",
+                                type: "date",
+                                format: "{0:yyyy-MM-dd hh:mm:ss}"
+                            },
+                            {
+                                field: "CustomerUserName",
+                                title: "@T("Plugins.Cameleo.CameleoCustomerEvents.Fields.CustomerUserName")",
+                                template: '<a href="@Url.Content("~/Admin/Customer/Edit/")#=CustomerId#" target="_blank">#= CustomerUserName #</a>'
+                            },
+                            {
+                                field: "CustomerId",
+                                title: "@T("Plugins.Cameleo.CameleoCustomerEvents.Fields.CustomerId")"
+                            },
+                            {
+                                field: "ClientName",
+                                title: "@T("Plugins.Cameleo.CameleoEvents.Fields.ClientName")"
+                            },
+                            {
+                                 field: "EventCode",
+                                 title: "@T("Plugins.Cameleo.CameleoEvents.Fields.EventCode")"
+                            },
+                            {
+                                 field: "EventName",
+                                 title: "@T("Plugins.Cameleo.CameleoEvents.Fields.EventName")"
+                            },
+                            {
+                                field: "Accepted",
+                                title: "@T("Plugins.Cameleo.CameleoCustomerEvents.Fields.Accepted")",
+                                template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=Accepted#.gif" />'
+                            },
+                            {
+                                field: "AcceptedStatusString",
+                                title: "@T("Plugins.Cameleo.CameleoCustomerEvents.Fields.AcceptedStatusString")"
+                            },
+                            {
+                                field: "AcceptedImageUse",
+                                title: "@T("Plugins.Cameleo.CameleoCustomerEvents.Fields.AcceptedImageUse")",
+                                template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=AcceptedImageUse#.gif" />'
+                            },
+                            {
+                                field: "Paid",
+                                title: "@T("Plugins.Cameleo.CameleoCustomerEvents.Fields.Paid")",
+                                template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=Paid#.gif" />'
+                            },
+                            {
+                                field: "EventUserId",
+                                title: "@T("Plugins.Cameleo.CameleoCustomerEvents.Fields.EventUserId")"
+                            },
+                            {
+                                field: "UserName",
+                                title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.UserName")"
+                            },
+                            {
+                                field: "Password",
+                                title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.Password")"
+                            },
+                            {
+                                field: "LastName",
+                                title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.LastName")"
+                            },
+                            {
+                                field: "FirstName",
+                                title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.FirstName")"
+                            },
+                            {
+                                field: "Group",
+                                title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.Group")"
+                            },
+                            {
+                                field: "UniqueId",
+                                title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.UniqueId")"
+                            },
+                            {
+                                field: "isStaff",
+                                title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.IsStaff")",
+                                template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=isStaff#.gif" />'
+                            },
+                        ]
+                    });
+                });
+
+                //Put additionnal pager on top of the grid
+                $(function ()
+                {
+                    var grid = $("#recent-registrations-grid").data("kendoGrid");
+                    var wrapper = $('<div class="k-pager-wrap k-grid-pager pagerTop"/>').insertBefore(grid.element.children("table"));
+                    grid.pagerTop = new kendo.ui.Pager(wrapper, $.extend({}, grid.options.pageable, { dataSource: grid.dataSource }));
+                    grid.element.height("").find(".pagerTop").css("border-width", "0 0 1px 0");
+                });
+
+            </script>
+        </td>
+    </tr>
+</table>
+
+    

@@ -1,0 +1,61 @@
+﻿@using Nop.Plugin.Cameleo.CameleoEvents.ViewModels;
+@using Nop.Plugin.Cameleo.CameleoEvents.Domain;
+@model Nop.Plugin.Cameleo.CameleoEvents.ViewModels.CameleoCustomerEventListViewModel
+@{
+    int index = 0;
+}
+@if (Model.CameleoCustomerEventList.Count > 0)
+{    
+    <table class="groupdetails-table">
+        <thead>
+            <tr>               
+                <th>
+                    @T("Plugins.Cameleo.CameleoEventUsers.Fields.LastName")
+                </th>
+                <th>
+                    @T("Plugins.Cameleo.CameleoEventUsers.Fields.FirstName")
+                </th>
+                <th>
+                    @T("Plugins.Cameleo.CameleoEventUsers.Fields.UserName")
+                </th>
+                <th>
+                    @T("Plugins.Cameleo.CameleoEventUsers.Fields.Password")
+                </th>                
+                <th>
+                    @T("Plugins.Cameleo.CameleoCustomerEvents.Fields.AcceptedStatus")
+                </th>               
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var tmpCustomerEvent in Model.CameleoCustomerEventList)
+            {
+                string style2 = index % 2 != 0 ? "alt" : null;
+                string style = tmpCustomerEvent.Accepted && tmpCustomerEvent.AcceptedStatus == (int)AcceptedStatus.AcceptedPaid ? "background-color:Green" : tmpCustomerEvent.Accepted && tmpCustomerEvent.AcceptedStatus == (int)AcceptedStatus.AcceptedNotPaid ? "background-color:Green" : !tmpCustomerEvent.Accepted && tmpCustomerEvent.AcceptedStatus == (int)AcceptedStatus.Refused ? "background-color:Red" : null;
+                string fontcolor = tmpCustomerEvent.Accepted && tmpCustomerEvent.AcceptedStatus == (int)AcceptedStatus.AcceptedPaid ? "color:white" : tmpCustomerEvent.Accepted && tmpCustomerEvent.AcceptedStatus == (int)AcceptedStatus.AcceptedNotPaid ? "" : !tmpCustomerEvent.Accepted && tmpCustomerEvent.AcceptedStatus == (int)AcceptedStatus.Refused ? "color:white" : null;
+                <tr class="@style2" style="vertical-align: middle;">                    
+                    <td>
+                        @tmpCustomerEvent.CameleoEventUser.LastName
+                    </td>
+                    <td>
+                        @tmpCustomerEvent.CameleoEventUser.FirstName
+                    </td>
+                    <td>
+                        @tmpCustomerEvent.CameleoEventUser.UserName
+                    </td>
+                    <td>
+                        @tmpCustomerEvent.CameleoEventUser.Password
+                    </td>                    
+                    <td style="@fontcolor;@style;">
+                        @T(AcceptedStatusStrings.LocalizedStringValues[tmpCustomerEvent.AcceptedStatus])
+                    </td>
+                </tr>
+
+                index++;
+            }
+        </tbody>
+    </table>    
+}
+else
+{
+    @T("Plugins.Cameleo.CameleoEvents.NoEvents")
+}

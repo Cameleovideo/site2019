@@ -1,0 +1,69 @@
+﻿@{
+    Layout = "~/Views/Shared/_ColumnsOne.cshtml";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.EventCodeRecovery").Text);
+}
+
+@using Nop.Plugin.Cameleo.CameleoEvents.Models;
+@model EventCodeRecoveryModel
+
+<div class="page eventcode-recovery-page">
+    <div class="page-title">
+        <h1>@T("Plugins.Cameleo.CameleoEvents.EventCodeRecovery")</h1>
+    </div>
+    <div class="page-body">
+        @if (!String.IsNullOrEmpty(Model.Result))
+        {            
+            <div class="result">
+                @Model.Result
+            </div>
+        }
+        @using (Html.BeginForm())
+        {
+            <p class="tooltip">@T("Plugins.Cameleo.CameleoEvents.EventCodeRecovery.Tooltip")</p>
+            <div class="fieldset">
+                <div class="form-fields">
+                    <div class="inputs">
+                        @Html.LabelFor(model => model.Email, new { }, " :")                        
+                        @Html.TextBoxFor(model => model.Email, new { @class = "email" })
+                        @Html.RequiredHint()
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
+                    <div class="inputs">
+                        @Html.LabelFor(model => model.FirstName, new { }, " :")
+                        @Html.TextBoxFor(model => model.FirstName)
+                        @Html.RequiredHint()
+                        @Html.ValidationMessageFor(model => model.FirstName)
+                    </div>
+                    <div class="inputs">
+                        @Html.LabelFor(model => model.LastName, new { }, " :")
+                        @Html.TextBoxFor(model => model.LastName)
+                        @Html.RequiredHint()
+                        @Html.ValidationMessageFor(model => model.LastName)
+                    </div>
+                    <div class="inputs">
+                        @Html.LabelFor(model => model.Event, new { }, " :")
+                        @Html.TextBoxFor(model => model.Event)
+                        @Html.RequiredHint()
+                        @Html.ValidationMessageFor(model => model.Event)
+                    </div>
+                    <div class="inputs">
+                        @Html.LabelFor(model => model.Group, new { }, " :")
+                        @Html.TextBoxFor(model => model.Group)
+                        @Html.RequiredHint()
+                        @Html.ValidationMessageFor(model => model.Group)
+                    </div>                    
+                    <div class="inputs">
+                        @Html.LabelFor(model => model.Notes, new { }, " :")
+                        @Html.TextBoxFor(model => model.Notes)                        
+                        @Html.ValidationMessageFor(model => model.Notes)
+                    </div>
+                </div>
+            </div>
+            <div class="buttons">
+                <input type="submit" name="event-recevory" class="button-1 event-recovery-button" value="@T("Plugins.Cameleo.CameleoEvents.EventCodeRecovery.RecoverButton")" />
+            </div>
+        }
+    </div>
+</div>

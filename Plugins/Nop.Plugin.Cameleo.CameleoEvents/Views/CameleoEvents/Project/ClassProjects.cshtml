@@ -1,0 +1,56 @@
+﻿@using Nop.Plugin.Cameleo.CameleoEvents.ViewModels;
+@using Nop.Plugin.Cameleo.CameleoEvents.Domain;
+@using Nop.Core;
+@using Nop.Core.Infrastructure;
+
+@{       
+    Layout = "~/Views/Shared/_CameleoColumnsOne.cshtml";
+
+    //Scripts
+    Html.AddScriptParts("~/Plugins/Cameleo.CameleoEvents/Scripts/dropzone/dropzone.js");
+
+    //title
+    Html.AddTitleParts(T("pagetitle.cameleoprojects.classprojects").Text);
+    
+    //CSS
+    Html.AddCssFileParts("~/Plugins/Cameleo.CameleoEvents/Content/styles.css");
+    Html.AddCssFileParts("~/Plugins/Cameleo.CameleoEvents/Scripts/dropzone/css/basic.css");
+
+    
+}
+<style>
+   
+</style>
+
+
+<div class="page cameleoevent-details-page event-reminder">
+    <div class="page-title">
+        <h1>@T("pagetitle.cameleoprojects.classprojects")</h1>
+    </div>
+    
+    <form action="~/Project/SaveUploadedFile" method="post" enctype="multipart/form-data" class="dropzone" id="dropzoneForm" style="background: none; border: none;">
+        <div class="fallback">
+            <input name="file" type="file" multiple />
+            <input type="submit" value="Upload" />
+        </div>
+    </form>
+    
+</div>
+
+
+
+<script type="text/javascript">
+    //File Upload response from the server
+    Dropzone.options.dropzoneForm = {
+        acceptedFiles: 'image/*',
+        thumbnailWidth: null,
+        dictResponseError:'ERROR',
+        dictDefaultMessage:'<input type="button" class="button-1" value="' +"@T("plugins.cameleo.cameleocustomerevents.projects.add.button")" + '" />',
+        init: function () {
+            this.on("complete", function (data) {
+                var res = eval('(' + data.xhr.responseText + ')');
+                alert(res.Message);
+            });
+        }
+    };
+</script>

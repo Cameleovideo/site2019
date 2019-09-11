@@ -1,0 +1,157 @@
+﻿@using Nop.Plugin.Cameleo.CameleoEvents.ViewModels;
+@using Nop.Plugin.Cameleo.CameleoEvents.Domain;
+@using Nop.Core;
+@using Nop.Core.Infrastructure;
+@using Nop.Admin.Models.Orders;
+
+@model PendingOrderListViewModel
+
+@{
+    //Layout
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+
+    //title
+    Html.AddTitleParts(T("pagetitle.cameleoeventdetails.pendingorders").Text);
+
+    //CSS
+    Html.AddCssFileParts("~/Plugins/Cameleo.CameleoEvents/Content/styles.css");
+}
+
+<div class="section-header">
+    <div class="title">
+        <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt="" />
+        @T("Plugins.Cameleo.CameleoEvents.EventDetails.PendingOrders") @Html.ActionLink("(" + T("Plugins.Cameleo.CameleoEvents.BackToList") + ")", "ConfigureEvents", "EventAdmin")
+    </div>
+</div>
+
+<table class="adminContent">
+    <tr>
+        <td>
+            <div id="pending-orders-grid"></div>
+
+            <script>
+                $(document).ready(function () {
+                    $("#pending-orders-grid").kendoGrid({
+                        dataSource: {
+                            data: @Html.Raw(Json.Encode(Model.PendingOrderList)),
+                            schema: {
+                                model: {
+                                    id: "Id",
+                                    fields: {
+                                        Id: { editable: false, type: "number" },
+                                        OrderStatus: { editable: false, type: "string" },
+                                        PaymentStatus: { editable: false, type: "string" },
+                                        ShippingStatus: { editable: false, type: "string" },
+                                        CustomerEmail: { editable: false, type: "string" },
+                                        CustomerId: { editable: false, type: "number" },
+                                        StoreName: { editable: false, type: "string" },
+                                        CreatedOn: { editable: false, type: "date" }
+                                    }
+                                }
+                            },
+                            error: function(e) {
+                                display_kendoui_grid_error(e);
+                                // Cancel the changes
+                                this.cancelChanges();
+                            }
+                        },
+                        editable: {
+                            confirmation: false,
+                            mode: "inline"
+                        },
+                        pageable: {
+                            refresh: false,
+                            numeric: false,
+                            previousNext: false,
+                            info: false
+                        },
+                        scrollable: false,
+                        columns: [
+                            {
+                                title: " ",
+                                field: "Id",
+                                template: '<a href="@Url.Action("PendigOrderPaid", "EventAdmin")?OrderId=#=Id#" class="k-button" >@T("Plugins.Cameleo.CameleoEvents.EventDetails.PendingOrders.Paid.Button")</a>'                                        
+                            },
+                            {
+                                field: "Id",
+                                title: "@T("Admin.Orders.Fields.ID")",
+                                width: 50,
+                                template: '<a href="@Url.Content("~/Admin/Order/Edit/")#=Id#" target="_blank">#= Id #</a>'
+                            },
+                            {
+                                field: "OrderStatus",
+                                title: "@T("Admin.Orders.Fields.OrderStatus")"
+                            },
+                            {
+                                field: "PaymentStatus",
+                                title: "@T("Admin.Orders.Fields.PaymentStatus")"
+                            },
+                            {
+                                field: "ShippingStatus",
+                                title: "@T("Admin.Orders.Fields.ShippingStatus")"
+                            },
+                            {
+                                field: "CreatedOn",
+                                title: "@T("Admin.Orders.Fields.CreatedOn")",
+                                type: "date",
+                                format: "{0:yyyy-MM-dd hh:mm:ss}"
+                            },
+                            {
+                                field: "CustomerId",
+                                title: "@T("Admin.Orders.Fields.Customer")",
+                                template: '<a href="@Url.Content("~/Admin/Customer/Edit/")#=CustomerId#" target="_blank">#=CustomerFullName# (#=CustomerEmail#)</a>'
+                            },
+                            {
+                                field: "StoreName",
+                                title: "@T("Admin.Orders.Fields.Store")"
+                            },                            
+                            {
+                                field: "Id",
+                                title: "@T("Plugins.Cameleo.CameleoEventUsers.Fields.Name").Text",
+                                template: "#=createAsync(data)#"
+                            },
+                            {
+                                field: "EventIds",
+                                title: "EventId"
+                            },
+                            {
+                                field: "EventCodes",
+                                title: "@T("Plugins.Cameleo.CameleoEvents.Fields.EventCode")"
+                            },
+                            {
+                                field: "ClientNames",
+                                title: "@T("Plugins.Cameleo.CameleoEvents.Fields.ClientName")"
+                            },
+                            {
+                                field: "OrderTotal",
+                                title: "@T("Admin.Orders.Fields.OrderTotal")"
+                            }
+                        ]
+                    });
+                });
+
+                function createAsync(dataitem){
+                    $.ajax({
+                        url: "@(Url.Action("CustomerEventSubjectNameForOrder", "CustomerEvent"))",
+                        data: { orderId : dataitem.Id },
+                        async: true,
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            alert(thrownError);
+                        },
+                        success: function(response) {
+                            // The AJAX request succeeded and the result variable
+                            // will contain the partial HTML returned by the action
+                            // we inject it into the div:
+                            $("#async_" + dataitem.Id).html(response);
+                        }
+                    });
+
+                    //return container with id generated from current model ID field
+                    return "<div id='async_" + dataitem.Id + "'> </div>"
+                }
+            </script>
+        </td>
+    </tr>
+</table>
+
+    

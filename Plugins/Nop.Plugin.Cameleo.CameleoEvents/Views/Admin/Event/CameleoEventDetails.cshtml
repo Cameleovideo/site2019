@@ -1,0 +1,266 @@
+﻿@using Nop.Plugin.Cameleo.CameleoEvents.ViewModels;
+@using Nop.Plugin.Cameleo.CameleoEvents.Domain;
+@using Nop.Core;
+@using Nop.Core.Infrastructure;
+
+@model Nop.Plugin.Cameleo.CameleoEvents.ViewModels.CameleoEventViewModel
+
+@{
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+    
+    //title
+    Html.AddTitleParts(T("pagetitle.cameleoeventdetails").Text);
+
+    //CSS
+    Html.AddCssFileParts("~/Plugins/Cameleo.CameleoEvents/Content/styles.css");
+
+    int index = 0;
+}
+
+
+<div class="section-header">
+    <div class="title">
+        <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt="" />
+        @T("Plugins.Cameleo.CameleoEvents.EventDetails") @Html.ActionLink("(" + T("Plugins.Cameleo.CameleoEvents.BackToList") + ")", "ConfigureEvents", "EventAdmin")
+    </div>   
+    
+    <div class="options">
+        <table>
+            <tr>
+                <td>
+                    <input type="button" id="importexcel" name="importexcel" class="k-button" value="@T("Admin.Common.ImportFromExcel")" />
+                </td>
+                <td>
+                    @using (Html.BeginForm("IntroLetter", "EventAdmin", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.Id)
+                        <input type="submit" class="k-button" value="@T("Plugins.Cameleo.CameleoEvents.Admin.IntroLetter.Button")" />
+                    }
+                </td>
+                <td>
+                    <input type="button" value="@T("Plugins.Cameleo.CameleoEvents.Admin.EventUserList.Button")" class="k-button" onclick="setLocation('@Url.RouteUrl("Admin/CameleoEventDetails/EventUserList", new { eventId = Model.Id })')" />
+                </td>
+                <td>
+                    @using (Html.BeginForm("EventReminder", "EventAdmin", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.Id)
+                        <input type="submit" class="k-button" value="@T("Plugins.Cameleo.CameleoEvents.Admin.EventReminder.Button")" />
+                    }
+                </td>
+                <td>
+                    <input type="button" value="@T("Plugins.Cameleo.CameleoEvents.Admin.NotPaidReport.Button")" class="k-button" onclick="setLocation('@Url.RouteUrl("Admin/CameleoEventDetails/NotPaidReport", new { eventId = Model.Id })')" />
+                </td>
+                <td>
+                    <input type="button" value="@T("Plugins.Cameleo.CameleoEvents.Admin.EventReport.Button")" class="k-button" onclick="setLocation('@Url.RouteUrl("Admin/CameleoEventDetails/FinalReport", new { eventId = Model.Id })')" />
+                </td>                
+            </tr>
+        </table>
+    </div> 
+</div>
+<div class="page cameleoevent-details-page">    
+    <div class="page-body">
+
+        @if (Model != null)
+        {
+            //Event header
+            @Html.Partial("~/Plugins/Cameleo.CameleoEvents/Views/Admin/Event/_EventDetails.cshtml", Model)            
+            <br />
+            
+            using (Html.BeginForm(null, null, FormMethod.Post, new { id = "customerevent-form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.Id)                
+                @Html.HiddenFor(model => model.DetailedGroupName)
+            
+                <table class="adminContent">
+                    <tr>
+                        <td>
+                            <div id="groups-grid"></div>
+
+                            <script>
+                                $(document).ready(function () {
+                                    $("#groups-grid").kendoGrid({
+                                        dataSource: {
+                                            data: @Html.Raw(Json.Encode(Model.Groups)),
+                                            schema: {
+                                                model: {
+                                                    id: "Value",
+                                                    fields: {
+                                                        Value: { editable: false, type: "string" },
+                                                        Text: { editable: false, type: "string" },
+                                                        EventUserCount: { editable: false, type: "number" },
+                                                        AcceptedEventUserCount: { editable: false, type: "number" },
+                                                        RefusedEventUserCount: { editable: false, type: "number" },
+                                                        NoAnswerEventUserCount: { editable: false, type: "number" },
+                                                        AcceptedImageUseEventUserCount: { editable: false, type: "number" },
+                                                        AcceptPercentage: { editable: false, type: "number" }
+                                                    }
+                                                }
+                                            },
+                                            error: function(e) {
+                                                display_kendoui_grid_error(e);
+                                                // Cancel the changes
+                                                this.cancelChanges();
+                                            }
+                                        },
+                                        editable: {
+                                            confirmation: false,
+                                            mode: "inline"
+                                        },
+                                        scrollable: false,
+                                        columns: [
+                                            {
+                                                field: "Value",
+                                                width: 50,
+                                                title: " ",
+                                                template: '<input type="submit" class="group-details-button k-button"  value="@T("Admin.Common.Details")" id="#= Value#" />'
+                                            },
+                                            {
+                                                field: "Value",
+                                                title: "@T("Plugins.Cameleo.CameleoEvents.EventDetails.Group")"
+                                            },
+                                            {
+                                                field: "AcceptPercentage",
+                                                title: "@T("Plugins.Cameleo.CameleoEvents.EventDetails.AcceptPercentage")",
+                                                template: "#: AcceptPercentage # %"
+                                            },
+                                            {
+                                                field: "EventUserCount",
+                                                title: "@T("Plugins.Cameleo.CameleoEvents.EventDetails.NbUsersInGroup")"
+                                            },
+                                            {
+                                                field: "AcceptedEventUserCount",
+                                                title: "@T("Plugins.Cameleo.CameleoEvents.EventDetails.NbUsersAccepted")"
+                                            },
+                                            {
+                                                field: "RefusedEventUserCount",
+                                                title: "@T("Plugins.Cameleo.CameleoEvents.EventDetails.NbUsersRefused")"
+                                            },
+                                            {
+                                                field: "NoAnswerEventUserCount",
+                                                title: "@T("Plugins.Cameleo.CameleoEvents.EventDetails.NbUsersNoAnswer")"
+                                            },
+                                            {
+                                                field: "AcceptedImageUseEventUserCount",
+                                                title: "@T("Plugins.Cameleo.CameleoEvents.EventDetails.NbUsersAcceptedImageUse")"
+                                            }
+                                        ]
+                                    });
+
+                                    $(".group-details-button").click(function(){           
+                                        if($(this).attr("id") == "null")
+                                        {
+                                            $("#DetailedGroupName").val("");
+                                        }
+                                        else 
+                                        {
+                                            $("#DetailedGroupName").val($(this).attr("id"));
+                                        }                                        
+                                    });
+                                });                                
+                            </script>
+                        </td>
+                    </tr>
+                </table>
+
+                if (Model.ShowGroupDetails)
+                {
+                    //Show details for a specific group
+                    <div style="margin-top: 20px; border: 1px solid #0181C8;">
+                        <div class="title">
+                            <div style="float:left;padding-right:10px;"><h1>@T("Plugins.Cameleo.CameleoEvents.EventDetails.Group") : <strong style="color:red;">@Model.DetailedGroupName</strong></h1></div>
+                            <div style="float:left;padding-right:10px;"><h1>@T("Plugins.Cameleo.CameleoEvents.EventDetails.NbUsersInGroup") : <strong style="color:red;">@Model.GroupDetails.EventUserCount</strong></h1></div>
+                            <div style="float:left;padding-right:10px;"><h1>@T("Plugins.Cameleo.CameleoEvents.EventDetails.NbUsersAccepted") : <strong style="color:red;">@Model.GroupDetails.AcceptedEventUserCount</strong></h1></div>
+                            <div style="float:left;padding-right:10px;"><h1>@T("Plugins.Cameleo.CameleoEvents.EventDetails.NbUsersRefused") : <strong style="color:red;">@Model.GroupDetails.RefusedEventUserCount</strong></h1></div>
+                            <div style="float:left;padding-right:10px;"><h1>@T("Plugins.Cameleo.CameleoEvents.EventDetails.NbUsersNoAnswer") : <strong style="color:red;">@(Model.GroupDetails.EventUserCount - Model.GroupDetails.AcceptedEventUserCount - Model.GroupDetails.RefusedEventUserCount)</strong></h1></div>
+                            <div style="float:left;"><h1>@T("Plugins.Cameleo.CameleoEvents.EventDetails.NbUsersAcceptedImageUse") : <strong style="color:red;">@Model.GroupDetails.AcceptedImageUseEventUserCount</strong></h1></div>
+                            <div style="float:right;">
+                                <input type="submit" id="btnAddNewCustomerEvent" name="btnAddNewCustomerEvent" value="@T("Plugins.Cameleo.CameleoEvents.CustomerEvent.AddNew.Button")" onclick="javascript:OpenWindow('@(Url.Action("AddCustomerEventPopup", "CustomerEventAdmin", new { eventId = Model.Id, groupName = Model.DetailedGroupName, btnId = "btnRefresh", formId = "customerevent-form" }))', 800, 250, true); return false;" class="k-button" />
+                                <input type="submit" id="btnAddAllCustomerEvent" name="btnAddAllCustomerEvent" value="@T("Plugins.Cameleo.CameleoEvents.CustomerEvent.AddAll.Button")" onclick="javascript:OpenWindow('@(Url.Action("AddAllCustomerEventsPopup", "CustomerEventAdmin", new { eventId = Model.Id, groupName = Model.DetailedGroupName, btnId = "btnRefresh", formId = "customerevent-form" }))', 800, 250, true); return false;" class="k-button" />
+                                <input type="submit" id="btnRefresh" name="btnRefresh" style="display:none;" />
+                                <script type="text/javascript">
+                                    $(document).ready(function () {
+                                        $('#btnRefresh').click(function () {
+                                            //refresh grid                                        
+                                            var optionsGrid = $("#cameleocustomerevents-grid").data('kendoGrid');;
+                                            optionsGrid.dataSource.read();
+
+                                            //return false to don't reload a page
+                                            return false;
+                                        });
+                                    });
+                                </script>
+                            </div>
+                            </div>
+
+                        <table style="width:100%;">
+                            <tbody>
+                                <tr>
+                                    <td style="vertical-align:top;">
+                                        <img src="http://www.jlion.com:80//tools/Thermometer.aspx?MIN=0&MAX=100&VT=4&T=&nbsp;&IV=@(Model.GroupDetails.AcceptPercentage.ToString())&M=0&SC=0&CS=2&CI=en-US&TH=0" style="border: solid 0px black;" alt="" title="" width="130" height="191" />
+                                    </td>
+                                    <td>
+                                        @Html.Action("CustomerEventList", "CustomerEventAdmin", new { eventId = Model.Id, groupName = Model.DetailedGroupName })
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            }
+        }
+        else
+        {
+            @T("Plugins.Cameleo.CameleoEvents.NoEvent")
+        }
+
+    </div>
+</div>
+
+@*import event users form*@
+<div id="importexcel-window" style="display:none;">
+    @using (Html.BeginForm("ImportExcel", "EventUserAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Id)
+        <table style="text-align:left;">
+            <tr>
+                <td colspan="2">
+                    <em>@T("Admin.Catalog.Products.List.ImportFromExcelTip")</em>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @T("Admin.Common.ExcelFile"):
+                </td>
+                <td>
+                    <input type="file" id="importexcelfile" name="importexcelfile" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" class="k-button" value="@T("Admin.Common.ImportFromExcel")" />
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#importexcel").click(function (e) {
+            e.preventDefault();
+            var window = $("#importexcel-window");
+            if (!window.data("kendoWindow")) {
+                window.kendoWindow({
+                    modal: true,
+                    width: "400px",
+                    title: "@T("Admin.Common.ImportFromCsv")",
+                    actions: ["Close"]
+                });
+            }
+            window.data('kendoWindow').center().open();
+        });
+    });
+</script>

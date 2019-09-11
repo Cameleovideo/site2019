@@ -1,0 +1,36 @@
+﻿@{
+    Layout = "~/Administration/Views/Shared/_AdminPopupLayout.cshtml";
+}
+@model Nop.Plugin.Cameleo.CameleoEvents.ViewModels.AddCustomerEventViewModel
+@{
+    //page title
+    ViewBag.Title = T("Plugins.Cameleo.CameleoEvents.CustomerEvent.AddAll").Text;
+
+    //CSS
+    Html.AddCssFileParts("~/Plugins/Cameleo.CameleoEvents/Content/styles.css");
+}
+
+@if (ViewBag.RefreshPage == true)
+{
+    <script type="text/javascript">
+
+        try {window.opener.document.forms['@(ViewBag.formId)'].@(ViewBag.btnId).click();}
+        catch (e){}
+        window.close();
+    </script>
+}
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(false)
+    @Html.HiddenFor(model => model.CameleoEvent.Id)
+    @Html.HiddenFor(model => model.GroupName)
+    <div class="section-header">
+        <div class="title">
+            <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt="" />
+            @T("Plugins.Cameleo.CameleoEvents.CustomerEvent.AddAll") (@Model.GroupName)
+        </div>        
+    </div>
+    @T("Plugins.Cameleo.CameleoEvents.CustomerEvent.AddAll.Description")
+    <center><input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" /></center>
+}

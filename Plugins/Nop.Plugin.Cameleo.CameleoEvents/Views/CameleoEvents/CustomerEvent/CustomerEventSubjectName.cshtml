@@ -1,0 +1,8 @@
+﻿@using Nop.Plugin.Cameleo.CameleoEvents.ViewModels;
+
+@model Nop.Plugin.Cameleo.CameleoEvents.ViewModels.CustomerEventSubjectNameListViewModel
+
+@foreach (var tmpCustomerEventSubjectName in Model.CameleoEventSubjectNameList)
+{
+    @(tmpCustomerEventSubjectName.FirstName + " " + tmpCustomerEventSubjectName.LastName + " (" + tmpCustomerEventSubjectName.Group + ")")<br>
+}

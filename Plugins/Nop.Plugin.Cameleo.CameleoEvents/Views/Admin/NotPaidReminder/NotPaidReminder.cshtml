@@ -1,0 +1,55 @@
+﻿@using Nop.Plugin.Cameleo.CameleoEvents.ViewModels;
+@using Nop.Plugin.Cameleo.CameleoEvents.Domain;
+@using Nop.Core;
+@using Nop.Core.Infrastructure;
+@model Nop.Plugin.Cameleo.CameleoEvents.ViewModels.NotPaidReminderListViewModel
+
+@{
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+
+    //title
+    Html.AddTitleParts(T("pagetitle.cameleoeventdetails.notpaidreminder").Text);
+
+    //CSS
+    Html.AddCssFileParts("~/Plugins/Cameleo.CameleoEvents/Content/styles.css");
+}
+
+<div class="section-header">
+    <div class="title">
+        <img src="@Url.Content("~/Administration/Content/images/ico-system.png")" alt="" />
+        @T("Plugins.Cameleo.CameleoEvents.EventDetails.NotPaidReminder") @Html.ActionLink("(" + T("Plugins.Cameleo.CameleoEventDetails.FinalReport.BackToDetails") + ")", "EventDetails", "EventAdmin", new { eventId = Model.EventId }, null)
+    </div>
+</div>
+
+<div class="page">
+    <div class="page-body">
+        @using (Html.BeginForm("NotPaidReminderPDF", "EventAdmin", FormMethod.Post, new { target = "_blank" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.EventId)
+
+            <table width="100%">                
+                <tr>
+                    <td class="adminTitle">
+                        @Html.LabelFor(model => model.ParticipationFee, new { }, " :")
+                    </td>
+                    <td class="adminData">
+                        @Html.EditorFor(model => model.ParticipationFee)
+                        @Html.RequiredHint()
+                        @Html.ValidationMessageFor(model => model.ParticipationFee)
+                    </td>
+                </tr>
+            </table>
+
+            <br /><br />
+            <h2>@T("Plugins.Cameleo.CameleoEvents.EventDetails.NotPaidReminder.First")</h2><br />
+            <input type="submit" class="k-button" name="noemail" value="@T("Plugins.Cameleo.CameleoEvents.Admin.NotPaidReport.ReminderNoEmail.Button")" />
+            <input type="submit" class="k-button" name="all" value="@T("Plugins.Cameleo.CameleoEvents.Admin.NotPaidReport.ReminderAll.Button")" />
+            
+            <br /><br /><br /><br />
+            <h2>@T("Plugins.Cameleo.CameleoEvents.EventDetails.NotPaidReminder.Second")</h2><br />
+            <input type="submit" class="k-button" name="noemail2" value="@T("Plugins.Cameleo.CameleoEvents.Admin.NotPaidReport.ReminderNoEmail.Button")" />
+            <input type="submit" class="k-button" name="all2" value="@T("Plugins.Cameleo.CameleoEvents.Admin.NotPaidReport.ReminderAll.Button")" />
+        }
+    </div>
+</div>
